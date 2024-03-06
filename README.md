@@ -20,12 +20,37 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Codebase structure
+
+The `src/` directory contains all application code like routing, components, styling etc.
+
+Configuration files and other infrastructure related files and code should be placed at the root of the repo.
+
+See the "src-directory" section of the project structure in the Next docs:
+
+https://nextjs.org/docs/app/building-your-application/routing/colocation#src-directory
+
+## Import Path Aliasing
+
+Import path aliases can be defined in `tsconfig.json`
+
+```json
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+    }
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
