@@ -6,29 +6,30 @@
 -   [Codebase Structure](#codebase-structure)
 -   [Import Path Aliasing](#import-path-aliasing)
 -   [Styling](#styling)
-    -   [Utility Function: cn](#utility-function-cn)
+    -   [cn - Class Name Utility](#cn---classname-utility)
+    -   [Font](#font)
 -   [Learn More](#learn-more)
 -   [Deploy on Vercel](#deploy-on-vercel)
 
 ## Getting Started
 
+**** TODO: switch to pnpm or bun
+
+Download dependencies
+
+```bash
+npm i
+```
+
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+App entry is `app/page.tsx`.
 
 ## Changing Hugging Face GPT model
 
@@ -68,6 +69,8 @@ Import path aliases can be defined in `tsconfig.json`
 ```
 
 ## Styling
+
+### CN - ClassName utility
 
 `utils/style/cn.ts` contains a very handy className utility.
 
@@ -191,6 +194,10 @@ Conclusion
 The cn utility significantly simplifies the management of Tailwind CSS classes in dynamic environments. It abstracts the intricacies of class merging, specificity, and conditional styling, allowing developers to focus on UI construction rather than CSS class management nuances.
 
 ===== chat gpt generated explanation - END ======
+
+### Font
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
