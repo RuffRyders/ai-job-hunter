@@ -25,12 +25,23 @@ export async function POST(req: NextRequest) {
             url
         )
 
+        AppLogger.info('coverLetter:POST -- prompt: \n\t', prompt)
+
+        const body = JSON.stringify({
+            inputs: prompt,
+            parameters: {
+                return_full_text: false,
+                max_new_tokens: 200,
+                max_length: 200,
+            },
+        })
+
         const res = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${AppConfig.HF_INFERENCE_API_KEY}`,
             },
             method: 'POST',
-            body: prompt,
+            body: body,
         })
 
         if (!res.ok) {
