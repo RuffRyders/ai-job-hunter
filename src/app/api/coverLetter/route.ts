@@ -1,15 +1,19 @@
 import { AppConfig } from '@/config/appConfig'
-import { HF_MODELS } from '@/constants'
+import { CURRENT_MODEL } from '@/constants'
 import { AppLogger } from '@/services/Logger/Logger'
+import { PromptGenerator } from '@/services/PromptGenerator/PromptGenerator'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
     try {
         const { jobDescription, coverLetter } = await req.json()
 
-        const prompt = `Please return an updated, optimized and tailored cover letter for the supplied job description.\n\nJob Description: ${jobDescription}\n\nCover Letter: ${coverLetter}`
+        const prompt = PromptGenerator.generatePrompt(
+            jobDescription,
+            coverLetter
+        )
 
-        const url = `${AppConfig.HF_INFERENCE_API_BASE_URL}/${HF_MODELS.gpt2.id}`
+        const url = `${AppConfig.HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`
 
         AppLogger.info(
             'coverLetter:POST --',

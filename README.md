@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Table of Contents
+
+-   [Getting Started](#getting-started)
+-   [Changing Hugging Face GPT Model](#changing-hugging-face-gpt-model)
+-   [Prompt Generation](#prompt-generation)
+-   [Codebase Structure](#codebase-structure)
+-   [Import Path Aliasing](#import-path-aliasing)
+-   [Styling](#styling)
+    -   [Utility Function: cn](#utility-function-cn)
+-   [Learn More](#learn-more)
+-   [Deploy on Vercel](#deploy-on-vercel)
 
 ## Getting Started
 
@@ -19,6 +29,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Changing Hugging Face GPT model
+
+Models constants are defined in this file
+
+`src/constants.ts`
+
+Update `CURRENT_MODEL` to change the Hugging Face model.
+
+## Prompt generation
+
+Prompt generation is currently handled by `src/services/PromptGenerator/PromptGenerator.ts`.
 
 ## Codebase structure
 
