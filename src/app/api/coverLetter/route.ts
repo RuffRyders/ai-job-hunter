@@ -1,14 +1,15 @@
 import { AppConfig } from "@/config/appConfig";
 import { CURRENT_MODEL } from "@/constants";
+import { promptCoverLetter } from "@/data/prompts";
 import { AppLogger } from "@/services/Logger/Logger";
-import { PromptGenerator } from "@/services/PromptGenerator/PromptGenerator";
+import { formatPrompt } from "@/utils/prompt/formatPrompt";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { jobDescription, coverLetter } = await req.json();
+    const { jobDescription } = await req.json();
 
-    const prompt = PromptGenerator.generatePrompt(jobDescription, coverLetter);
+    const prompt = formatPrompt(promptCoverLetter, jobDescription);
 
     const url = `${AppConfig.HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`;
 
@@ -16,8 +17,6 @@ export async function POST(req: NextRequest) {
       "coverLetter:POST --",
       "\n\tjobDescription: ",
       jobDescription,
-      "\n\tcoverLetter: ",
-      coverLetter,
       "\n\turl: ",
       url
     );
@@ -42,8 +41,6 @@ export async function POST(req: NextRequest) {
       body,
     });
 
-    console.log("status", res.status);
-
     if (!res.ok) {
       const errorMessage =
         (await res.json()).error || "An error occurred during fetch operation";
@@ -61,7 +58,6 @@ export async function POST(req: NextRequest) {
     // TODO: it's an array of objects? { generated_text: string }[], investigate the data shape and handle it properly
     const data = await res.json();
 
-    console.log("data", data);
     const generatedText = data[0].generated_text;
 
     AppLogger.info(
