@@ -6,19 +6,15 @@ interface FetchCoverLetterResponse {
 
 interface FetchCoverLetterParams {
   jobDescription: string;
-  coverLetter: string;
 }
 
 export const fetchCoverLetter = async ({
   jobDescription,
-  coverLetter,
 }: FetchCoverLetterParams): Promise<FetchCoverLetterResponse | undefined> => {
   AppLogger.info(
     "fetchCoverLetter: start: ",
     "\n\tjobDescription: ",
-    jobDescription,
-    "\n\tcoverLetter: ",
-    coverLetter
+    jobDescription
   );
 
   const res = await fetch(`/api/coverLetter`, {
@@ -28,7 +24,6 @@ export const fetchCoverLetter = async ({
     },
     body: JSON.stringify({
       jobDescription,
-      coverLetter,
     }),
   });
 

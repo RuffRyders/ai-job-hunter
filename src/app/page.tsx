@@ -8,10 +8,9 @@ export default function Home() {
     fetchFunction: fetchCoverLetter,
   });
 
-  const handleSubmit = async (jobDescription: string, coverLetter: string) => {
+  const handleSubmit = async (jobDescription: string) => {
     await fetcher({
       jobDescription,
-      coverLetter,
     });
   };
 
@@ -19,9 +18,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-full p-6">
-      <p className="text-2xl mb-6 text-center">
-        Enter job description and (optionally) a starter cover letter
-      </p>
+      <p className="text-2xl mb-6 text-center">Enter job description</p>
       <SimpleForm onSubmit={handleSubmit} />
 
       <div className="mt-10 border-t-2 pt-6 pb-20">
