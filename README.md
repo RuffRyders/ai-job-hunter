@@ -5,6 +5,7 @@
 -   [Prompt Generation](#prompt-generation)
 -   [Codebase Structure](#codebase-structure)
 -   [Import Path Aliasing](#import-path-aliasing)
+-   [Design](#design)
 -   [Styling](#styling)
     -   [cn - Class Name Utility](#cn---classname-utility)
     -   [Font](#font)
@@ -67,6 +68,12 @@ Import path aliases can be defined in `tsconfig.json`
       ],
     }
 ```
+
+## Design
+
+Designs and wire frames in figma. Link below.
+
+https://www.figma.com/file/u5ZnNk5WQHupgxvCtIjlrx/AIJobHunter?type=design&node-id=0-1&mode=design&t=ewY2hPNirvRCVXLp-0
 
 ## Styling
 
