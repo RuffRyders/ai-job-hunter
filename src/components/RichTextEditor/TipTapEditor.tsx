@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import './TipTapEditor.css'
 import { cn } from '@/utils/style/cn'
-import richTextDefaultContent from '@/data/samples/richTextDefaultContent'
+import { resumeHTML } from '@/data/samples/resume'
 
 const editorContentActual = 'editor-content-actual'
 
@@ -35,7 +35,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
                 ),
             },
         },
-        content: richTextDefaultContent,
+        content: resumeHTML,
     })
 
     const downloadPDF = () => {
