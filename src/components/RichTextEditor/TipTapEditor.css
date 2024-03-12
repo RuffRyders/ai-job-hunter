@@ -1,4 +1,3 @@
-/* Custom styles for Tiptap content */
 .editor-content ul,
 .editor-content ol {
     @apply list-disc;
