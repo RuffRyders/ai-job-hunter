@@ -1,6 +1,6 @@
 const lineBreak = '<p><br class="ProseMirror-trailingBreak"></p>'
 
-export const resumeHTML = `
+const resumeHTML = `
 <h2>
   <strong>Martin Amigo</strong>
 </h2>
@@ -82,3 +82,5 @@ ${lineBreak}
   </ul>
 </p>
 `
+
+export default resumeHTML

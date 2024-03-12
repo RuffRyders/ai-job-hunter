@@ -7,13 +7,14 @@ import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import './TipTapEditor.css'
 import { cn } from '@/utils/style/cn'
-import { resumeHTML } from '@/data/samples/resume'
 
 const editorContentActual = 'editor-content-actual'
 
-interface TipTapEditorProps {}
+interface TipTapEditorProps {
+    resumeHTML: string
+}
 
-const TipTapEditor = (props: TipTapEditorProps) => {
+const TipTapEditor = ({ resumeHTML }: TipTapEditorProps) => {
     const editor = useEditor({
         extensions: [StarterKit],
         editorProps: {
@@ -37,6 +38,16 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         },
         content: resumeHTML,
     })
+
+    const copyHTMLToClipboard = () => {
+        const currentHTML = editor?.getHTML()
+
+        if (!currentHTML) {
+            throw new Error('No HTML content found in the editor')
+        }
+
+        navigator.clipboard.writeText(currentHTML)
+    }
 
     const downloadPDF = () => {
         // Assuming the editor content is wrapped in a div with a specific class or id
@@ -96,12 +107,20 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         <div>
             {editor && <MenuSimple editor={editor} />}
             <EditorContent editor={editor} className="editor-content" />
-            <button
-                onClick={downloadPDF}
-                className="absolute top-1/2 right-6 p-2 border border-gray-700 rounded-md mt-4 bg-green-500 text-white"
-            >
-                Download as PDF
-            </button>
+            <div className="absolute top-1/2 right-6 flex flex-col">
+                <button
+                    onClick={downloadPDF}
+                    className="p-2 border border-gray-700 rounded-md mt-4 bg-green-500 text-white"
+                >
+                    Download as PDF
+                </button>
+                <button
+                    onClick={copyHTMLToClipboard}
+                    className="p-2 border border-gray-700 rounded-md mt-4 bg-green-500 text-white"
+                >
+                    Copy HTML
+                </button>
+            </div>
         </div>
     )
 }
