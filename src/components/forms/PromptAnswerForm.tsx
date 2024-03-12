@@ -53,14 +53,14 @@ export function PromptAnswerForm({
     };
 
   return (
-    <form className="flex flex-col gap-2">
-      <label>
+    <div className="flex flex-col gap-2">
+      <div className="pb-2">
         <MessageWriter
           message={botText}
           wordDelay={wordDelay}
           onDone={() => setBotDone(true)}
         />
-      </label>
+      </div>
       {botDone && (
         <>
           {inputType == "textarea" && (
@@ -71,6 +71,16 @@ export function PromptAnswerForm({
               maxRows={6}
               className="text-lg"
               placeholder={inputPlaceholder}
+              onPaste={(e) => {
+                console.log(
+                  "Pasted the following text...",
+                  e.clipboardData.getData("Text")
+                  // https://jobs.lever.co/Anthropic/673b3fa0-ea19-4384-84dd-7deabc3f29a5
+                );
+                // TODO: Check for URL, fetch and try to pull a JD, replace text
+                // TODO: If failed to find JD, add a message to the chat saying so (needs design)
+                // TODO: We also need to check that they provided a valid JD, that could be another inference
+              }}
             />
           )}
           {inputType == "editor" && data && <TextEditor content={data} />}
@@ -94,6 +104,6 @@ export function PromptAnswerForm({
           }
         </>
       )}
-    </form>
+    </div>
   );
 }
