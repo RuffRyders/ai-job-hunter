@@ -1,0 +1,16 @@
+.menuButton {
+    font-size: inherit;
+    font-family: inherit;
+    color: #000;
+    margin: .1rem;
+    border: 1px solid black;
+    border-radius: .3rem;
+    padding: .1rem .4rem;
+    background: white;
+    accent-color: black;
+}
+
+.menuButton--active {
+    background: #000;
+    color: white;
+}
