@@ -1,0 +1,19 @@
+.editor-content ul,
+.editor-content ol {
+    @apply list-disc;
+    /* TODO make this dynamic and a user definable settings */
+    padding-left: 40px;
+}
+
+/* 
+.editor-content li {
+    display: list-item;
+} */
+
+.editor-content code {
+    @apply bg-gray-700 text-gray-200 p-1 rounded;
+}
+
+.editor-content blockquote {
+    @apply border-l-4 border-gray-400 pl-4 italic;
+}

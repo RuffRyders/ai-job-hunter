@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/pm": "^2.2.4",
+    "@tiptap/react": "^2.2.4",
+    "@tiptap/starter-kit": "^2.2.4",
     "clsx": "^2.1.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "14.1.2",
     "react": "^18",
     "react-dom": "^18",
