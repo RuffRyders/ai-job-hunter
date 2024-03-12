@@ -1,5 +1,6 @@
 import { Button, Textarea } from "@mantine/core";
 import { TextEditor } from "../TextEditor";
+import { MessageWriter } from "../MessageWriter";
 
 type PromptOption = {
   label: string;
@@ -22,7 +23,9 @@ export function PromptAnswerForm({
   return (
     <form>
       <div className="flex flex-col gap-2 ">
-        <label>{prompt}</label>
+        <label>
+          <MessageWriter message={prompt} />
+        </label>
         {inputType == "textarea" && (
           <Textarea
             value={data}
