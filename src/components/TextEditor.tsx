@@ -19,9 +19,9 @@ export function TextEditor({ content }: { content?: string }) {
       </RichTextEditor.Toolbar>
       <RichTextEditor.Content
         style={{
-          "max-height": "calc(100vh - 200px)",
-          "overflow-y": "auto",
-          "overflow-x": "hidden",
+          maxHeight: "calc(100vh - 200px)",
+          overflowY: "auto",
+          overflowX: "hidden",
         }}
       />
     </RichTextEditor>

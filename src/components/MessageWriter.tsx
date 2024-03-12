@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useInterval } from "../hooks/useInterval";
 
-export function MessageWriter({ message = "" }: { message: string }) {
+export function MessageWriter({
+  message = "",
+  onDone,
+}: {
+  message: string;
+  onDone?: () => void;
+}) {
   const [index, setIndex] = useState(0);
   const [written, setWritten] = useState("");
   const [running, setRunning] = useState(true);
@@ -9,15 +15,15 @@ export function MessageWriter({ message = "" }: { message: string }) {
 
   useInterval(
     () => {
-      console.log("I fire every second!", written, index);
       setWritten(`${written} ${parts[index]}`);
       if (index < parts.length - 1) {
         setIndex(index + 1);
       } else {
         setRunning(false);
+        onDone?.();
       }
     },
-    running ? 100 : null
+    running ? 200 : null
   );
 
   return <>{written}</>;

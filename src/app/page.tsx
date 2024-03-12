@@ -5,87 +5,91 @@ import { useFetchFunction } from "@/utils/fetch/useFetchFunction";
 import { useEffect, useState } from "react";
 import { PromptAnswerForm } from "@/components/forms/PromptAnswerForm";
 import { jobs } from "@/data/samples/jobs";
+import { textToHtml } from "@/utils/string/textToHtml";
 
 interface PrompOption {
   label: string;
-  callback: (data?: string) => void;
+  onAction: (data?: string) => void;
 }
 
 interface PromptStep {
-  prompt: string;
+  botText: string;
   data: string;
   inputType?: "textarea" | "text";
+  inputPlaceholder: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   options: PrompOption[];
 }
 
 export default function Home() {
-  const { fetcher, data, loading, error } = useFetchFunction({
-    fetchFunction: fetchCoverLetter,
-  });
+  // const { fetcher, data, loading, error } = useFetchFunction({
+  //   fetchFunction: fetchCoverLetter,
+  // });
   const [coverLetter, setCoverLetter] = useState<string>();
   const [jobDescription, setJobDescription] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
 
-  useEffect(() => {
-    if (data) {
-      if (data.generatedCoverLetter) {
-        const converted = data.generatedCoverLetter
-          .split("\n")
-          .map((line) => {
-            if (line === "") {
-              return null;
-            }
-            return `<p>${line}</p>`;
-          })
-          .filter(Boolean)
-          .join("");
-        setCoverLetter(converted);
-      }
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     if (data.generatedCoverLetter) {
+  //       const converted = textToHtml(data.generatedCoverLetter);
+  //       setCoverLetter(converted);
+  //     }
+  //   }
+  // }, [data]);
 
-  const handleSubmit = async (jobDescription: string) =>
-    fetcher({
-      jobDescription,
-    });
+  // const handleSubmit = async (jobDescription: string) =>
+  //   fetcher({
+  //     jobDescription,
+  //   });
 
   const steps = [
     {
-      prompt: "Hi. I am an AI cover letter generator.",
+      botText:
+        "Hi. I am an AI Job Assistant. I have been tasked with writing cover letters.",
       options: [
         {
           label: "Let's get started!",
-          callback: () => {
+          onAction: () => {
             setStepIndex(stepIndex + 1);
           },
         },
       ],
     },
     {
-      prompt: "Stupendous, but I need the job description to work my magic.",
+      botText: "Stupendous! I just need the job description to work my magic.",
       data: jobDescription,
       inputType: "textarea",
+      inputPlaceholder: "Paste the job description...",
       onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) =>
         setJobDescription(event.target.value),
       options: [
         {
           label: "Send",
-          callback: (data?: string) => {
+          onAction: async () => {
+            return await fetchCoverLetter({
+              jobDescription,
+            });
+          },
+          onDone: (data?: any) => {
+            const converted = textToHtml(data.generatedCoverLetter);
+            setCoverLetter(converted);
             setStepIndex(stepIndex + 1);
-            handleSubmit(jobDescription);
+          },
+          onError: (error: any) => {
+            console.log(error);
           },
         },
         {
           label: "Fill with test data",
-          callback: () => {
+          onAction: () => {
             setJobDescription(jobs.disney);
           },
         },
       ],
     },
     {
-      prompt: "Here is your generated cover letter...",
+      botText: "Here is your generated cover letter...",
       data: coverLetter,
       inputType: "editor",
       onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -93,8 +97,8 @@ export default function Home() {
       options: [
         {
           label: "Save",
-          callback: (data?: string) => {
-            alert("Save!\n\n" + data);
+          onAction: () => {
+            alert("Save!\n\n" + coverLetter);
           },
         },
       ],
