@@ -3,11 +3,12 @@ import { TextEditor } from "../TextEditor";
 import { MessageWriter } from "../MessageWriter";
 import { useState } from "react";
 
-type OnActionHandler = () => any;
-type OnDoneHandler = (data?: any) => void;
-type OnErrorHandler = (error?: unknown) => void;
+export type OnActionHandler = () => any;
+export type OnDoneHandler = (data?: any) => void;
+export type OnErrorHandler = (error?: unknown) => void;
 
-type PromptOption = {
+export type PromptInputType = "text" | "textarea" | "editor";
+export type PromptOption = {
   label: string;
   onAction: OnActionHandler;
   onDone?: OnDoneHandler;
@@ -20,25 +21,29 @@ export function PromptAnswerForm({
   inputType,
   inputPlaceholder,
   onChange,
+  wordDelay,
   options,
 }: {
   botText: string;
   data?: string;
-  inputType?: "text" | "textarea" | "editor";
+  inputType?: PromptInputType;
   inputPlaceholder?: string;
+  wordDelay?: number;
   onChange?: React.ChangeEventHandler;
   options: PromptOption[];
 }) {
   const [botDone, setBotDone] = useState(false);
-  //   const [actionDone, setActionDone] = useState(false);
+  const [selected, setSelected] = useState<number>();
 
   const handleAction =
     (
+      index: number,
       onAction: OnActionHandler,
       onDone?: OnDoneHandler,
       onError?: OnErrorHandler
     ) =>
     async () => {
+      setSelected(index);
       try {
         const response = await onAction();
         onDone?.(response);
@@ -48,43 +53,47 @@ export function PromptAnswerForm({
     };
 
   return (
-    <form>
-      <div className="flex flex-col gap-2 ">
-        <label>
-          <MessageWriter message={botText} onDone={() => setBotDone(true)} />
-        </label>
-        {botDone && (
-          <>
-            {inputType == "textarea" && (
-              <Textarea
-                value={data}
-                onChange={onChange}
-                autosize
-                maxRows={6}
-                className="text-lg"
-                placeholder={inputPlaceholder}
-              />
-            )}
-            {inputType == "editor" && data && <TextEditor content={data} />}
-            {
-              <div className="flex justify-end gap-2">
-                {options?.map((option, index) => (
-                  <Button
-                    key={index}
-                    onClick={handleAction(
-                      option.onAction,
-                      option.onDone,
-                      option.onError
-                    )}
-                  >
-                    {option.label}
-                  </Button>
-                ))}
-              </div>
-            }
-          </>
-        )}
-      </div>
+    <form className="flex flex-col gap-2">
+      <label>
+        <MessageWriter
+          message={botText}
+          wordDelay={wordDelay}
+          onDone={() => setBotDone(true)}
+        />
+      </label>
+      {botDone && (
+        <>
+          {inputType == "textarea" && (
+            <Textarea
+              value={data}
+              onChange={onChange}
+              autosize
+              maxRows={6}
+              className="text-lg"
+              placeholder={inputPlaceholder}
+            />
+          )}
+          {inputType == "editor" && data && <TextEditor content={data} />}
+          {
+            <div className="flex justify-end gap-2">
+              {options?.map((option, index) => (
+                <Button
+                  key={index}
+                  disabled={selected !== undefined}
+                  onClick={handleAction(
+                    index,
+                    option.onAction,
+                    option.onDone,
+                    option.onError
+                  )}
+                >
+                  {option.label}
+                </Button>
+              ))}
+            </div>
+          }
+        </>
+      )}
     </form>
   );
 }

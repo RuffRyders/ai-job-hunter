@@ -3,9 +3,11 @@ import { useInterval } from "../hooks/useInterval";
 
 export function MessageWriter({
   message = "",
+  wordDelay = 200,
   onDone,
 }: {
   message: string;
+  wordDelay?: number;
   onDone?: () => void;
 }) {
   const [index, setIndex] = useState(0);
@@ -23,7 +25,7 @@ export function MessageWriter({
         onDone?.();
       }
     },
-    running ? 200 : null
+    running ? wordDelay : null
   );
 
   return <>{written}</>;
