@@ -1,7 +1,8 @@
-import { Button, Textarea } from "@mantine/core";
+import { Textarea } from "../Textarea";
 import { TextEditor } from "../TextEditor";
 import { MessageWriter } from "../MessageWriter";
 import { useState } from "react";
+import { Button } from "../Button";
 
 export type OnActionHandler = () => any;
 export type OnDoneHandler = (data?: any) => void;
@@ -54,7 +55,7 @@ export function PromptAnswerForm({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="pb-2">
+      <div className="pb-2 text-lg">
         <MessageWriter
           message={botText}
           wordDelay={wordDelay}
@@ -66,10 +67,10 @@ export function PromptAnswerForm({
           {inputType == "textarea" && (
             <Textarea
               value={data}
-              onChange={onChange}
-              autosize
-              maxRows={6}
-              className="text-lg"
+              onChange={
+                onChange as React.ChangeEventHandler<HTMLTextAreaElement>
+              }
+              autoSize
               placeholder={inputPlaceholder}
               onPaste={(e) => {
                 console.log(
