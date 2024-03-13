@@ -23,7 +23,7 @@ export function Textarea({
   };
 
   const sameStyles =
-    "text-balance row-start-1 row-end-2 col-start-1 col-end-2 p-4";
+    "text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2 p-4";
 
   return (
     <div className="grid max-h-48 overflow-y-none overflow-y-auto">
