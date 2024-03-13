@@ -1,16 +1,16 @@
 ## Table of Contents
 
--   [Getting Started](#getting-started)
--   [Changing Hugging Face GPT Model](#changing-hugging-face-gpt-model)
--   [Prompt Generation](#prompt-generation)
--   [Codebase Structure](#codebase-structure)
--   [Import Path Aliasing](#import-path-aliasing)
--   [Design](#design)
--   [Styling](#styling)
-    -   [cn - Class Name Utility](#cn---classname-utility)
-    -   [Font](#font)
--   [Roadmap](#roadmap-and-planning)
--   [Build Optimizations](#build-optimizations)
+- [Getting Started](#getting-started)
+- [Changing Hugging Face GPT Model](#changing-hugging-face-gpt-model)
+- [Prompt Generation](#prompt-generation)
+- [Codebase Structure](#codebase-structure)
+- [Import Path Aliasing](#import-path-aliasing)
+- [Design](#design)
+- [Styling](#styling)
+  - [cn - Class Name Utility](#cn---classname-utility)
+  - [Font](#font)
+- [Roadmap](#roadmap-and-planning)
+- [Build Optimizations](#build-optimizations)
 
 ## Getting Started
 
@@ -40,9 +40,9 @@ Models constants are defined in this file
 
 Update `CURRENT_MODEL` to change the Hugging Face model.
 
-## Prompt generation
+## Prompt Engineering
 
-Prompt generation is currently handled by `src/services/PromptGenerator/PromptGenerator.ts`.
+Prompt engineering in this project currently uses the string formatting templates located at `src/data/prompts.ts` and the prompt format util at `src/utils/formatPrompt.ts`.
 
 ## Codebase structure
 
@@ -82,29 +82,29 @@ Designs and wire frames [here in figma.](https://www.figma.com/file/u5ZnNk5WQHup
 Example usage:
 
 ```tsx
-import { cn } from '../_utils/cn'
+import { cn } from "../_utils/cn";
 
 export const SectionTitle = ({ name, classNameText }: SectionTitleProps) => {
-    return (
-        <div className="inline-flex pl-4 pt-4">
-            <p
-                className={cn([
-                    'text-white w-full rounded-sm px-2',
-                    // 'dark:bg-gradient-to-t from-transparent to-neutral-800',
-                    'border border-white border-solid',
-                    'rounded-md',
-                    classNameText,
-                ])}
-            >
-                {name}
-            </p>
-        </div>
-    )
-}
+  return (
+    <div className="inline-flex pl-4 pt-4">
+      <p
+        className={cn([
+          "text-white w-full rounded-sm px-2",
+          // 'dark:bg-gradient-to-t from-transparent to-neutral-800',
+          "border border-white border-solid",
+          "rounded-md",
+          classNameText,
+        ])}
+      >
+        {name}
+      </p>
+    </div>
+  );
+};
 
 interface SectionTitleProps {
-    name: string
-    classNameText?: string
+  name: string;
+  classNameText?: string;
 }
 ```
 
@@ -208,6 +208,6 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 Roadmap and other planning notes [here in google docs.](https://docs.google.com/document/d/1K2f0gv-EWTZ1aQYlbWGm-fpakKa6zUASceDoIqw4QsI/edit)
 
-## Build Optimizations
+## Build Optimizationsxw
 
 To optimize bundle size for the `jsPDF` dep check [the readme here](https://github.com/parallax/jsPDF?tab=readme-ov-file#optional-dependencies)

@@ -5,3 +5,6 @@ export class AppConfig {
   public static readonly HF_INFERENCE_API_KEY =
     process.env.HF_INFERENCE_API_KEY;
 }
+
+export const HF_INFERENCE_API_BASE_URL = process.env.HF_INFERENCE_API_BASE_URL;
+export const HF_INFERENCE_API_KEY = process.env.HF_INFERENCE_API_KEY;
