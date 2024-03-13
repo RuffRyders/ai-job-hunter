@@ -1,5 +1,5 @@
 import { Textarea } from "../Textarea";
-import { TextEditor } from "../TextEditor";
+import { RichTextEditor } from "../RichTextEditor";
 import { MessageWriter } from "../MessageWriter";
 import { useState } from "react";
 import { Button } from "../Button";
@@ -84,7 +84,7 @@ export function PromptAnswerForm({
               }}
             />
           )}
-          {inputType == "editor" && data && <TextEditor content={data} />}
+          {inputType == "editor" && data && <RichTextEditor content={data} />}
           {
             <div className="flex justify-end gap-2">
               {options?.map((option, index) => (

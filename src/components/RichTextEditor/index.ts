@@ -1,3 +1,1 @@
-import TipTapEditor from './TipTapEditor'
-
-export default TipTapEditor
+export { RichTextEditor } from "./TipTapEditor";
