@@ -1,4 +1,4 @@
-import { Textarea } from "../Textarea";
+import { TextArea } from "../TextArea";
 import { RichTextEditor } from "../RichTextEditor";
 import { MessageWriter } from "../MessageWriter";
 import { useState } from "react";
@@ -65,7 +65,7 @@ export function PromptAnswerForm({
       {botDone && (
         <>
           {inputType == "textarea" && (
-            <Textarea
+            <TextArea
               value={data}
               onChange={
                 onChange as React.ChangeEventHandler<HTMLTextAreaElement>
@@ -90,8 +90,8 @@ export function PromptAnswerForm({
               {options?.map((option, index) => (
                 <Button
                   key={index}
-                  disabled={selected !== undefined}
-                  onClick={handleAction(
+                  isDisabled={selected !== undefined}
+                  onPress={handleAction(
                     index,
                     option.onAction,
                     option.onDone,

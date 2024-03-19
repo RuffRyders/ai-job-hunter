@@ -1,9 +1,4 @@
-import {
-  Button as AriaButton,
-  ButtonProps as AriaButtonProps,
-} from "react-aria-components";
-
-interface ButtonProps extends AriaButtonProps {}
+import { Button as AriaButton, ButtonProps } from "react-aria-components";
 
 export function Button({ children, className, ...rest }: ButtonProps) {
   return (

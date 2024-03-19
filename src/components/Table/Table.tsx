@@ -7,6 +7,8 @@ import {
   TableHeader,
   TableProps,
 } from "react-aria-components";
+import { StatusLabel } from "../StatusLabel";
+import { applicationStatuses } from "@/data/applicationStatuses";
 
 interface JobApplication {
   title: string;
@@ -51,6 +53,18 @@ let rows = [
     dateUpdated: "10/12/23",
   },
 ] as JobApplication[];
+
+function StatusCell({ statusKey }: { statusKey: string }) {
+  const applicationStatus = applicationStatuses[statusKey];
+  return (
+    <Cell className="px-6 py-4">
+      <StatusLabel
+        statusText={applicationStatus.name}
+        color={applicationStatus.color}
+      />
+    </Cell>
+  );
+}
 
 function SalaryCell({
   salary,
@@ -103,10 +117,14 @@ export function Table({ onRowAction }: TableProps) {
         {(item) => (
           <Row columns={columns} className="bg-white border-b cursor-pointer">
             {(column) => {
-              if (column.id === "salary") {
-                return <SalaryCell salary={item[column.id]} />;
+              const value = item[column.id];
+              if (column.id === "status") {
+                return <StatusCell statusKey={value} />;
               }
-              return <Cell className="px-6 py-4">{item[column.id]}</Cell>;
+              if (column.id === "salary") {
+                return <SalaryCell salary={value} />;
+              }
+              return <Cell className="px-6 py-4">{value}</Cell>;
             }}
           </Row>
         )}

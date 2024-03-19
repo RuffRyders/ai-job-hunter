@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { EntryModal } from "@/components/EntryModal";
+import { CardEditor } from "@/components/CardEditor";
 import { SearchInput } from "@/components/SearchInput";
 import { Table } from "@/components/Table";
 import { useState } from "react";
@@ -25,7 +25,7 @@ export default function JobTracker() {
 
         <div className="py-4">
           <Table onRowAction={handleRowAction} />
-          <EntryModal onOpenChange={setOpen} isOpen={isOpen} />
+          <CardEditor onOpenChange={setOpen} isOpen={isOpen} />
         </div>
       </div>
     </div>
