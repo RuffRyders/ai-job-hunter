@@ -3,7 +3,7 @@ import {
   OnDoneHandler,
   OnErrorHandler,
   PromptAnswerForm,
-} from "./PromptAnswerForm";
+} from "../forms/PromptAnswerForm";
 
 export interface PrompOption {
   label: string;
