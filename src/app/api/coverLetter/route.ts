@@ -1,4 +1,4 @@
-import { AppConfig } from "@/config/appConfig";
+import { HF_INFERENCE_API_BASE_URL, HF_INFERENCE_API_KEY } from "@/config/appConfig";
 import { CURRENT_MODEL } from "@/constants";
 import { promptCoverLetter } from "@/data/prompts";
 import { AppLogger } from "@/services/Logger/Logger";
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     const prompt = formatPrompt(promptCoverLetter, jobDescription);
 
-    const url = `${AppConfig.HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`;
+    const url = `${HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`;
 
     AppLogger.info(
       "coverLetter:POST --",
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     const res = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${AppConfig.HF_INFERENCE_API_KEY}`,
+        Authorization: `Bearer ${HF_INFERENCE_API_KEY}`,
         "Content-Type": "application/json",
       },
       method: "POST",
