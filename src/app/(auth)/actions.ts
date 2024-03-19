@@ -1,49 +1,53 @@
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-import { createClient } from '@/services/auth/supabase/server'
+import { createClient } from "@/services/auth/supabase/server";
 
 export async function login(formData: FormData) {
-    const supabase = createClient()
+  console.log("formData", formData);
+  const supabase = createClient();
 
-    // TODO type-casting here for convenience
-    // in practice, you should validate your inputs
-    const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-    }
+  // TODO type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
 
-    const { error } = await supabase.auth.signInWithPassword(data)
+  console.log("data", data);
 
-    // TODO handle error cases
-    if (error) {
-        return { message: 'Invalid email or password' }
-    }
+  const { error } = await supabase.auth.signInWithPassword(data);
 
-    revalidatePath('/', 'layout')
-    redirect('/')
+  // TODO handle error cases
+  if (error) {
+    console.log(error);
+    return { message: "Invalid email or password" };
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/");
 }
 
 export async function signup(formData: FormData) {
-    const supabase = createClient()
+  const supabase = createClient();
 
-    // TODO type-casting here for convenience
-    // in practice, you should validate your inputs
-    const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-    }
+  // TODO type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
 
-    const { error } = await supabase.auth.signUp(data)
+  const { error } = await supabase.auth.signUp(data);
 
-    // TODO handle error cases
-    if (error) {
-        console.log('error', error)
-        return { message: 'Invalid email or password' }
-    }
+  // TODO handle error cases
+  if (error) {
+    console.log("error", error);
+    return { message: "Invalid email or password" };
+  }
 
-    revalidatePath('/', 'layout')
-    redirect('/')
+  revalidatePath("/", "layout");
+  redirect("/");
 }
