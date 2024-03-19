@@ -8,7 +8,7 @@ interface SubmitButtonProps {
     children: React.ReactNode
 }
 
-const SubmitButton = ({ formAction }: SubmitButtonProps) => {
+const SubmitButton = ({ formAction, children }: SubmitButtonProps) => {
     const { pending } = useFormStatus()
 
     return (
@@ -19,7 +19,7 @@ const SubmitButton = ({ formAction }: SubmitButtonProps) => {
             disabled={pending}
             className="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-700 disabled:bg-gray-500"
         >
-            Sign up
+            {children}
         </button>
     )
 }

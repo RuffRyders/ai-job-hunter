@@ -84,11 +84,6 @@ export const RichTextEditor = ({ content }: RichTextEditorProps) => {
         const xPosition = (a4WidthMM - scaledWidth) / 2;
         const yPosition = (a4HeightMM - scaledHeight) / 2;
 
-        console.log("calculated scale: ", scale);
-        console.log("a4 aspect ratio: ", a4WidthMM / a4HeightMM);
-        console.log("canvas aspect ratio", canvas.width / canvas.height);
-        console.log("canvas dimensions: ", canvas.width, canvas.height);
-
         pdf.addImage(
           imgData,
           "PNG",

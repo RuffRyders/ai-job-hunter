@@ -40,6 +40,7 @@ export async function signup(formData: FormData) {
 
     // TODO handle error cases
     if (error) {
+        console.log('error', error)
         return { message: 'Invalid email or password' }
     }
 
