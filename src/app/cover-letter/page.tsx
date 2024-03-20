@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { fetchCoverLetter } from "@/data/api/fetchCoverLetter";
 import { textToHtml } from "@/utils/string/textToHtml";
 import { jobs } from "@/data/samples/jobs";
-import { BotChat, PromptStep } from "@/components/forms/BotChat";
+import { BotChat, PromptStep } from "@/components/bot/BotChat";
 
 export default function Home() {
   const [coverLetter, setCoverLetter] = useState<string>();

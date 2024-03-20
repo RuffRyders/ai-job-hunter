@@ -1,14 +1,29 @@
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  type?: "button" | "submit" | "reset" | undefined;
+import { cn } from "@/utils/style/cn";
+import {
+  Button as AriaButton,
+  ButtonProps as AriaButtonProps,
+} from "react-aria-components";
+
+interface ButtonProps extends AriaButtonProps {
+  variant?: "primary";
 }
 
-export function Button({ children, className, ...rest }: ButtonProps) {
+export function Button({ children, className, variant, ...rest }: ButtonProps) {
+  const isPrimary = variant === "primary";
   return (
-    <button
-      className={`pointer-events-auto rounded-full bg-indigo-600 px-6 py-4 text-normal font-semibold leading-5 text-white hover:bg-indigo-500 disabled:bg-slate-900 disabled:text-slate-500 ${className}`}
+    <AriaButton
+      className={cn(
+        `pointer-events-auto rounded-full bg-gray-200 pressed:opacity-70 px-5 py-3 text-sm font-semibold text-black hover:bg-gray-300 disabled:bg-gray-50 disabled:text-gray-500`,
+        {
+          "text-white": isPrimary,
+          "bg-primary-500": isPrimary,
+          "hover:bg-primary-600": isPrimary,
+        },
+        className
+      )}
       {...rest}
     >
       {children}
-    </button>
+    </AriaButton>
   );
 }
