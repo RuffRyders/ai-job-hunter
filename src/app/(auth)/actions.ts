@@ -5,45 +5,74 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/services/auth/supabase/server'
 
-export async function login(formData: FormData) {
+interface AuthActionResponse {
+    error?: {
+        message: string
+    }
+}
+
+interface LoginActionProps {
+    email: string
+    password: string
+}
+
+export async function login({
+    email,
+    password,
+}: LoginActionProps): Promise<AuthActionResponse> {
     const supabase = createClient()
 
-    // TODO type-casting here for convenience
-    // in practice, you should validate your inputs
     const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
+        email,
+        password,
     }
 
     const { error } = await supabase.auth.signInWithPassword(data)
 
     // TODO handle error cases
     if (error) {
-        return { message: 'Invalid email or password' }
+        return {
+            error: {
+                message: error.message,
+            },
+        }
     }
 
+    // purges cache for declared path, but I don't fully understand why yet
     revalidatePath('/', 'layout')
     redirect('/')
 }
 
-export async function signup(formData: FormData) {
+interface SignupActionProps {
+    email: string
+    password: string
+}
+
+export async function signup({
+    email,
+    password,
+}: SignupActionProps): Promise<AuthActionResponse> {
     const supabase = createClient()
 
     // TODO type-casting here for convenience
     // in practice, you should validate your inputs
     const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
+        email,
+        password,
     }
 
     const { error } = await supabase.auth.signUp(data)
 
     // TODO handle error cases
     if (error) {
-        console.log('error', error)
-        return { message: 'Invalid email or password' }
+        return {
+            error: {
+                message: error.message,
+            },
+        }
     }
 
+    // purges cache for declared path, but I don't fully understand why yet
     revalidatePath('/', 'layout')
     redirect('/')
 }

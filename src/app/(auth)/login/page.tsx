@@ -1,26 +1,50 @@
 'use client'
 
-import { useFormState } from 'react-dom'
-import { login } from '../actions'
+import { FormEventHandler, useState } from 'react'
 import Link from 'next/link'
+
+import { login } from '../actions'
 import SubmitButton from '../_components/SubmitButton'
+import LoadingOverlay from '../_components/LoadingOverlay'
 
 const initialState = {
     message: '',
 }
 
 export default function LoginPage() {
-    const [state, action] = useFormState(login, initialState)
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
-    const handleSignup = () => {}
+    const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault()
+
+        setLoading(true)
+        setError('')
+
+        // TODO type-casting here for convenience, implement better validation (utility function?)
+        const formData = new FormData(e.currentTarget)
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
+
+        const response = await login({ email, password })
+
+        setLoading(false)
+        setError(response?.error?.message || '')
+    }
 
     return (
-        <div
-            className="w-full h-screen flex justify-center items-center bg-no-repeat bg-cover"
-            style={{ backgroundImage: 'url(/login/lavender-blue-graph.webp)' }}
-        >
-            <form className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col space-y-4">
+        <div className="w-full h-screen flex justify-center items-center">
+            <form
+                onSubmit={onSubmit}
+                className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col space-y-4"
+            >
                 <div className="w-full text-center text-3xl">Log In</div>
+
+                {error && (
+                    <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                        {error}
+                    </div>
+                )}
 
                 <label htmlFor="email">Email</label>
                 <input
@@ -38,7 +62,7 @@ export default function LoginPage() {
                     className="p-2 border rounded-2xl"
                     required
                 />
-                <SubmitButton formAction={action}>Log in</SubmitButton>
+                <SubmitButton>Log in</SubmitButton>
 
                 <div className="flex flex-col w-full items-center">
                     <div>New Here?</div>
@@ -51,6 +75,8 @@ export default function LoginPage() {
                     </Link>
                 </div>
             </form>
+
+            <LoadingOverlay loading={loading} />
         </div>
     )
 }
