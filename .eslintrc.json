@@ -6,7 +6,7 @@
       "single"
     ],
     "indent": [
-      "error",
+      "warn",
       2
     ],
     "semi": [
