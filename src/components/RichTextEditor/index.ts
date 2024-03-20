@@ -1,1 +1,1 @@
-export { RichTextEditor } from "./TipTapEditor";
+export { RichTextEditor } from './TipTapEditor'

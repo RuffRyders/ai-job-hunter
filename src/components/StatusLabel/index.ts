@@ -1,1 +1,1 @@
-export { StatusLabel } from "./StatusLabel";
+export { StatusLabel } from './StatusLabel'

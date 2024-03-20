@@ -5,37 +5,37 @@ import { useState } from 'react'
 import useSWR from 'swr'
 
 export default function PrivatePage() {
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-    const { data } = useSWR('user', loadUserData)
-    const { user, error: swrError } = data ?? {}
+  const { data } = useSWR('user', loadUserData)
+  const { user, error: swrError } = data ?? {}
 
-    const handleSignOut = async () => {
-        setLoading(true)
-        setError('')
+  const handleSignOut = async () => {
+    setLoading(true)
+    setError('')
 
-        const response = await signOut()
+    const response = await signOut()
 
-        setLoading(false)
-        setError(response?.error?.message || '')
-    }
+    setLoading(false)
+    setError(response?.error?.message || '')
+  }
 
-    return (
-        <div>
-            <p className="mb-10">Hello {user?.email}</p>
+  return (
+    <div>
+      <p className="mb-10">Hello {user?.email}</p>
 
-            <p className="text-red-500 mb-10">{error ?? swrError}</p>
+      <p className="text-red-500 mb-10">{error ?? swrError}</p>
 
-            <button
-                onClick={handleSignOut}
-                className="button block"
-                type="button"
-                aria-disabled={loading}
-                disabled={loading}
-            >
-                Sign Out
-            </button>
-        </div>
-    )
+      <button
+        onClick={handleSignOut}
+        className="button block"
+        type="button"
+        aria-disabled={loading}
+        disabled={loading}
+      >
+        Sign Out
+      </button>
+    </div>
+  )
 }

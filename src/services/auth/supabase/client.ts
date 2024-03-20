@@ -1,4 +1,7 @@
-import { NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY } from '@/config/appConfig'
+import {
+  NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_ANON_KEY,
+} from '@/config/appConfig'
 import { createBrowserClient } from '@supabase/ssr'
 
 /**
@@ -6,5 +9,8 @@ import { createBrowserClient } from '@supabase/ssr'
  */
 
 export function createClient() {
-    return createBrowserClient(NEXT_PUBLIC_SUPABASE_URL!, NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+  return createBrowserClient(
+    NEXT_PUBLIC_SUPABASE_URL!,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  )
 }

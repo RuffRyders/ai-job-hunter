@@ -6,54 +6,54 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 interface AuthActionResponse {
-    error?: {
-        message: string
-    }
+  error?: {
+    message: string
+  }
 }
 
 export const signOut = async (): Promise<AuthActionResponse> => {
-    const supabase = createClient()
+  const supabase = createClient()
 
-    try {
-        const {
-            data: { user },
-        } = await supabase.auth.getUser()
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-        if (user) {
-            await supabase.auth.signOut()
-        }
-    } catch (err) {
-        let errorMessage = ''
+    if (user) {
+      await supabase.auth.signOut()
+    }
+  } catch (err) {
+    let errorMessage = ''
 
-        if (err instanceof Error) {
-            errorMessage = err.message
-        } else {
-            errorMessage = 'Unknown error'
-        }
-
-        return {
-            error: {
-                message: errorMessage,
-            },
-        }
+    if (err instanceof Error) {
+      errorMessage = err.message
+    } else {
+      errorMessage = 'Unknown error'
     }
 
-    revalidatePath('/', 'layout')
-    redirect('/login')
+    return {
+      error: {
+        message: errorMessage,
+      },
+    }
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/login')
 }
 
 interface LoadUserDataActionProps {
-    user?: User
-    error?: string
+  user?: User
+  error?: string
 }
 
 export async function loadUserData(): Promise<LoadUserDataActionProps> {
-    const supabase = createClient()
-    const { data, error } = await supabase.auth.getUser()
+  const supabase = createClient()
+  const { data, error } = await supabase.auth.getUser()
 
-    if (error || !data?.user) {
-        return { error: 'Internal error' }
-    }
+  if (error || !data?.user) {
+    return { error: 'Internal error' }
+  }
 
-    return { user: data.user }
+  return { user: data.user }
 }
