@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
   content: [
@@ -16,6 +17,9 @@ const config: Config = {
       },
       aspectRatio: {
         "a4-document": "210 / 297",
+      },
+      colors: {
+        primary: colors.blue,
       },
     },
   },

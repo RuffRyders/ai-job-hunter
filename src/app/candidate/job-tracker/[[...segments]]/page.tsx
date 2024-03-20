@@ -7,7 +7,12 @@ import { Table } from "@/components/Table";
 import { useState } from "react";
 import { Key } from "react-aria-components";
 
-export default function JobTracker() {
+export default function JobTracker({
+  params: { segments },
+}: {
+  params: { segments: string[] };
+}) {
+  const [jobId] = segments;
   const [isOpen, setOpen] = useState(false);
 
   const handleRowAction = (key: Key) => {
@@ -25,7 +30,7 @@ export default function JobTracker() {
 
         <div className="py-4">
           <Table onRowAction={handleRowAction} />
-          <CardEditor onOpenChange={setOpen} isOpen={isOpen} />
+          <CardEditor jobId={jobId} onOpenChange={setOpen} isOpen={isOpen} />
         </div>
       </div>
     </div>
