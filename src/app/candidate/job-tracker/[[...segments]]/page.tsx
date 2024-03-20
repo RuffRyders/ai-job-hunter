@@ -12,7 +12,7 @@ export default function JobTracker({
 }: {
   params: { segments: string[] };
 }) {
-  const [jobId] = segments;
+  const jobId = segments?.[0];
   const [isOpen, setOpen] = useState(false);
 
   const handleRowAction = (key: Key) => {
