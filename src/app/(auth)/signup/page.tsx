@@ -32,7 +32,7 @@ export default function SignupPage() {
         <div className="w-full h-screen flex justify-center items-center">
             <form
                 onSubmit={onSubmit}
-                className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col relative space-y-4"
+                className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col space-y-4"
             >
                 <div className="w-full text-center text-3xl">
                     Create An Account

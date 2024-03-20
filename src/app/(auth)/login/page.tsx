@@ -7,10 +7,6 @@ import { login } from '../actions'
 import SubmitButton from '../_components/SubmitButton'
 import LoadingOverlay from '../_components/LoadingOverlay'
 
-const initialState = {
-    message: '',
-}
-
 export default function LoginPage() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
