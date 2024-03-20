@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get('type') as EmailOtpType | null
     // const redirectPath = searchParams.get('redirectPath')
 
-    const redirectTo = new NextURL(`${request.nextUrl.origin}/verify`)
+    const redirectTo = new NextURL('/verify', request.nextUrl.origin)
 
     if (token_hash && type) {
         const supabase = createClient()
