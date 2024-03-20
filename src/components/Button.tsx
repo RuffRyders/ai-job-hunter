@@ -13,7 +13,7 @@ export function Button({ children, className, variant, ...rest }: ButtonProps) {
   return (
     <AriaButton
       className={cn(
-        `pointer-events-auto rounded-full bg-gray-200 pressed:opacity-70 px-5 py-3 text-sm font-semibold text-black hover:bg-gray-300 disabled:bg-gray-50 disabled:text-gray-500`,
+        'pointer-events-auto rounded-full bg-gray-200 pressed:opacity-70 px-5 py-3 text-sm font-semibold text-black hover:bg-gray-300 disabled:bg-gray-50 disabled:text-gray-500',
         {
           'text-white': isPrimary,
           'bg-primary-500': isPrimary,

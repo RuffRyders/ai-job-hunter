@@ -17,7 +17,7 @@ export const fetchCoverLetter = async ({
     jobDescription,
   )
 
-  const res = await fetch(`/api/coverLetter`, {
+  const res = await fetch('/api/coverLetter', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
