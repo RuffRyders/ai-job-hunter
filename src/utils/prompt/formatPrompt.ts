@@ -1,13 +1,13 @@
-import format from "string-format";
+import format from 'string-format'
 
 export function formatPrompt(
   template: string,
   ...args: (
     | string
     | {
-        [k: string]: any;
+        [k: string]: any
       }
   )[]
 ): string {
-  return format(template, ...args);
+  return format(template, ...args)
 }

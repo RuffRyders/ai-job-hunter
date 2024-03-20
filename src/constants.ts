@@ -10,14 +10,14 @@
  */
 export const HF_MODELS = {
   gpt2: {
-    id: "gpt2",
+    id: 'gpt2',
   },
   gemma: {
-    id: "google/gemma-7b-it",
+    id: 'google/gemma-7b-it',
   },
-};
+}
 
 /**
  * The model used for the HF inference API
  */
-export const CURRENT_MODEL = HF_MODELS.gemma.id;
+export const CURRENT_MODEL = HF_MODELS.gemma.id

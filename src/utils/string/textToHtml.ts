@@ -1,12 +1,12 @@
 export function textToHtml(str: string) {
   return str
-    .split("\n")
+    .split('\n')
     .map((line) => {
-      if (line === "") {
-        return null;
+      if (line === '') {
+        return null
       }
-      return `<p>${line}</p>`;
+      return `<p>${line}</p>`
     })
     .filter(Boolean)
-    .join("");
+    .join('')
 }

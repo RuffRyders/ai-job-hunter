@@ -18,7 +18,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('bold') && styles['menuButton--active']
+          editor.isActive('bold') && styles['menuButton--active'],
         )}
       >
         bold
@@ -28,7 +28,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('italic') && styles['menuButton--active']
+          editor.isActive('italic') && styles['menuButton--active'],
         )}
       >
         italic
@@ -38,7 +38,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         disabled={!editor.can().chain().focus().toggleStrike().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('strike') && styles['menuButton--active']
+          editor.isActive('strike') && styles['menuButton--active'],
         )}
       >
         strike
@@ -48,7 +48,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         disabled={!editor.can().chain().focus().toggleCode().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('code') && styles['menuButton--active']
+          editor.isActive('code') && styles['menuButton--active'],
         )}
       >
         code
@@ -69,7 +69,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('paragraph') ? 'is-active' : ''
+          editor.isActive('paragraph') ? 'is-active' : '',
         )}
       >
         paragraph
@@ -78,7 +78,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 1 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 1 }) ? 'is-active' : '',
         )}
       >
         h1
@@ -87,7 +87,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 2 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 2 }) ? 'is-active' : '',
         )}
       >
         h2
@@ -96,7 +96,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 3 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 3 }) ? 'is-active' : '',
         )}
       >
         h3
@@ -105,7 +105,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 4 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 4 }) ? 'is-active' : '',
         )}
       >
         h4
@@ -114,7 +114,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 5 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 5 }) ? 'is-active' : '',
         )}
       >
         h5
@@ -123,7 +123,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('heading', { level: 6 }) ? 'is-active' : ''
+          editor.isActive('heading', { level: 6 }) ? 'is-active' : '',
         )}
       >
         h6
@@ -132,7 +132,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('bulletList') ? 'is-active' : ''
+          editor.isActive('bulletList') ? 'is-active' : '',
         )}
       >
         bullet list
@@ -141,7 +141,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('orderedList') ? 'is-active' : ''
+          editor.isActive('orderedList') ? 'is-active' : '',
         )}
       >
         ordered list
@@ -150,7 +150,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('codeBlock') ? 'is-active' : ''
+          editor.isActive('codeBlock') ? 'is-active' : '',
         )}
       >
         code block
@@ -159,7 +159,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('blockquote') ? 'is-active' : ''
+          editor.isActive('blockquote') ? 'is-active' : '',
         )}
       >
         blockquote
@@ -196,7 +196,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
         onClick={() => editor.chain().focus().run()}
         className={cn(
           styles.menuButton,
-          editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''
+          editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : '',
         )}
       >
         purple

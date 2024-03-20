@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
-  autoSize: boolean;
+  autoSize: boolean
 }
 
 export function Textarea({
@@ -11,19 +11,19 @@ export function Textarea({
   onChange,
   ...rest
 }: TextAreaProps) {
-  const [data, setData] = useState("");
+  const [data, setData] = useState('')
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log("change", event.target.value);
-    setData(event.target.value);
-    onChange?.(event);
-  };
+    console.log('change', event.target.value)
+    setData(event.target.value)
+    onChange?.(event)
+  }
 
   const handleKeyUp = (event: any) => {
-    console.log("keyup", event?.target?.value);
-  };
+    console.log('keyup', event?.target?.value)
+  }
 
   const sameStyles =
-    "text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2 p-4";
+    'text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2 p-4'
 
   return (
     <div className="grid max-h-48 overflow-y-none overflow-y-auto">
@@ -36,8 +36,8 @@ export function Textarea({
         {children}
       </textarea>
       <div className={`${sameStyles} whitespace-pre-wrap invisible`}>
-        {data}{" "}
+        {data}{' '}
       </div>
     </div>
-  );
+  )
 }

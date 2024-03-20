@@ -1,5 +1,5 @@
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined
 }
 
 export function Button({ children, className, ...rest }: ButtonProps) {
@@ -10,5 +10,5 @@ export function Button({ children, className, ...rest }: ButtonProps) {
     >
       {children}
     </button>
-  );
+  )
 }
