@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   Dialog,
   Modal,
@@ -12,25 +12,25 @@ import {
   TabList,
   Tab,
   TabPanel,
-} from "react-aria-components";
-import { IconX } from "@tabler/icons-react";
-import { applicationStatuses } from "@/data/applicationStatuses";
-import { Button } from "../Button";
-import { IconButton } from "../IconButton";
-import { Select } from "../Select";
-import { StatusLabel } from "../StatusLabel";
-import { TextArea } from "../TextArea";
-import { SelectOption } from "../Select/Select";
+} from 'react-aria-components'
+import { IconX } from '@tabler/icons-react'
+import { applicationStatuses } from '@/data/applicationStatuses'
+import { Button } from '../Button'
+import { IconButton } from '../IconButton'
+import { Select } from '../Select'
+import { StatusLabel } from '../StatusLabel'
+import { TextArea } from '../TextArea'
+import { SelectOption } from '../Select/Select'
 
 interface CardEditorProps extends ModalOverlayProps {
-  jobId?: string;
+  jobId?: string
 }
 
 export function CardEditor({ jobId, ...rest }: CardEditorProps) {
-  const options = Object.values(applicationStatuses);
-  const [status, setStatus] = useState<Key>("not-yet-applied");
-  const [description, setDescription] = useState("This is on a wait list");
-  const [jobTitle, setJobTitle] = useState("Software Engineer");
+  const options = Object.values(applicationStatuses)
+  const [status, setStatus] = useState<Key>('not-yet-applied')
+  const [description, setDescription] = useState('This is on a wait list')
+  const [jobTitle, setJobTitle] = useState('Software Engineer')
   return (
     <ModalOverlay
       className="fixed inset-0 bg-black/50 overflow-y-auto"
@@ -147,5 +147,5 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
         </Dialog>
       </Modal>
     </ModalOverlay>
-  );
+  )
 }

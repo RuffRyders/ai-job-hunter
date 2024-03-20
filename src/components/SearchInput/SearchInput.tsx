@@ -4,11 +4,11 @@ import {
   Button,
   InputProps,
   SearchFieldProps,
-} from "react-aria-components";
-import { IconSearch } from "@tabler/icons-react";
+} from 'react-aria-components'
+import { IconSearch } from '@tabler/icons-react'
 
-type SearchInputProps = Pick<InputProps, "placeholder"> &
-  Pick<SearchFieldProps, "className">;
+type SearchInputProps = Pick<InputProps, 'placeholder'> &
+  Pick<SearchFieldProps, 'className'>
 
 export function SearchInput({ className, placeholder }: SearchInputProps) {
   return (
@@ -22,5 +22,5 @@ export function SearchInput({ className, placeholder }: SearchInputProps) {
       />
       <Button className="pr-2">✕</Button>
     </SearchField>
-  );
+  )
 }

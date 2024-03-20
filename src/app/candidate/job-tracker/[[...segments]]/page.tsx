@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/Button";
-import { CardEditor } from "@/components/CardEditor";
-import { SearchInput } from "@/components/SearchInput";
-import { Table } from "@/components/Table";
-import { useState } from "react";
-import { Key } from "react-aria-components";
+import { Button } from '@/components/Button'
+import { CardEditor } from '@/components/CardEditor'
+import { SearchInput } from '@/components/SearchInput'
+import { Table } from '@/components/Table'
+import { useState } from 'react'
+import { Key } from 'react-aria-components'
 
 export default function JobTracker({
   params: { segments },
 }: {
-  params: { segments: string[] };
+  params: { segments: string[] }
 }) {
-  const jobId = segments?.[0];
-  const [isOpen, setOpen] = useState(false);
+  const jobId = segments?.[0]
+  const [isOpen, setOpen] = useState(false)
 
   const handleRowAction = (key: Key) => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
@@ -34,5 +34,5 @@ export default function JobTracker({
         </div>
       </div>
     </div>
-  );
+  )
 }

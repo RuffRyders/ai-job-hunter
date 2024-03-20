@@ -1,1 +1,1 @@
-export { CardEditor } from "./CardEditor";
+export { CardEditor } from './CardEditor'

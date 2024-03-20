@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 export default function Profile() {
   return (
@@ -7,5 +7,5 @@ export default function Profile() {
         Profile
       </div>
     </div>
-  );
+  )
 }

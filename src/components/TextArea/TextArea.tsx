@@ -1,12 +1,12 @@
-import { cn } from "@/utils/style/cn";
-import { useEffect, useState } from "react";
+import { cn } from '@/utils/style/cn'
+import { useEffect, useState } from 'react'
 import {
   TextArea as AriaTextArea,
   TextAreaProps as AriaTextAreaProps,
-} from "react-aria-components";
+} from 'react-aria-components'
 
 interface TextAreaProps extends AriaTextAreaProps {
-  autoSize?: boolean;
+  autoSize?: boolean
 }
 
 export function TextArea({
@@ -17,29 +17,29 @@ export function TextArea({
   value,
   ...rest
 }: TextAreaProps) {
-  const [data, setData] = useState(value);
-  const [isFocused, setFocused] = useState(false);
+  const [data, setData] = useState(value)
+  const [isFocused, setFocused] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setData(event.target.value);
-    onChange?.(event);
-  };
+    setData(event.target.value)
+    onChange?.(event)
+  }
 
   useEffect(() => {
-    setData(value);
-  }, [value]);
+    setData(value)
+  }, [value])
 
   const handleKeyUp = (event: any) => {
-    console.log("keyup", event?.target?.value);
-  };
+    console.log('keyup', event?.target?.value)
+  }
 
   const sameStyles =
-    "text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2";
+    'text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2'
 
   return (
     <div
       className={cn(
-        "grid bg-white overflow-y-none overflow-y-auto rounded h-full w-full p-2 bg-gray-100",
-        isFocused && ["p-2", "outline", "outline-2", "outline-blue-500"]
+        'grid bg-white overflow-y-none overflow-y-auto rounded h-full w-full p-2 bg-gray-100',
+        isFocused && ['p-2', 'outline', 'outline-2', 'outline-blue-500'],
       )}
     >
       <AriaTextArea
@@ -55,8 +55,8 @@ export function TextArea({
         {children}
       </AriaTextArea>
       <div className={`${sameStyles} whitespace-pre-wrap invisible`}>
-        {data + " "}
+        {data + ' '}
       </div>
     </div>
-  );
+  )
 }

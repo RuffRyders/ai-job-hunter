@@ -1,18 +1,18 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "AI Job Hunter",
-  description: "AI Job Hunting Assistant",
-};
+  title: 'AI Job Hunter',
+  description: 'AI Job Hunting Assistant',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className="dark">
@@ -22,5 +22,5 @@ export default function RootLayout({
         </main>
       </body>
     </html>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "react-aria-components";
+import { Button, ButtonProps } from 'react-aria-components'
 
 export function IconButton({ children, className, ...rest }: ButtonProps) {
   return (
@@ -8,5 +8,5 @@ export function IconButton({ children, className, ...rest }: ButtonProps) {
     >
       {children}
     </Button>
-  );
+  )
 }
