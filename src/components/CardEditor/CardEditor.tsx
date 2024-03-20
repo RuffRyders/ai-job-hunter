@@ -42,14 +42,14 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
           {({ close }) => (
             <div className="flex flex-col flex-1">
               <div className="flex flex-col flex-1 gap-2">
-                <Header className="flex">
+                <Header className="flex gap-2">
                   <TextField
                     aria-label="jobTitle"
                     className="flex flex-1"
                     autoFocus
                   >
                     <Input
-                      className="text-2xl flex-1"
+                      className="text-2xl flex-1 font-bold"
                       placeholder="Enter a job title..."
                       onChange={(event) => setJobTitle(event.target.value)}
                       value={jobTitle}
@@ -72,7 +72,7 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
                     </TextField>
                     <Tabs className="flex flex-1 flex-col">
                       <TabList
-                        className="flex border-b border-solid border-slate-300"
+                        className="flex border-b border-solid border-gray-300"
                         aria-label="History of Ancient Rome"
                       >
                         <Tab
@@ -94,8 +94,8 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
                           Tailored Resume
                         </Tab>
                       </TabList>
-                      <TabPanel className="flex flex-1" id="description">
-                        <TextField className="flex flex-1 py-2">
+                      <TabPanel className="flex flex-1 pt-2" id="description">
+                        <TextField className="flex flex-1">
                           <TextArea
                             className="min-h-48"
                             placeholder="Enter a job description..."
@@ -106,12 +106,12 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
                           />
                         </TextField>
                       </TabPanel>
-                      <TabPanel className="flex flex-1" id="cover-letter">
+                      <TabPanel className="flex flex-1 pt-2" id="cover-letter">
                         <div className="rounded bg-gray-100 flex flex-1 items-center justify-center">
                           <Button>Generate Cover Letter</Button>
                         </div>
                       </TabPanel>
-                      <TabPanel className="flex flex-1" id="resume">
+                      <TabPanel className="flex flex-1 pt-2" id="resume">
                         <div className="rounded bg-gray-100 flex flex-1 items-center justify-center">
                           <Button>Generate Resume</Button>
                         </div>

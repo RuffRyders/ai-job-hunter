@@ -38,7 +38,7 @@ export function TextArea({
   return (
     <div
       className={cn(
-        "grid bg-white overflow-y-none overflow-y-auto rounded flex flex-1",
+        "grid bg-white overflow-y-none overflow-y-auto rounded h-full w-full p-2 bg-gray-100",
         isFocused && ["p-2", "outline", "outline-2", "outline-blue-500"]
       )}
     >
@@ -49,7 +49,7 @@ export function TextArea({
         onChange={handleChange}
         onKeyUp={handleKeyUp}
         value={data}
-        className={`${sameStyles} overflow-hidden resize-none outline-none ${className}`}
+        className={`${sameStyles} overflow-hidden resize-none outline-none bg-transparent ${className}`}
         {...rest}
       >
         {children}
