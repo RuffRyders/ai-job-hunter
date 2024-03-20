@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "quotes": [
-      "error",
+      "warn",
       "single"
     ],
     "indent": [
