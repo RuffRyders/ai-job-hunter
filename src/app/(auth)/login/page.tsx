@@ -3,7 +3,7 @@
 import { FormEventHandler, useState } from 'react'
 import Link from 'next/link'
 
-import { login } from '../actions'
+import { login } from '../serverActions'
 import SubmitButton from '../_components/SubmitButton'
 import LoadingOverlay from '../_components/LoadingOverlay'
 

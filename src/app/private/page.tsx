@@ -1,11 +1,11 @@
 'use client'
 
-import { loadUserData, signOut } from './actions'
+import { loadUserData, signOut } from './serverActions'
 import { useState } from 'react'
 import useSWR from 'swr'
 
 export default function PrivatePage() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
     const { data } = useSWR('user', loadUserData)
