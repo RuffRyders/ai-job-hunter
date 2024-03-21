@@ -34,6 +34,7 @@ export async function login({
 
   // TODO handle error cases
   if (error) {
+    console.log('error: ', error)
     return {
       error: {
         message: error.message,

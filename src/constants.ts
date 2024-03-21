@@ -21,3 +21,8 @@ export const HF_MODELS = {
  * The model used for the HF inference API
  */
 export const CURRENT_MODEL = HF_MODELS.gemma.id
+
+export const NON_AUTH_ROUTES = new Map([
+  ['/login', true],
+  ['/signup', true],
+])

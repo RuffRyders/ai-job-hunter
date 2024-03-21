@@ -5,14 +5,12 @@ import {
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { AppLogger } from '@/services/Logger/Logger'
+import { handleRouting } from './handleRouting'
 
 /**
  * Update session cookies and redirect to login if the user is not authenticated
  */
-async function updateSession(
-  request: NextRequest,
-  nonAuthRoutes: string[] = [],
-) {
+async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -76,17 +74,12 @@ async function updateSession(
     AppLogger.info('Error updating auth session: ', error.message)
   }
 
-  const isExcludedPath = nonAuthRoutes.some((path) =>
-    request.nextUrl.pathname.startsWith(path),
-  )
-
-  // If there's no user or an error, and not an excluded path, redirect to login.
-  if ((!user || error) && !isExcludedPath) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  // If the user is authenticated, continue with the response, possibly with updated cookies
-  return response
+  handleRouting({
+    request,
+    response,
+    user,
+    error,
+  })
 }
 
 export default updateSession
