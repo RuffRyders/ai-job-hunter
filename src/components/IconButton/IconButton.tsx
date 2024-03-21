@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, ButtonProps } from 'react-aria-components'
 
 export function IconButton({ children, className, ...rest }: ButtonProps) {
