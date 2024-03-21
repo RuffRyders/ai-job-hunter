@@ -1,8 +1,19 @@
-export default function AppHeader() {
+import useSWR from 'swr'
+import Avatar from '../Avatar/Avatar'
+import fetchUserData from '@/data/api/fetchUserData'
+
+export default async function AppHeader() {
+  const { data, error } = await fetchUserData()
+
+  if (error) {
+    console.log('Error fetching user data: ', error)
+  }
+
   return (
-    <header className="w-full h-20 sm:h-32 bg-green-200 border-b-2 border-b-gray-400 flex flex-row">
+    <div className="w-full h-16 sm:h-18 bg-white border-b-[1px] border-b-gray-300 flex flex-row items-center justify-between px-6 py-3">
       <div className="font-bold text-lg">branding here</div>
-      <div className="w-10 sm:w-14 h-10 sm:h-14 bg-purple-400 rounded-full" />
-    </header>
+      {data && <Avatar email={data.email} avatarUrl={data.avatarUrl} />}
+      {!data && <div className="text-red-500">X</div>}
+    </div>
   )
 }
