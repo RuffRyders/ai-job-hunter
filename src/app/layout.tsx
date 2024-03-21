@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppProviders>
-          <main>{children}</main>
+          <main className="h-full">{children}</main>
         </AppProviders>
       </body>
     </html>
