@@ -74,7 +74,7 @@ async function updateSession(request: NextRequest) {
     AppLogger.info('Error updating auth session: ', error.message)
   }
 
-  handleRouting({
+  return handleRouting({
     request,
     response,
     user,
