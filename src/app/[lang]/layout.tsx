@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -11,9 +11,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  ...rest
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  console.log('rest', rest)
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
