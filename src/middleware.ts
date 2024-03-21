@@ -6,12 +6,8 @@ import updateSession from '@/services/auth/supabase/middleware/updateSession'
  * https://nextjs.org/docs/app/building-your-application/routing/middleware#conditional-statements
  */
 
-// Paths that don't require authentication
-// TODO routing path pattern to group auth routes or something? (/public/...)
-const nonAuthRoutes = ['/login', '/signup']
-
 export async function middleware(request: NextRequest) {
-  return await updateSession(request, nonAuthRoutes)
+  return await updateSession(request)
 
   // * Example of how to conditionally call middleware
   // if (request.nextUrl.pathname.startsWith('/about')) {

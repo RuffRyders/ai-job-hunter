@@ -1,41 +1,14 @@
-'use client'
+import { SignOutButton } from './SignOutButton'
+import { getUserOrServerRedirect } from '@/utils/auth/getUserOrServerRedirect'
 
-import { loadUserData, signOut } from './serverActions'
-import { useState } from 'react'
-import useSWR from 'swr'
-
-export default function PrivatePage() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
-  const { data } = useSWR('user', loadUserData)
-  const { user, error: swrError } = data ?? {}
-
-  const handleSignOut = async () => {
-    setLoading(true)
-    setError('')
-
-    const response = await signOut()
-
-    setLoading(false)
-    setError(response?.error?.message || '')
-  }
+export default async function PrivatePage() {
+  const user = await getUserOrServerRedirect()
 
   return (
     <div>
       <p className="mb-10">Hello {user?.email}</p>
 
-      <p className="text-red-500 mb-10">{error ?? swrError}</p>
-
-      <button
-        onClick={handleSignOut}
-        className="button block"
-        type="button"
-        aria-disabled={loading}
-        disabled={loading}
-      >
-        Sign Out
-      </button>
+      <SignOutButton />
     </div>
   )
 }
