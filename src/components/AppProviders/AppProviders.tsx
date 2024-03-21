@@ -5,16 +5,14 @@
  */
 
 import { FC, PropsWithChildren } from 'react'
-import { I18nProvider, useLocale } from 'react-aria-components'
 
 const AppProviders: FC<PropsWithChildren> = ({ children }) => {
-  let { locale, direction } = useLocale()
-
-  // TODO: this html tag won't be render SSR, is that bad for SEO?
   return (
-    <html lang={locale} dir={direction}>
-      <I18nProvider locale={locale}>{children}</I18nProvider>
-    </html>
+    <>
+      {/* <ExampleProvider> */}
+      {children}
+      {/* </ExampleProvider> */}
+    </>
   )
 }
 
