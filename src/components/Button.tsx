@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/utils/style/cn'
 import {
   Button as AriaButton,

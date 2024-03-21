@@ -1,3 +1,4 @@
+import AppProviders from '@/components/AppProviders/AppProviders'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -15,11 +16,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={inter.className}>
-        <main className="h-full dark text-foreground bg-background">
-          {children}
-        </main>
+        <AppProviders>
+          <main className="h-full">{children}</main>
+        </AppProviders>
       </body>
     </html>
   )

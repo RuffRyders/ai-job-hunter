@@ -11,6 +11,7 @@
   - [Font](#font)
 - [Roadmap](#roadmap-and-planning)
 - [Build Optimizations](#build-optimizations)
+- [AppProvider, context and client side provider logic](#app-provider)
 
 ## Getting Started
 
@@ -211,3 +212,7 @@ Roadmap and other planning notes [here in google docs.](https://docs.google.com/
 ## Build Optimizationsxw
 
 To optimize bundle size for the `jsPDF` dep check [the readme here](https://github.com/parallax/jsPDF?tab=readme-ov-file#optional-dependencies)
+
+## App Provider
+
+Many tools and libraries require some data to be available in context across the whole application tree.  That data is often dynamic in nature needing to be retrieved or defined on the client (e.g. authenticating with remote entity or dependent on something client side like the browser locale).  To allow the rest of the app tree to utilize SSR place that logic in the AppProvider component at `src/components/AppProviders/AppProviders.tsx`
