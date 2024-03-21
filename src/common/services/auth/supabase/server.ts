@@ -1,6 +1,7 @@
 import {
   NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  SUPABASE_SERVICE_ROLE_KEY,
 } from '@/common/data/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
@@ -42,6 +43,21 @@ export function createClient() {
             // user sessions.
           }
         },
+      },
+    },
+  )
+}
+
+// * This is a service role client, it bypasses all RLS rules so use it with caution
+export function createServiceRoleClient() {
+  const cookieStore = cookies()
+
+  return createServerClient(
+    NEXT_PUBLIC_SUPABASE_URL!,
+    SUPABASE_SERVICE_ROLE_KEY!,
+    {
+      cookies: {
+        // I don't think we want to do anything with cookies from the service role client. Could be dangerous
       },
     },
   )

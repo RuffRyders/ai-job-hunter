@@ -3,7 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/common/services/auth/supabase/server'
+import {
+  createClient,
+  createServiceRoleClient,
+} from '@/common/services/auth/supabase/server'
 
 interface AuthActionResponse {
   error?: {
@@ -48,26 +51,47 @@ interface SignupActionProps {
   password: string
 }
 
+// TODO make this all atomic somehow.  a user should always exist in both the auth system and the database
 export async function signup({
   email,
   password,
 }: SignupActionProps): Promise<AuthActionResponse> {
   const supabase = createClient()
+  const supabaseServiceRole = createServiceRoleClient()
 
   // TODO type-casting here for convenience
   // in practice, you should validate your inputs
-  const data = {
+  const signUpData = {
     email,
     password,
   }
 
-  const { error } = await supabase.auth.signUp(data)
+  const { error: signUpError, data: userAuthData } =
+    await supabase.auth.signUp(signUpData)
 
   // TODO handle error cases
-  if (error) {
+  if (signUpError) {
     return {
       error: {
-        message: error.message,
+        message: signUpError.message,
+      },
+    }
+  } else if (!userAuthData || !userAuthData.user?.id) {
+    return {
+      error: {
+        message: 'No user data returned',
+      },
+    }
+  }
+
+  const { data, error: insertError } = await supabaseServiceRole
+    .from('users')
+    .insert({ email, id: userAuthData.user.id })
+
+  if (insertError) {
+    return {
+      error: {
+        message: insertError.message,
       },
     }
   }
