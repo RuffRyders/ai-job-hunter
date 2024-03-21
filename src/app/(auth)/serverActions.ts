@@ -56,7 +56,6 @@ export async function signup({
   email,
   password,
 }: SignupActionProps): Promise<AuthActionResponse> {
-  const supabase = createClient()
   const supabaseServiceRole = createServiceRoleClient()
 
   // TODO type-casting here for convenience
@@ -67,7 +66,7 @@ export async function signup({
   }
 
   const { error: signUpError, data: userAuthData } =
-    await supabase.auth.signUp(signUpData)
+    await supabaseServiceRole.auth.signUp(signUpData)
 
   // TODO handle error cases
   if (signUpError) {
