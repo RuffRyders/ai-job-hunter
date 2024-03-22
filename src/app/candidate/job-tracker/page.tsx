@@ -1,24 +1,8 @@
-'use client'
-
 import { Button } from '@/components/Button'
-import { CardEditor } from '@/components/CardEditor'
 import { SearchInput } from '@/components/SearchInput'
 import { Table } from '@/components/Table'
-import { useState } from 'react'
-import { Key } from 'react-aria-components'
 
-export default function JobTracker({
-  params: { segments },
-}: {
-  params: { segments: string[] }
-}) {
-  const jobId = segments?.[0]
-  const [isOpen, setOpen] = useState(false)
-
-  const handleRowAction = (key: Key) => {
-    setOpen(true)
-  }
-
+export default function JobTracker() {
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
       <div className="h-full flex flex-col gap-2">
@@ -29,8 +13,7 @@ export default function JobTracker({
         </div>
 
         <div className="py-4">
-          <Table onRowAction={handleRowAction} />
-          <CardEditor jobId={jobId} onOpenChange={setOpen} isOpen={isOpen} />
+          <Table />
         </div>
       </div>
     </div>
