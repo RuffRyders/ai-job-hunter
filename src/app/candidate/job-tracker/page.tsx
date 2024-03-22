@@ -1,6 +1,7 @@
-import { Button } from '@/components/Button'
-import { SearchInput } from '@/components/SearchInput'
-import { Table } from '@/components/Table'
+import { Button } from '@/common/ui/Button'
+import { SearchInput } from '@/common/ui/SearchInput'
+import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
+import Link from 'next/link'
 
 export default function JobTracker() {
   return (
@@ -9,11 +10,16 @@ export default function JobTracker() {
         <div className="flex gap-2 items-start items-center">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
           <SearchInput className="ml-auto" placeholder="Search..." />
-          <Button>Add a job</Button>
+          <Link
+            href="/candidate/job-tracker/[id]"
+            as="/candidate/job-tracker/new"
+          >
+            <Button>Add a job</Button>
+          </Link>
         </div>
 
         <div className="py-4">
-          <Table />
+          <JobsTable />
         </div>
       </div>
     </div>

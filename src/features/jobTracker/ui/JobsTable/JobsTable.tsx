@@ -1,16 +1,10 @@
 'use client'
 
-import {
-  Cell,
-  Column,
-  Row,
-  Table as AriaTable,
-  TableBody,
-  TableHeader,
-  TableProps,
-} from 'react-aria-components'
-import { StatusLabel } from '../StatusLabel'
-import { applicationStatuses } from '@/data/applicationStatuses'
+import { Cell, Column, Key, Row, TableProps } from 'react-aria-components'
+import { Table, TableBody, TableHeader } from '@/common/ui/Table'
+import { StatusLabel } from '@/common/ui/StatusLabel'
+import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
+import { useRouter } from 'next/navigation'
 
 interface JobApplication {
   title: string
@@ -90,16 +84,21 @@ function SalaryCell({
   )
 }
 
-export function Table({ onRowAction }: TableProps) {
+export function JobsTable() {
+  const router = useRouter()
+
+  const handleRowAction = (key: Key) => {
+    console.log('handled key', key)
+    if (!key) {
+      return
+    }
+
+    router.push(`/candidate/job-tracker/${key}`)
+  }
+
   return (
-    <AriaTable
-      onRowAction={onRowAction}
-      className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-    >
-      <TableHeader
-        columns={columns}
-        className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-      >
+    <Table onRowAction={handleRowAction}>
+      <TableHeader columns={columns}>
         {(column) => (
           <Column isRowHeader={column.isRowHeader} className="px-6 py-3">
             {({ allowsSorting, sortDirection }) => (
@@ -131,6 +130,6 @@ export function Table({ onRowAction }: TableProps) {
           </Row>
         )}
       </TableBody>
-    </AriaTable>
+    </Table>
   )
 }

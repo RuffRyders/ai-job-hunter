@@ -1,8 +1,8 @@
-import { TextArea } from '../TextArea'
-import { RichTextEditor } from '../RichTextEditor'
-import { MessageWriter } from '../MessageWriter'
+import { TextArea } from '../../../common/ui/TextArea'
+import { RichTextEditor } from '../../../common/ui/RichTextEditor'
+import { MessageWriter } from '../../../common/ui/MessageWriter/MessageWriter'
 import { useState } from 'react'
-import { Button } from '../Button'
+import { Button } from '../../../common/ui/Button/Button'
 
 export type OnActionHandler = () => any
 export type OnDoneHandler = (data?: any) => void

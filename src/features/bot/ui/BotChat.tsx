@@ -3,7 +3,7 @@ import {
   OnDoneHandler,
   OnErrorHandler,
   PromptAnswerForm,
-} from '../../components/bot/PromptAnswerForm'
+} from './PromptAnswerForm'
 
 export interface PrompOption {
   label: string

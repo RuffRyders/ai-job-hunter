@@ -16,13 +16,14 @@ import {
   TabPanel,
 } from 'react-aria-components'
 import { IconX } from '@tabler/icons-react'
-import { applicationStatuses } from '@/data/applicationStatuses'
-import { Button } from '../Button'
-import { IconButton } from '../IconButton'
-import { Select } from '../Select'
-import { StatusLabel } from '../StatusLabel'
-import { TextArea } from '../TextArea'
-import { SelectOption } from '../Select/Select'
+import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
+import { Button } from '../../../../common/ui/Button/Button'
+import { IconButton } from '../../../../common/ui/IconButton'
+import { Select } from '../../../../common/ui/Select'
+import { StatusLabel } from '../../../../common/ui/StatusLabel'
+import { TextArea } from '../../../../common/ui/TextArea'
+import { SelectOption } from '../../../../common/ui/Select/Select'
+import { useRouter } from 'next/navigation'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string
@@ -33,10 +34,18 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
   const [status, setStatus] = useState<Key>('not-yet-applied')
   const [description, setDescription] = useState('This is on a wait list')
   const [jobTitle, setJobTitle] = useState('Software Engineer')
+  const router = useRouter()
+
+  const handleOpenChange = (data: any) => {
+    console.log(data)
+    router.push('/candidate/job-tracker')
+  }
+
   return (
     <ModalOverlay
       className="fixed inset-0 bg-black/50 overflow-y-auto"
       isDismissable
+      onOpenChange={handleOpenChange}
       {...rest}
     >
       <Modal className="flex my-20 mx-auto bg-white max-w-3xl min-h-[500px] h-[calc(100vh - 100px)] drop-shadow-2xl rounded-lg">

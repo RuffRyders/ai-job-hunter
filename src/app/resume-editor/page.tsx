@@ -1,4 +1,4 @@
-import { RichTextEditor } from '@/components/RichTextEditor/TipTapEditor'
+import { RichTextEditor } from '@/common/ui/RichTextEditor/TipTapEditor'
 import testResume from '@/data/samples/resume/testResume1'
 
 export default function Page() {
