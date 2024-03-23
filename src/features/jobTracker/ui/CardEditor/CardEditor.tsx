@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dialog,
   Modal,
@@ -24,6 +24,9 @@ import { StatusLabel } from '../../../../common/ui/StatusLabel'
 import { TextArea } from '../../../../common/ui/TextArea'
 import { SelectOption } from '../../../../common/ui/Select/Select'
 import { useRouter } from 'next/navigation'
+import { getJob } from '../../data/api/jobApplicationsApi'
+import useSWR from 'swr'
+import { fetcher } from '@/utils/fetch/fetcher'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string
@@ -35,9 +38,12 @@ export function CardEditor({ jobId, ...rest }: CardEditorProps) {
   const [description, setDescription] = useState('This is on a wait list')
   const [jobTitle, setJobTitle] = useState('Software Engineer')
   const router = useRouter()
+  const { data, error } = useSWR('jobId', () =>
+    fetcher(`/api/candidate/applications/${jobId}`),
+  )
+  console.log({ data, error })
 
-  const handleOpenChange = (data: any) => {
-    console.log(data)
+  const handleOpenChange = () => {
     router.push('/candidate/job-tracker')
   }
 
