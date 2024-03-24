@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/utils/style/cn'
+import { cn } from '@/common/utils/style/cn'
 import {
   Button as AriaButton,
   ButtonProps as AriaButtonProps,

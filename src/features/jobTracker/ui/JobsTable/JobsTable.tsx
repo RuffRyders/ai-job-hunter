@@ -1,12 +1,12 @@
 'use client'
 
-import { Cell, Column, Key, Row, TableProps } from 'react-aria-components'
+import { Cell, Column, Key, Row } from 'react-aria-components'
 import { Table, TableBody, TableHeader } from '@/common/ui/Table'
 import { StatusLabel } from '@/common/ui/StatusLabel'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { useRouter } from 'next/navigation'
 import useSWR from 'swr'
-import { fetcher } from '@/utils/fetch/fetcher'
+import { fetcher } from '@/common/utils/fetcher/fetcher'
 
 interface JobApplication {
   jobTitle: string

@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/utils/style/cn'
+import { cn } from '@/common/utils/style/cn'
 import { useEffect, useState } from 'react'
 import {
   TextArea as AriaTextArea,

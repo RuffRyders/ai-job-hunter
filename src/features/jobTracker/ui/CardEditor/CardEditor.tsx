@@ -26,7 +26,7 @@ import { SelectOption } from '../../../../common/ui/Select/Select'
 import { useRouter } from 'next/navigation'
 import { getJob } from '../../data/api/jobApplicationsApi'
 import useSWR from 'swr'
-import { fetcher } from '@/utils/fetch/fetcher'
+import { fetcher } from '@/common/utils/fetcher/fetcher'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string

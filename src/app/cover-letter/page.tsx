@@ -1,9 +1,9 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { fetchCoverLetter } from '@/data/api/fetchCoverLetter'
-import { textToHtml } from '@/utils/string/textToHtml'
-import { jobs } from '@/data/samples/jobs'
+import { fetchCoverLetter } from '@/common/data/api/fetchCoverLetter'
+import { textToHtml } from '@/common/utils/string/textToHtml'
+import { jobs } from '@/features/bot/data/samples/jobs'
 import { BotChat, PromptStep } from '@/features/bot/ui/BotChat'
 
 export default function Home() {

@@ -1,5 +1,5 @@
 import { SignOutButton } from './SignOutButton'
-import { getUserOrServerRedirect } from '@/utils/auth/getUserOrServerRedirect'
+import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedirect'
 
 export default async function PrivatePage() {
   const user = await getUserOrServerRedirect()

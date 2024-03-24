@@ -1,4 +1,4 @@
-import { cn } from '@/utils/style/cn'
+import { cn } from '@/common/utils/style/cn'
 import { Editor } from '@tiptap/react'
 import styles from './MenuSimple.module.css'
 

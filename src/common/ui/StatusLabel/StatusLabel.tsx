@@ -1,4 +1,4 @@
-import { cn } from '@/utils/style/cn'
+import { cn } from '@/common/utils/style/cn'
 
 export function StatusLabel({
   statusText,

@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import MenuSimple from './components/MenuSimple/MenuSimple'
-import { cn } from '@/utils/style/cn'
+import { cn } from '@/common/utils/style/cn'
 import './TipTapEditor.css'
 
 const editorContentActual = 'editor-content-actual'
