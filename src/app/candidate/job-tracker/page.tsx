@@ -9,7 +9,11 @@ export default function JobTracker() {
       <div className="h-full flex flex-col gap-2">
         <div className="flex gap-2 items-start items-center">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
-          <SearchInput className="ml-auto" placeholder="Search..." />
+          <SearchInput
+            className="ml-auto"
+            placeholder="Search..."
+            aria-label="Filter applied jobs"
+          />
           <Link
             href="/candidate/job-tracker/[id]"
             as="/candidate/job-tracker/new"

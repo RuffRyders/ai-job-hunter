@@ -21,9 +21,7 @@ interface SelectProps<T extends object>
 export function SelectOption({ children, ...rest }: ListBoxItemProps) {
   return (
     <ListBoxItem
-      className={({ isFocused, isSelected }) =>
-        `p-1 ${isFocused ? 'focused' : ''} ${isSelected ? 'selected' : ''}`
-      }
+      className="p-1 rounded cursor-pointer focus:outline focus:outline-2 focus:outline-blue-500"
       {...rest}
     >
       {children}
@@ -38,7 +36,7 @@ export function Select<T extends object>({
 }: SelectProps<T>) {
   return (
     <AriaSelect {...rest}>
-      <Button className="flex gap-2 w-full">
+      <Button className="p-1 border-solid border border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500">
         <SelectValue className="flex-auto display-block" />
         <div aria-hidden="true">
           <IconChevronDown />

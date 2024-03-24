@@ -30,15 +30,16 @@ import { fetcher } from '@/utils/fetch/fetcher'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string
+  isNew?: boolean
 }
 
-export function CardEditor({ jobId, ...rest }: CardEditorProps) {
+export function CardEditor({ jobId, isNew, ...rest }: CardEditorProps) {
   const options = Object.values(applicationStatuses)
   const [status, setStatus] = useState<Key>('not-yet-applied')
-  const [description, setDescription] = useState('This is on a wait list')
-  const [jobTitle, setJobTitle] = useState('Software Engineer')
+  const [description, setDescription] = useState('')
+  const [jobTitle, setJobTitle] = useState('')
   const router = useRouter()
-  const { data, error } = useSWR('jobId', () =>
+  const { data, error } = useSWR(jobId, () =>
     fetcher(`/api/candidate/applications/${jobId}`),
   )
   console.log({ data, error })

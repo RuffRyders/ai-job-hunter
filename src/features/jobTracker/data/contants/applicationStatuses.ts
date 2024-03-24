@@ -5,9 +5,9 @@ interface ApplicationStatusData {
 }
 
 export const applicationStatuses = {
-  ['not-yet-applied']: {
+  not_applied: {
     name: 'Not Yet Applied',
-    value: 'not-yet-applied',
+    value: 'not_applied',
     color: '#b3b3b3',
   },
   applied: { name: 'Applied', value: 'applied', color: '#00A8DD' },
@@ -17,12 +17,23 @@ export const applicationStatuses = {
     color: '#FFA800',
   },
   rejected: { name: 'Rejected', value: 'rejected', color: '#F04C4C' },
-  offered: { name: 'Offered', value: 'offered', color: '#3CC925' },
+  closed: { name: 'Closed', value: 'closed', color: '#505050' },
+  offer_pending: {
+    name: 'Offer Pending',
+    value: 'offer_pending',
+    color: '#ffdd00',
+  },
+  accepted: {
+    name: 'Accepted',
+    value: 'accepted',
+    color: '#3CC925',
+  },
 } as {
-  ['not-yet-applied']: ApplicationStatusData
+  not_applied: ApplicationStatusData
   applied: ApplicationStatusData
   interviewing: ApplicationStatusData
-  offered: ApplicationStatusData
+  offer_pending: ApplicationStatusData
+  accepted: ApplicationStatusData
   rejected: ApplicationStatusData
   [key: string]: ApplicationStatusData
 }

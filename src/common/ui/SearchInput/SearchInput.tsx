@@ -12,10 +12,15 @@ import { IconSearch } from '@tabler/icons-react'
 type SearchInputProps = Pick<InputProps, 'placeholder'> &
   Pick<SearchFieldProps, 'className'>
 
-export function SearchInput({ className, placeholder }: SearchInputProps) {
+export function SearchInput({
+  className,
+  placeholder,
+  ...rest
+}: SearchInputProps) {
   return (
     <SearchField
       className={`flex gap-1 items-center border border-slate-300 border-solid text-sm rounded-full ${className} px-4`}
+      {...rest}
     >
       <IconSearch stroke={3} />
       <Input

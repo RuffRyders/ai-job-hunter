@@ -9,7 +9,9 @@ export function StatusLabel({
 }) {
   return (
     <div
-      className={cn('text-white px-1 rounded bg-slate-300 w-full text-center')}
+      className={cn(
+        'text-white px-1 rounded bg-slate-300 w-full text-center user-select-none',
+      )}
       style={{ backgroundColor: color }}
     >
       {statusText}
