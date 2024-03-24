@@ -1,7 +1,7 @@
 import {
   NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY,
-} from '@/common/config/appConfig'
+} from '@/common/data/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { AppLogger } from '@/common/services/Logger/Logger'

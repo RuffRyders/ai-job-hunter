@@ -24,7 +24,7 @@ import { StatusLabel } from '../../../../common/ui/StatusLabel'
 import { TextArea } from '../../../../common/ui/TextArea'
 import { SelectOption } from '../../../../common/ui/Select/Select'
 import { useRouter } from 'next/navigation'
-import { getJob } from '../../data/api/jobApplicationsApi'
+import { getJob } from '../../data/api/jobApplications'
 import useSWR from 'swr'
 import { fetcher } from '@/common/utils/fetcher/fetcher'
 

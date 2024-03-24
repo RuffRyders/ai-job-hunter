@@ -1,7 +1,7 @@
 import {
   NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY,
-} from '@/common/config/appConfig'
+} from '@/common/data/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
