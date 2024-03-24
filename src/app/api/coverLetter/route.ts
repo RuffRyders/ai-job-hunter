@@ -1,10 +1,10 @@
 import {
   HF_INFERENCE_API_BASE_URL,
   HF_INFERENCE_API_KEY,
-} from '@/config/appConfig'
-import { CURRENT_MODEL } from '@/constants'
+} from '@/common/config/appConfig'
+import { CURRENT_MODEL } from '@/common/constants'
 import { promptCoverLetter } from '@/features/bot/data/prompts'
-import { AppLogger } from '@/services/Logger/Logger'
+import { AppLogger } from '@/common/services/Logger/Logger'
 import { formatPrompt } from '@/common/utils/prompt/formatPrompt'
 import { NextRequest, NextResponse } from 'next/server'
 

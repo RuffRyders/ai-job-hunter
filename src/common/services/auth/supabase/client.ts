@@ -1,7 +1,7 @@
 import {
   NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY,
-} from '@/config/appConfig'
+} from '@/common/config/appConfig'
 import { createBrowserClient } from '@supabase/ssr'
 
 /**

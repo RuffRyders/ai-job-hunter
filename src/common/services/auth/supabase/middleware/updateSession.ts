@@ -1,10 +1,10 @@
 import {
   NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY,
-} from '@/config/appConfig'
+} from '@/common/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { AppLogger } from '@/services/Logger/Logger'
+import { AppLogger } from '@/common/services/Logger/Logger'
 
 /**
  * Update session cookies and redirect to login if the user is not authenticated

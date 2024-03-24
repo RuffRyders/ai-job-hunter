@@ -1,4 +1,4 @@
-import { AppLogger } from '@/services/Logger/Logger'
+import { AppLogger } from '@/common/services/Logger/Logger'
 
 interface FetchCoverLetterResponse {
   generatedCoverLetter: string

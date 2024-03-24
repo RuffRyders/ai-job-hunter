@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server'
-import updateSession from '@/services/auth/supabase/middleware/updateSession'
+import updateSession from '@/common/services/auth/supabase/middleware/updateSession'
 
 /**
  * Nextjs Docs
