@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/Button'
-import { createClient } from '@/services/auth/supabase/client'
+import { Button } from '@/common/ui/Button/Button'
+import { createClient } from '@/common/services/auth/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 

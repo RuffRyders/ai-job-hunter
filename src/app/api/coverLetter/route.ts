@@ -1,11 +1,11 @@
 import {
   HF_INFERENCE_API_BASE_URL,
   HF_INFERENCE_API_KEY,
-} from '@/config/appConfig'
-import { CURRENT_MODEL } from '@/constants'
-import { promptCoverLetter } from '@/data/prompts'
-import { AppLogger } from '@/services/Logger/Logger'
-import { formatPrompt } from '@/utils/prompt/formatPrompt'
+} from '@/common/data/config/appConfig'
+import { CURRENT_MODEL } from '@/common/data/constants/models'
+import { promptCoverLetter } from '@/features/bot/data/prompts'
+import { AppLogger } from '@/common/services/Logger/Logger'
+import { formatPrompt } from '@/common/utils/prompt/formatPrompt'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {

@@ -1,5 +1,5 @@
-import { RichTextEditor } from '@/components/RichTextEditor/TipTapEditor'
-import testResume from '@/data/samples/resume/testResume1'
+import { RichTextEditor } from '@/common/ui/RichTextEditor/TipTapEditor'
+import testResume from '@/features/bot/data/samples/resume/testResume1'
 
 export default function Page() {
   return (
