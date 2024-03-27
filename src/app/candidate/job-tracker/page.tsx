@@ -1,9 +1,13 @@
 import { Button } from '@/common/ui/Button'
 import { SearchInput } from '@/common/ui/SearchInput'
+import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedirect'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import Link from 'next/link'
 
-export default function JobTracker() {
+export default async function JobTracker() {
+  // Protect route to ensure a user is signed in
+  await getUserOrServerRedirect()
+
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
       <div className="h-full flex flex-col gap-2">
