@@ -1,9 +1,9 @@
-import { CardEditor } from '@/features/jobTracker/ui/CardEditor'
+import { JobEditor } from '@/features/jobTracker/ui/JobEditor'
 
 export interface PageProps {
   params: { id: string }
 }
 
 export default function Page({ params: { id } }: PageProps) {
-  return <CardEditor isOpen={true} jobId={id} />
+  return <JobEditor isOpen={true} jobId={id} />
 }

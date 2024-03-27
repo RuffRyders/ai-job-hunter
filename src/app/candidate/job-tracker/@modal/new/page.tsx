@@ -1,5 +1,5 @@
-import { CardEditor } from '@/features/jobTracker/ui/CardEditor'
+import { JobEditor } from '@/features/jobTracker/ui/JobEditor'
 
 export default function Page() {
-  return <CardEditor isOpen={true} />
+  return <JobEditor isNew isOpen />
 }
