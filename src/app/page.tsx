@@ -1,7 +1,10 @@
 import { Button } from '@/common/ui/Button/Button'
+import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedirect'
 import Link from 'next/link'
 
-export default function Home() {
+export default async function Home() {
+  const user = await getUserOrServerRedirect()
+
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
       <div className="h-full flex flex-col gap-2 items-center justify-center">

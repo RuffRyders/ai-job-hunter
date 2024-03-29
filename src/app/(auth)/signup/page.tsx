@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { signup } from '../serverActions'
 import SubmitButton from '../_components/SubmitButton'
-import LoadingOverlay from '../_components/LoadingOverlay'
+import LoadingOverlay from '../../../common/ui/LoadingOverlay'
 
 export default function SignupPage() {
   const [error, setError] = useState('')

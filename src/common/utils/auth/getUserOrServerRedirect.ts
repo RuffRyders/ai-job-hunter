@@ -1,13 +1,13 @@
 import { createClient } from '@/common/services/auth/supabase/server'
 import { redirect } from 'next/navigation'
 
-export async function getUserOrServerRedirect(
-  {
-    redirectTo = '/login',
-  }: {
-    redirectTo?: string
-  } = { redirectTo: '/login' },
-) {
+interface Params {
+  redirectTo?: string
+}
+
+export async function getUserOrServerRedirect(params?: Params) {
+  const redirectTo = params?.redirectTo || '/login'
+
   const supabase = createClient()
 
   const { data, error } = await supabase.auth.getUser()
