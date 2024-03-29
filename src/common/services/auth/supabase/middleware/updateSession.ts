@@ -4,7 +4,6 @@ import {
 } from '@/common/data/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { AppLogger } from '@/common/services/Logger/Logger'
 
 /**
  * Update session cookies and redirect to login if the user is not authenticated
@@ -62,10 +61,8 @@ async function updateSession(request: NextRequest) {
     },
   )
 
-  // Attempt to get the current user to check authentication status
   await supabase.auth.getUser()
 
-  // If the user is authenticated, continue with the response, possibly with updated cookies
   return response
 }
 
