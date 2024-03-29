@@ -2,6 +2,7 @@ import AppProviders from './_providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import AppHeader from '@/features/header/ui/AppHeader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppProviders>
-          <main className="h-full">{children}</main>
+          <header>
+            <AppHeader />
+          </header>
+
+          <main>{children}</main>
         </AppProviders>
       </body>
     </html>
