@@ -1,6 +1,6 @@
-import { cn } from '@/common/utils/style/cn'
-import Image from 'next/image'
 import { MouseEvent } from 'react'
+
+import { cn } from '@/common/utils/style/cn'
 import { AvatarImage } from './AvatarImage'
 
 interface AvatarProps {
