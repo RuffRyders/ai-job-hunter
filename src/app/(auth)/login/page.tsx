@@ -34,7 +34,7 @@ export default function LoginPage() {
         <div className="w-full text-center text-3xl mb-4">Log In</div>
 
         {error && (
-          <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+          <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
             {error}
           </div>
         )}

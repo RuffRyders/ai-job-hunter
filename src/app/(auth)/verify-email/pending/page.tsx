@@ -2,11 +2,10 @@
 
 import { resendVerifyEmail } from '@/features/auth/serverActions/verifyEmail/resendVerifyEmail'
 import { Button } from '@/common/ui/Button'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { VerifyEmailErrorCodes } from '@/features/auth/serverActions/verifyEmail/constants'
+import { useEffect, useState } from 'react'
 import { Input } from '@/common/ui/Input/Input'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
+import { redirectIfLoggedIn } from '@/features/auth/serverActions/redirectIfLoggedIn'
 
 // TODO if already verified redirect to '/'
 
@@ -15,6 +14,10 @@ const VerifyEmailPendingPage = () => {
   const [emailInputError, setEmailInputError] = useState<string | null>(null)
   const [email, setEmail] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    redirectIfLoggedIn()
+  }, [])
 
   const handleResendVerificationEmail = async () => {
     setLoading(true)

@@ -8,7 +8,7 @@ export const redirectIfLoggedIn = async () => {
 
   const { data, error } = await supabase.auth.getUser()
 
-  if (data.user) {
+  if (data.user && data.user.email_confirmed_at) {
     redirect('/')
   }
 
