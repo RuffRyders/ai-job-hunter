@@ -1,3 +1,5 @@
+import { AuthModal } from './_components/AuthModal'
+
 interface AuthLayoutProps {
   children: React.ReactNode
 }
@@ -5,10 +7,10 @@ interface AuthLayoutProps {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div
-      className="w-full h-screen flex bg-no-repeat bg-cover"
+      className="w-full h-screen flex flex-col items-center justify-center bg-no-repeat bg-cover"
       style={{ backgroundImage: 'url(/login/lavender-blue-graph.webp)' }}
     >
-      {children}
+      <AuthModal>{children}</AuthModal>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import SubmitButton from '../_components/SubmitButton'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
-import { logIn } from '@/common/data/serverActions/logIn'
+import { logIn } from '@/features/auth/serverActions/logIn'
 
 export default function LoginPage() {
   const [error, setError] = useState('')
@@ -29,12 +29,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <form
-        onSubmit={onSubmit}
-        className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col space-y-4"
-      >
-        <div className="w-full text-center text-3xl">Log In</div>
+    <div>
+      <form onSubmit={onSubmit} className="w-full h-full flex flex-col">
+        <div className="w-full text-center text-3xl mb-4">Log In</div>
 
         {error && (
           <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
@@ -47,7 +44,7 @@ export default function LoginPage() {
           id="email"
           name="email"
           type="email"
-          className="p-2 border rounded-2xl"
+          className="p-2 border rounded-2xl mb-4"
           required
         />
         <label htmlFor="password">Password</label>
@@ -55,7 +52,7 @@ export default function LoginPage() {
           id="password"
           name="password"
           type="password"
-          className="p-2 border rounded-2xl"
+          className="p-2 border rounded-2xl mb-4"
           required
         />
         <SubmitButton>Log in</SubmitButton>
@@ -71,7 +68,6 @@ export default function LoginPage() {
           </Link>
         </div>
       </form>
-
       <LoadingOverlay loading={loading} />
     </div>
   )

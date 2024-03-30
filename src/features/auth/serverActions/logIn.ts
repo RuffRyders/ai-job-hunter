@@ -27,11 +27,15 @@ export async function logIn({
     password,
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const { error, data: signInResponseData } = await supabase.auth.signInWithPassword(data)
 
   // TODO handle error cases
   if (error) {
-    console.log('error: ', error)
+    if (error.message === 'Email not confirmed') {
+      redirect('/verify-email/pending')
+    }
+
+    console.error('error: ', error)
     return {
       error: {
         message: error.message,
