@@ -60,7 +60,8 @@ export async function signUp({
     }
   }
 
-  // purges cache for declared path, but I don't fully understand why yet
+  // purges cache for ALL paths, but there are potentially some nuances between server and client caches...
+  // https://nextjs.org/docs/app/api-reference/functions/revalidatePath#revalidating-all-data
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/verify-email/pending')
 }

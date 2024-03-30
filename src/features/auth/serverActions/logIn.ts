@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/common/services/auth/supabase/server'
+import { HOME_PAGE } from '@/common/data/config/appConfig'
 
 interface AuthActionResponse {
   error?: {
@@ -27,7 +28,8 @@ export async function logIn({
     password,
   }
 
-  const { error, data: signInResponseData } = await supabase.auth.signInWithPassword(data)
+  const { error, data: signInResponseData } =
+    await supabase.auth.signInWithPassword(data)
 
   // TODO handle error cases
   if (error) {
@@ -43,7 +45,8 @@ export async function logIn({
     }
   }
 
-  // purges cache for declared path, but I don't fully understand why yet
+  // purges cache for ALL paths, but there are potentially some nuances between server and client caches...
+  // https://nextjs.org/docs/app/api-reference/functions/revalidatePath#revalidating-all-data
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect(HOME_PAGE)
 }
