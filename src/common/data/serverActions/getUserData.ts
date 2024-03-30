@@ -1,14 +1,14 @@
 'use server'
 
-import { createClient } from '@/features/auth/supabase/server'
+import { createClient } from '@/common/data/supabase/server'
 import { User } from '@supabase/supabase-js'
 
-interface GetUserDataActionProps {
+interface GetUserDataResponse {
   user?: User
   error?: string
 }
 
-export async function getUserData(): Promise<GetUserDataActionProps> {
+export async function getUserData(): Promise<GetUserDataResponse> {
   const supabase = createClient()
   const { data, error } = await supabase.auth.getUser()
 

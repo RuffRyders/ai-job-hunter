@@ -3,7 +3,7 @@ import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedi
 import Link from 'next/link'
 
 export default async function Home() {
-  const user = await getUserOrServerRedirect()
+  await getUserOrServerRedirect()
 
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">

@@ -1,4 +1,4 @@
-import { createClient } from '@/features/auth/supabase/server'
+import { createClient } from '@/common/data/supabase/server'
 import { redirect } from 'next/navigation'
 
 interface Params {

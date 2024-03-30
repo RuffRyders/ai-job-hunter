@@ -3,8 +3,8 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/features/auth/supabase/server'
-import { HOME_PAGE } from '@/common/data/config/appConfig'
+import { createClient } from '@/common/data/supabase/server'
+import { CANDIDATE_HOME_PAGE } from '@/common/data/config/appConfig'
 
 interface AuthActionResponse {
   error?: {
@@ -48,5 +48,5 @@ export async function logIn({
   // purges cache for ALL paths, but there are potentially some nuances between server and client caches...
   // https://nextjs.org/docs/app/api-reference/functions/revalidatePath#revalidating-all-data
   revalidatePath('/', 'layout')
-  redirect(HOME_PAGE)
+  redirect(CANDIDATE_HOME_PAGE)
 }

@@ -1,7 +1,7 @@
 'use server'
 
-import { HOME_PAGE } from '@/common/data/config/appConfig'
-import { createClient } from '@/features/auth/supabase/server'
+import { CANDIDATE_HOME_PAGE } from '@/common/data/config/appConfig'
+import { createClient } from '@/common/data/supabase/server'
 import { redirect } from 'next/navigation'
 
 export const redirectIfLoggedIn = async () => {
@@ -10,7 +10,7 @@ export const redirectIfLoggedIn = async () => {
   const { data, error } = await supabase.auth.getUser()
 
   if (data.user && data.user.email_confirmed_at) {
-    redirect(HOME_PAGE)
+    redirect(CANDIDATE_HOME_PAGE)
   }
 
   return
