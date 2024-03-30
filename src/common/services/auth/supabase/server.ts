@@ -57,7 +57,7 @@ export function createServiceRoleClient() {
     SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
-        // I don't think we want to do anything with cookies from the service role client. Could be dangerous
+        // ! I don't think we want to do anything with cookies from the service role client. Could be dangerous
       },
     },
   )

@@ -3,9 +3,9 @@
 import { FormEventHandler, useState } from 'react'
 import Link from 'next/link'
 
-import { login } from '../serverActions'
 import SubmitButton from '../_components/SubmitButton'
-import LoadingOverlay from '../../../common/ui/LoadingOverlay'
+import LoadingOverlay from '@/common/ui/LoadingOverlay'
+import { logIn } from '@/common/data/serverActions/logIn'
 
 export default function LoginPage() {
   const [error, setError] = useState('')
@@ -22,7 +22,7 @@ export default function LoginPage() {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
-    const response = await login({ email, password })
+    const response = await logIn({ email, password })
 
     setLoading(false)
     setError(response?.error?.message || '')

@@ -1,7 +1,7 @@
 import { Button } from '@/common/ui/Button'
 import Link from 'next/link'
 
-const VerifyEmailPage = () => {
+const VerifyEmailSuccessPage = () => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
       <h1 className="mb-10">Your email has been verified!</h1>
@@ -12,4 +12,4 @@ const VerifyEmailPage = () => {
   )
 }
 
-export default VerifyEmailPage
+export default VerifyEmailSuccessPage

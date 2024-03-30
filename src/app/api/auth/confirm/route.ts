@@ -14,7 +14,8 @@ export async function GET(request: NextRequest) {
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
 
-  const redirectTo = new NextURL('/verify-email', request.nextUrl.origin)
+  const redirectToSuccess = new NextURL('/verify-email/success', request.nextUrl.origin)
+  const redirectToError = new NextURL('/verify-email/error', request.nextUrl.origin)
 
   if (token_hash && type) {
     const supabase = createClient()
@@ -24,11 +25,9 @@ export async function GET(request: NextRequest) {
       token_hash,
     })
     if (!error) {
-      return NextResponse.redirect(redirectTo)
+      return NextResponse.redirect(redirectToSuccess)
     }
   }
 
-  // return the user to an error page with some instructions
-  redirectTo.pathname = '/error'
-  return NextResponse.redirect(redirectTo)
+  return NextResponse.redirect(redirectToError)
 }
