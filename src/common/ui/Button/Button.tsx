@@ -11,20 +11,27 @@ interface ButtonProps extends AriaButtonProps {
 }
 
 export function Button({ children, className, variant, ...rest }: ButtonProps) {
-  const isPrimary = variant === 'primary'
+  const styles = [
+    'pointer-events-auto',
+    'rounded-full',
+    'bg-gray-200',
+    'px-5',
+    'py-3',
+    'text-sm',
+    'text-black',
+    'font-semibold',
+    'pressed:opacity-70',
+    'hover:bg-gray-300',
+    'disabled:bg-gray-50',
+    'disabled:text-gray-500',
+  ]
+  const primaryStyles = variant === 'primary' && [
+    'text-white',
+    'bg-primary-500',
+    'hover:bg-primary-600',
+  ]
   return (
-    <AriaButton
-      className={cn(
-        'pointer-events-auto rounded-full bg-gray-200 pressed:opacity-70 px-5 py-3 text-sm font-semibold text-black hover:bg-gray-300 disabled:bg-gray-50 disabled:text-gray-500',
-        {
-          'text-white': isPrimary,
-          'bg-primary-500': isPrimary,
-          'hover:bg-primary-600': isPrimary,
-        },
-        className,
-      )}
-      {...rest}
-    >
+    <AriaButton className={cn(styles, primaryStyles, className)} {...rest}>
       {children}
     </AriaButton>
   )
