@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/common/services/auth/supabase/server'
+import { createClient } from '@/features/auth/supabase/server'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
 import { VerifyEmailErrorCodes } from './constants'
 

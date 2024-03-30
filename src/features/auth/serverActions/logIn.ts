@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/common/services/auth/supabase/server'
+import { createClient } from '@/features/auth/supabase/server'
 import { HOME_PAGE } from '@/common/data/config/appConfig'
 
 interface AuthActionResponse {

@@ -1,7 +1,7 @@
 import { type EmailOtpType } from '@supabase/supabase-js'
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { createClient } from '@/common/services/auth/supabase/server'
+import { createClient } from '@/features/auth/supabase/server'
 import { NextURL } from 'next/dist/server/web/next-url'
 
 /**
