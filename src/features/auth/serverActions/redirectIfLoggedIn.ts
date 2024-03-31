@@ -1,7 +1,7 @@
 'use server'
 
 import { CANDIDATE_HOME_PAGE } from '@/common/data/config/appConfig'
-import { createClient } from '@/common/data/supabase/server'
+import { createClient } from '@/common/services/supabase/server'
 import { redirect } from 'next/navigation'
 
 export const redirectIfLoggedIn = async () => {

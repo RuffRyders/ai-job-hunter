@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createServiceRoleClient } from '@/common/data/supabase/server'
+import { createServiceRoleClient } from '@/common/services/supabase/server'
 
 interface AuthActionResponse {
   error?: {

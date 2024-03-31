@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/common/data/supabase/server'
+import { createClient } from '@/common/services/supabase/server'
 import { User } from '@supabase/supabase-js'
 
 interface GetUserDataResponse {

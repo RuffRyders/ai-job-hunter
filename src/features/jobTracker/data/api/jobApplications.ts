@@ -1,4 +1,4 @@
-import { createClient } from '@/common/data/supabase/server'
+import { createClient } from '@/common/services/supabase/server'
 
 const tableName = 'jobApplications'
 
