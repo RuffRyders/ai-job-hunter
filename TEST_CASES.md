@@ -1,0 +1,13 @@
+- Sign Up
+    - Success
+    - Error
+- Log In
+    - Success
+    - Error
+- Verify Email
+    - Success
+    - Error
+    - Resend Email
+- Protected Routes
+    - Not logged in
+    - Logged in, but email not verified

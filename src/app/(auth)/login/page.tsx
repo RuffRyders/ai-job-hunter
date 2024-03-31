@@ -3,9 +3,9 @@
 import { FormEventHandler, useState } from 'react'
 import Link from 'next/link'
 
-import { login } from '../serverActions'
 import SubmitButton from '../_components/SubmitButton'
-import LoadingOverlay from '../_components/LoadingOverlay'
+import LoadingOverlay from '@/common/ui/LoadingOverlay'
+import { logIn } from '@/features/auth/serverActions/logIn'
 
 export default function LoginPage() {
   const [error, setError] = useState('')
@@ -22,22 +22,19 @@ export default function LoginPage() {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
-    const response = await login({ email, password })
+    const response = await logIn({ email, password })
 
     setLoading(false)
     setError(response?.error?.message || '')
   }
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <form
-        onSubmit={onSubmit}
-        className="w-full max-w-md p-8 bg-white rounded-3xl shadow-md flex flex-col space-y-4"
-      >
-        <div className="w-full text-center text-3xl">Log In</div>
+    <div>
+      <form onSubmit={onSubmit} className="w-full h-full flex flex-col">
+        <div className="w-full text-center text-3xl mb-4">Log In</div>
 
         {error && (
-          <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+          <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
             {error}
           </div>
         )}
@@ -47,7 +44,7 @@ export default function LoginPage() {
           id="email"
           name="email"
           type="email"
-          className="p-2 border rounded-2xl"
+          className="p-2 border rounded-2xl mb-4"
           required
         />
         <label htmlFor="password">Password</label>
@@ -55,7 +52,7 @@ export default function LoginPage() {
           id="password"
           name="password"
           type="password"
-          className="p-2 border rounded-2xl"
+          className="p-2 border rounded-2xl mb-4"
           required
         />
         <SubmitButton>Log in</SubmitButton>
@@ -71,7 +68,6 @@ export default function LoginPage() {
           </Link>
         </div>
       </form>
-
       <LoadingOverlay loading={loading} />
     </div>
   )
