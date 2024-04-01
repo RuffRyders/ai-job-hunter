@@ -1,5 +1,5 @@
 import { AppLogger } from '@/common/services/Logger/Logger'
-import { createClient } from '@/common/services/auth/supabase/server'
+import { createClient } from '@/common/services/supabase/server'
 
 interface FetchUserDataResponse {
   data?: {
