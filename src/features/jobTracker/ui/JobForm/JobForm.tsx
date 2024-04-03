@@ -9,6 +9,9 @@ import {
   Tab,
   TabPanel,
   Key,
+  NumberField,
+  Label,
+  Group,
 } from 'react-aria-components'
 import { IconX } from '@tabler/icons-react'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
@@ -40,6 +43,8 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
       jobTitle: '',
       jobDescription: '',
       companyName: '',
+      salaryMax: undefined,
+      salaryMin: undefined,
     },
     values,
   })
@@ -127,7 +132,10 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                   Tailored Resume
                 </Tab>
               </TabList>
-              <TabPanel className="flex flex-1 pt-2" id="description">
+              <TabPanel
+                className="flex flex-col flex-1 gap-4 pt-2"
+                id="description"
+              >
                 <Controller
                   name="jobDescription"
                   control={control}
@@ -140,6 +148,48 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                           placeholder="Enter a job description..."
                         />
                       </TextField>
+                    )
+                  }}
+                />
+                <Controller
+                  name="salaryMin"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <NumberField
+                        {...field}
+                        step={1000}
+                        defaultValue={0}
+                        minValue={0}
+                      >
+                        <Label>Salary Min</Label>
+                        <Group>
+                          <IconButton slot="decrement">-</IconButton>
+                          <Input />
+                          <IconButton slot="increment">+</IconButton>
+                        </Group>
+                      </NumberField>
+                    )
+                  }}
+                />
+                <Controller
+                  name="salaryMax"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <NumberField
+                        {...field}
+                        step={1000}
+                        defaultValue={0}
+                        minValue={0}
+                      >
+                        <Label>Salary Max</Label>
+                        <Group>
+                          <IconButton slot="decrement">-</IconButton>
+                          <Input />
+                          <IconButton slot="increment">+</IconButton>
+                        </Group>
+                      </NumberField>
                     )
                   }}
                 />

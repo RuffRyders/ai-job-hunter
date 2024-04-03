@@ -6,6 +6,7 @@ import { StatusLabel } from '@/common/ui/StatusLabel'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { useRouter } from 'next/navigation'
 import { ApplicationStatus, JobModel } from '../../data/types'
+import { formatDistance } from 'date-fns'
 
 const columns = [
   { name: 'Job Title', id: 'jobTitle', isRowHeader: true },
@@ -89,7 +90,10 @@ export function JobsTable({ jobs }: JobsTableProps) {
       </TableHeader>
       <TableBody items={jobs}>
         {(item) => (
-          <Row columns={columns} className="bg-white border-b cursor-pointer">
+          <Row
+            columns={columns}
+            className="bg-white border-b cursor-pointer hover:bg-gray-100"
+          >
             {(column) => {
               if (column.id === 'salary') {
                 return (
@@ -105,6 +109,11 @@ export function JobsTable({ jobs }: JobsTableProps) {
               const value = item[column.id]
               if (column.id === 'applicationStatus') {
                 return <StatusCell status={value} />
+              }
+              if (column.id === 'updatedAt') {
+                return (
+                  <Cell className="px-6 py-4">{`${formatDistance(Date.now(), value)} ago`}</Cell>
+                )
               }
               return <Cell className="px-6 py-4">{value}</Cell>
             }}
