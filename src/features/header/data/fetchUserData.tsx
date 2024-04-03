@@ -1,3 +1,5 @@
+'use server'
+
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { createClient } from '@/common/services/supabase/server'
 
