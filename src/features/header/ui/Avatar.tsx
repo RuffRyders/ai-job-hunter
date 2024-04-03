@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react'
+import { AvatarImage } from './AvatarImage'
 
 import { cn } from '@/common/utils/style/cn'
 import { AvatarImage } from './AvatarImage'
