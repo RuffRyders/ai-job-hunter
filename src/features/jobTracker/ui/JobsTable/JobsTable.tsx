@@ -5,18 +5,7 @@ import { Table, TableBody, TableHeader } from '@/common/ui/Table'
 import { StatusLabel } from '@/common/ui/StatusLabel'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { useRouter } from 'next/navigation'
-import useSWR from 'swr'
-import { fetcher } from '@/common/utils/fetcher/fetcher'
-import { ApplicationStatus } from '../../data/types'
-
-interface JobApplication {
-  jobTitle: string
-  companyName: string
-  salary: { salaryMin: number; salaryMax: number }
-  applicationStatus: string
-  updatedAt: string
-  [id: string]: any
-}
+import { ApplicationStatus, JobModel } from '../../data/types'
 
 const columns = [
   { name: 'Job Title', id: 'jobTitle', isRowHeader: true },
@@ -25,33 +14,6 @@ const columns = [
   { name: 'Status', id: 'applicationStatus' },
   { name: 'Last Update', id: 'updatedAt' },
 ]
-
-// let rows = [
-//   {
-//     id: 1,
-//     jobTitle: 'Software Engineer',
-//     companyName: 'Google, Inc.',
-//     salary: { salaryMin: 178000, salaryMax: 312000 },
-//     applicationStatus: ApplicationStatus.APPLIED,
-//     updatedAt: '10/12/23',
-//   },
-//   {
-//     id: 2,
-//     jobTitle: 'Software Engineer, Frontend',
-//     companyName: 'Nike, Inc.',
-//     salary: { salaryMin: 123000, salaryMax: 224000 },
-//     applicationStatus: ApplicationStatus.INTERVIEWING,
-//     updatedAt: '10/12/23',
-//   },
-//   {
-//     id: '123abc',
-//     jobTitle: 'Software Engineer',
-//     companyName: 'Google, Inc.',
-//     salary: { salaryMin: 178000, salaryMax: 312000 },
-//     applicationStatus: ApplicationStatus.NOT_APPLIED,
-//     updatedAt: '10/12/23',
-//   },
-// ] as JobApplication[]
 
 function StatusCell({ status }: { status: ApplicationStatus }) {
   const applicationStatus = applicationStatuses[status]
@@ -68,36 +30,41 @@ function StatusCell({ status }: { status: ApplicationStatus }) {
   )
 }
 
+function formatCurrency(value = 0) {
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(value)
+}
+
 function SalaryCell({
-  salary,
+  salary: { salaryMin, salaryMax },
 }: {
-  salary: { salaryMin: number; salaryMax: number }
+  salary: { salaryMin?: number; salaryMax?: number }
 }) {
+  console.log('val type', Boolean(salaryMax))
   return (
     <Cell className="px-6 py-4">
       <span>
-        {`${new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 0,
-        }).format(salary.salaryMin)} - ${new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 0,
-        }).format(salary.salaryMax)}`}
+        {`${salaryMin ? formatCurrency(salaryMin) : ''} - ${salaryMin ? formatCurrency(salaryMax) : ''}`}
       </span>
     </Cell>
   )
 }
 
-export function JobsTable() {
-  const router = useRouter()
-  const { data: rows, error } = useSWR('/api/candidate/applications', () =>
-    fetcher<JobApplication[]>('/api/candidate/applications'),
-  )
+interface JobsTableProps {
+  jobs: JobModel[]
+}
 
-  console.log('data', rows)
-  console.log('error', error)
+export function JobsTable({ jobs }: JobsTableProps) {
+  const router = useRouter()
+  // const { data: rows, error } = useSWR('/api/candidate/applications', () =>
+  //   fetcher<JobApplication[]>('/api/candidate/applications'),
+  // )
+
+  // console.log('data', rows)
+  // console.log('error', error)
 
   const handleRowAction = (key: Key) => {
     console.log('handled key', key)
@@ -126,7 +93,7 @@ export function JobsTable() {
           </Column>
         )}
       </TableHeader>
-      <TableBody items={rows}>
+      <TableBody items={jobs}>
         {(item) => (
           <Row columns={columns} className="bg-white border-b cursor-pointer">
             {(column) => {

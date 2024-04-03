@@ -25,7 +25,7 @@ export const applicationStatuses = {
   OFFER_PENDING: {
     name: 'Offer Pending',
     value: ApplicationStatus.OFFER_PENDING,
-    color: '#ffdd00',
+    color: '#3CC925',
   },
 } as {
   NOT_APPLIED: ApplicationStatusData

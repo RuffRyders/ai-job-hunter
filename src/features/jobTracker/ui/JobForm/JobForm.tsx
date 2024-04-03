@@ -22,14 +22,18 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { addJobApplication } from '../../data/serverActions/addJobApplication'
 import { ApplicationStatus, JobModel } from '../../data/types'
 import { useRouter } from 'next/navigation'
+import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 
 interface JobFormProps {
+  jobId?: string
   onClose?: () => void
+  values?: JobModel
 }
 
-export function JobForm({ onClose }: JobFormProps) {
+export function JobForm({ jobId, values, onClose }: JobFormProps) {
   const router = useRouter()
   const statusOptions = Object.values(applicationStatuses)
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       applicationStatus: ApplicationStatus.NOT_APPLIED,
@@ -37,13 +41,19 @@ export function JobForm({ onClose }: JobFormProps) {
       jobDescription: '',
       companyName: '',
     },
+    values,
   })
 
   const onSubmit: SubmitHandler<JobModel> = async (data) => {
     console.log('form-submitted', data)
-    const result = await addJobApplication(data)
-    console.log('result', result)
-    // router.push('/candidate/job-tracker')
+    if (!jobId) {
+      const result = await addJobApplication(data)
+      console.log('result', result)
+    } else {
+      const result = await updateJobApplication(jobId, data)
+      console.log('updated', result)
+    }
+    router.push('/candidate/job-tracker')
   }
 
   return (

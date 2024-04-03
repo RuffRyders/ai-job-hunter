@@ -31,11 +31,12 @@ export async function createJob(data: JobModel) {
     .select()
 }
 
-export async function saveJob(id: string, data: JobModel) {
+export async function updateJob(id: string, data: JobModel) {
   const supabase = await createClient()
   return await supabase
     .from(tableName)
     .update({ ...data, id })
+    .eq('id', id)
     .select()
 }
 

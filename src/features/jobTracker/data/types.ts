@@ -3,6 +3,9 @@ export interface JobModel {
   jobTitle: string
   jobDescription: string
   companyName: string
+  salaryMax?: number
+  salaryMin?: number
+  [key: string]: any
 }
 
 export enum ApplicationStatus {
