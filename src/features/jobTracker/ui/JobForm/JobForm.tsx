@@ -9,7 +9,6 @@ import {
   Tab,
   TabPanel,
   Key,
-  NumberField,
   Label,
   Group,
 } from 'react-aria-components'
@@ -23,9 +22,10 @@ import { TextArea } from '../../../../common/ui/TextArea'
 import { SelectOption } from '../../../../common/ui/Select/Select'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { addJobApplication } from '../../data/serverActions/addJobApplication'
-import { ApplicationStatus, JobModel } from '../../data/types'
+import { JobModel } from '../../data/types'
 import { useRouter } from 'next/navigation'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
+import { NumberField } from '@/common/ui/NumberField'
 
 interface JobFormProps {
   jobId?: string
@@ -39,7 +39,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      applicationStatus: ApplicationStatus.NOT_APPLIED,
+      applicationStatus: 'NOT_APPLIED',
       jobTitle: '',
       jobDescription: '',
       companyName: '',
@@ -154,13 +154,14 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                 <Controller
                   name="salaryMin"
                   control={control}
-                  render={({ field }) => {
+                  render={({ field: { value, ...rest } }) => {
                     return (
                       <NumberField
-                        {...field}
+                        {...rest}
                         step={1000}
                         defaultValue={0}
                         minValue={0}
+                        value={value ?? undefined}
                       >
                         <Label>Salary Min</Label>
                         <Group>
@@ -182,6 +183,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                         step={1000}
                         defaultValue={0}
                         minValue={0}
+                        value={field.value}
                       >
                         <Label>Salary Max</Label>
                         <Group>

@@ -8,7 +8,10 @@ import Link from 'next/link'
 export default async function JobTracker() {
   // Protect route to ensure a user is signed in
   await getUserOrServerRedirect()
-  const jobs = await getJobs()
+  const { data, error } = await getJobs()
+  if (data === null) {
+    return <div> Whoops! An error occured.</div>
+  }
 
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
@@ -29,7 +32,7 @@ export default async function JobTracker() {
         </div>
 
         <div className="py-4">
-          <JobsTable jobs={jobs?.data} />
+          <JobsTable jobs={data} />
         </div>
       </div>
     </div>

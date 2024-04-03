@@ -2,7 +2,14 @@
 
 import { cn } from '@/common/utils/style/cn'
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react'
-import { TextArea as AriaTextArea, TextAreaProps } from 'react-aria-components'
+import {
+  TextArea as AriaTextArea,
+  TextAreaProps as AriaTextAreaProps,
+} from 'react-aria-components'
+
+interface TextAreaProps extends Omit<AriaTextAreaProps, 'value'> {
+  value?: string | null
+}
 
 export const TextArea = forwardRef(function TextArea(
   { children, className, onChange, value, ...rest }: TextAreaProps,
@@ -35,7 +42,7 @@ export const TextArea = forwardRef(function TextArea(
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         onChange={handleChange}
-        value={data}
+        value={data ?? undefined}
         className={`${sameStyles} overflow-hidden resize-none outline-none bg-transparent ${className}`}
         {...rest}
       >

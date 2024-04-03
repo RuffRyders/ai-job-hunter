@@ -7,6 +7,7 @@ import { applicationStatuses } from '@/features/jobTracker/data/contants/applica
 import { useRouter } from 'next/navigation'
 import { ApplicationStatus, JobModel } from '../../data/types'
 import { formatDistance } from 'date-fns'
+import { Database } from '@/common/services/supabase/database.types'
 
 const columns = [
   { name: 'Job Title', id: 'jobTitle', isRowHeader: true },
@@ -16,7 +17,10 @@ const columns = [
   { name: 'Last Update', id: 'updatedAt' },
 ]
 
-function StatusCell({ status }: { status: ApplicationStatus }) {
+function StatusCell({ status }: { status?: ApplicationStatus | null }) {
+  if (!status) {
+    return null
+  }
   const applicationStatus = applicationStatuses[status]
   if (!applicationStatus) {
     return null
@@ -55,7 +59,7 @@ function SalaryCell({
 }
 
 interface JobsTableProps {
-  jobs: JobModel[]
+  jobs?: JobModel[]
 }
 
 export function JobsTable({ jobs }: JobsTableProps) {
@@ -89,7 +93,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
         )}
       </TableHeader>
       <TableBody items={jobs}>
-        {(item) => (
+        {(item: Database['public']['Tables']['jobApplications']['Row']) => (
           <Row
             columns={columns}
             className="bg-white border-b cursor-pointer hover:bg-gray-100"
@@ -99,20 +103,25 @@ export function JobsTable({ jobs }: JobsTableProps) {
                 return (
                   <SalaryCell
                     salary={{
-                      salaryMax: item['salaryMax'],
-                      salaryMin: item['salaryMin'],
+                      salaryMax: item['salaryMax'] as any,
+                      salaryMin: item['salaryMin'] as any,
                     }}
                   />
                 )
               }
 
-              const value = item[column.id]
+              const value =
+                item[
+                  column.id as keyof Database['public']['Tables']['jobApplications']['Row']
+                ]
               if (column.id === 'applicationStatus') {
-                return <StatusCell status={value} />
+                return <StatusCell status={value as any} />
               }
               if (column.id === 'updatedAt') {
                 return (
-                  <Cell className="px-6 py-4">{`${formatDistance(Date.now(), value)} ago`}</Cell>
+                  <Cell className="px-6 py-4">
+                    {value && `${formatDistance(Date.now(), value)} ago`}
+                  </Cell>
                 )
               }
               return <Cell className="px-6 py-4">{value}</Cell>

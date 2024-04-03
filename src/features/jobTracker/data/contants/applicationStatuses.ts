@@ -9,22 +9,22 @@ interface ApplicationStatusData {
 export const applicationStatuses = {
   NOT_APPLIED: {
     name: 'Saved',
-    value: ApplicationStatus.NOT_APPLIED,
+    value: 'NOT_APPLIED',
     color: '#b3b3b3',
   },
   APPLIED: {
     name: 'Applied',
-    value: ApplicationStatus.APPLIED,
+    value: 'APPLIED',
     color: '#00A8DD',
   },
   INTERVIEWING: {
     name: 'Interviewing',
-    value: ApplicationStatus.INTERVIEWING,
+    value: 'INTERVIEWING',
     color: '#FFA800',
   },
   OFFER_PENDING: {
     name: 'Offer Pending',
-    value: ApplicationStatus.OFFER_PENDING,
+    value: 'OFFER_PENDING',
     color: '#3CC925',
   },
 } as {

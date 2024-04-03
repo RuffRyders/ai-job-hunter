@@ -1,16 +1,16 @@
-export interface JobModel {
-  applicationStatus: ApplicationStatus
-  jobTitle: string
-  jobDescription: string
-  companyName: string
-  salaryMax?: number
-  salaryMin?: number
-  [key: string]: any
-}
+import { Database } from '@/common/services/supabase/database.types'
 
-export enum ApplicationStatus {
-  NOT_APPLIED = 'NOT_APPLIED',
-  APPLIED = 'APPLIED',
-  INTERVIEWING = 'INTERVIEWING',
-  OFFER_PENDING = 'OFFER_PENDING',
-}
+export type ApplicationStatus =
+  Database['public']['Enums']['jobApplicationStatus']
+
+// export interface JobModel {
+//   applicationStatus: ApplicationStatus
+//   jobTitle: string | null
+//   jobDescription: string | null
+//   companyName: string | null
+//   salaryMax?: number
+//   salaryMin?: number
+//   [key: string]: any
+// }
+
+export type JobModel = Database['public']['Tables']['jobApplications']['Row']
