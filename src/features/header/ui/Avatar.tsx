@@ -1,13 +1,28 @@
+import { cn } from '@/common/utils/style/cn'
 import Image from 'next/image'
+import { MouseEvent } from 'react'
 
 interface AvatarProps {
   email: string
   avatarUrl?: string
+  onClick: (e: MouseEvent<HTMLDivElement>) => void
+  className?: string
 }
 
-export default function Avatar({ email, avatarUrl }: AvatarProps) {
+export default function Avatar({
+  email,
+  avatarUrl,
+  onClick,
+  className,
+}: AvatarProps) {
   return (
-    <div className="h-full aspect-square bg-purple-400 rounded-full">
+    <div
+      onClick={onClick}
+      className={cn(
+        'h-full aspect-square bg-purple-400 rounded-full',
+        className,
+      )}
+    >
       {avatarUrl ? (
         <Image
           src={avatarUrl}

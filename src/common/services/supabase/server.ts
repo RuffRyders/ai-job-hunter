@@ -49,7 +49,7 @@ export function createClient() {
   )
 }
 
-// * This is a service role client, it bypasses all RLS rules so use it with caution
+// * This is a service role client, it bypasses all RLS rules so use it with caution. Only use it for server side operations!
 export function createServiceRoleClient() {
   const cookieStore = cookies()
 
