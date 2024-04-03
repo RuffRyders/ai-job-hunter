@@ -59,12 +59,6 @@ interface JobsTableProps {
 
 export function JobsTable({ jobs }: JobsTableProps) {
   const router = useRouter()
-  // const { data: rows, error } = useSWR('/api/candidate/applications', () =>
-  //   fetcher<JobApplication[]>('/api/candidate/applications'),
-  // )
-
-  // console.log('data', rows)
-  // console.log('error', error)
 
   const handleRowAction = (key: Key) => {
     console.log('handled key', key)

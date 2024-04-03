@@ -8,8 +8,6 @@ import {
 } from 'react-aria-components'
 import { useRouter } from 'next/navigation'
 import { JobForm } from '../JobForm'
-import useSWR from 'swr'
-import { fetcher } from '@/common/utils/fetcher/fetcher'
 import { JobModel } from '../../data/types'
 
 interface CardEditorProps extends ModalOverlayProps {
@@ -20,10 +18,6 @@ interface CardEditorProps extends ModalOverlayProps {
 
 export function JobEditor({ jobId, isNew, values, ...rest }: CardEditorProps) {
   const router = useRouter()
-  // const { data, error, isLoading } = useSWR(jobId ?? null, () =>
-  //   fetcher<JobModel[]>(`/api/candidate/applications/${jobId}`),
-  // )
-  // console.log('job', { data, error, isLoading })
   console.log('values', values)
 
   const handleOpenChange = () => {
