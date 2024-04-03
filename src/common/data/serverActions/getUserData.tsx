@@ -3,7 +3,7 @@
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { createClient } from '@/common/services/supabase/server'
 
-interface FetchUserDataResponse {
+interface GetUserDataResponse {
   data?: {
     email: string
     avatarUrl: string
@@ -11,7 +11,7 @@ interface FetchUserDataResponse {
   error?: string
 }
 
-const fetchUserData = async (): Promise<FetchUserDataResponse> => {
+export const getUserData = async (): Promise<GetUserDataResponse> => {
   try {
     const supabase = createClient()
 
@@ -50,4 +50,4 @@ const fetchUserData = async (): Promise<FetchUserDataResponse> => {
   }
 }
 
-export default fetchUserData
+export default getUserData
