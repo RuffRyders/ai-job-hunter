@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Avatar from '@/features/header/ui/Avatar'
 import fetchUserData from '@/features/header/data/fetchUserData'
@@ -26,7 +26,7 @@ export default function AppHeader() {
   }
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
         const { data, error } = await fetchUserData()
         if (error) throw new Error(error)
