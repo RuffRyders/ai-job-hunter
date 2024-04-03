@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { signOut } from '@/features/auth/serverActions/signOut'
-import { AvatarImage } from './AvatarImage'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { cn } from '@/common/utils/style/cn'
 
@@ -98,9 +97,6 @@ export const UserMenu = ({ isOpen, onClose, userData }: UserMenuProps) => {
           PADDING_RIGHT,
         )}
       >
-        {/* <div className="border-b h-8 w-8 relative">
-          <AvatarImage avatarUrl={userData.avatarUrl} email={userData.email} />
-        </div> */}
         <div className="text-sm font-bold truncate">{userData.email}</div>
       </div>
 
