@@ -1,5 +1,7 @@
 import { twMerge } from 'tailwind-merge'
 import clsx, { ClassValue } from 'clsx'
+
+// https://github.com/dcastil/tailwind-merge/blob/v2.2.2/docs/what-is-it-for.md
 /**
  * Handy utility to make className usage more convenient. See readme for examples and usage.
  */

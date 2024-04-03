@@ -70,7 +70,6 @@ export function PromptAnswerForm({
               onChange={
                 onChange as React.ChangeEventHandler<HTMLTextAreaElement>
               }
-              autoSize
               placeholder={inputPlaceholder}
               onPaste={(e) => {
                 console.log(

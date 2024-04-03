@@ -1,24 +1,20 @@
 'use client'
 
 import { cn } from '@/common/utils/style/cn'
-import { useEffect, useState } from 'react'
+import { ForwardedRef, forwardRef, useEffect, useState } from 'react'
 import {
   TextArea as AriaTextArea,
   TextAreaProps as AriaTextAreaProps,
 } from 'react-aria-components'
 
-interface TextAreaProps extends AriaTextAreaProps {
-  autoSize?: boolean
+interface TextAreaProps extends Omit<AriaTextAreaProps, 'value'> {
+  value?: string | null
 }
 
-export function TextArea({
-  autoSize = true,
-  children,
-  className,
-  onChange,
-  value,
-  ...rest
-}: TextAreaProps) {
+export const TextArea = forwardRef(function TextArea(
+  { children, className, onChange, value, ...rest }: TextAreaProps,
+  ref: ForwardedRef<HTMLTextAreaElement>,
+) {
   const [data, setData] = useState(value)
   const [isFocused, setFocused] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,10 +25,6 @@ export function TextArea({
   useEffect(() => {
     setData(value)
   }, [value])
-
-  const handleKeyUp = (event: any) => {
-    console.log('keyup', event?.target?.value)
-  }
 
   const sameStyles =
     'text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2'
@@ -45,20 +37,20 @@ export function TextArea({
       )}
     >
       <AriaTextArea
+        ref={ref}
         data-focused={isFocused}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         onChange={handleChange}
-        onKeyUp={handleKeyUp}
-        value={data}
+        value={data ?? undefined}
         className={`${sameStyles} overflow-hidden resize-none outline-none bg-transparent ${className}`}
         {...rest}
       >
         {children}
       </AriaTextArea>
       <div className={`${sameStyles} whitespace-pre-wrap invisible`}>
-        {data + ' '}
+        {data + ' ' /* white space helps with autosize */}
       </div>
     </div>
   )
-}
+})

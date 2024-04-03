@@ -9,6 +9,8 @@ import {
   Tab,
   TabPanel,
   Key,
+  Label,
+  Group,
 } from 'react-aria-components'
 import { IconX } from '@tabler/icons-react'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
@@ -19,31 +21,44 @@ import { StatusLabel } from '../../../../common/ui/StatusLabel'
 import { TextArea } from '../../../../common/ui/TextArea'
 import { SelectOption } from '../../../../common/ui/Select/Select'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { addJobApplication } from '../../data/serverActions/addJobApplication'
+import { JobModel } from '../../data/types'
+import { useRouter } from 'next/navigation'
+import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
+import { NumberField } from '@/common/ui/NumberField'
 
 interface JobFormProps {
+  jobId?: string
   onClose?: () => void
+  values?: JobModel
 }
 
-interface FormInput {
-  applicationStatus: string
-  jobTitle: string
-  jobDescription: string
-  companyName: string
-}
-
-export function JobForm({ onClose }: JobFormProps) {
+export function JobForm({ jobId, values, onClose }: JobFormProps) {
+  const router = useRouter()
   const statusOptions = Object.values(applicationStatuses)
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      applicationStatus: 'not_applied',
+      applicationStatus: 'NOT_APPLIED',
       jobTitle: '',
       jobDescription: '',
       companyName: '',
+      salaryMax: undefined,
+      salaryMin: undefined,
     },
+    values,
   })
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
+  const onSubmit: SubmitHandler<JobModel> = async (data) => {
     console.log('form-submitted', data)
+    if (!jobId) {
+      const result = await addJobApplication(data)
+      console.log('result', result)
+    } else {
+      const result = await updateJobApplication(jobId, data)
+      console.log('updated', result)
+    }
+    router.push('/candidate/job-tracker')
   }
 
   return (
@@ -117,7 +132,10 @@ export function JobForm({ onClose }: JobFormProps) {
                   Tailored Resume
                 </Tab>
               </TabList>
-              <TabPanel className="flex flex-1 pt-2" id="description">
+              <TabPanel
+                className="flex flex-col flex-1 gap-4 pt-2"
+                id="description"
+              >
                 <Controller
                   name="jobDescription"
                   control={control}
@@ -130,6 +148,50 @@ export function JobForm({ onClose }: JobFormProps) {
                           placeholder="Enter a job description..."
                         />
                       </TextField>
+                    )
+                  }}
+                />
+                <Controller
+                  name="salaryMin"
+                  control={control}
+                  render={({ field: { value, ...rest } }) => {
+                    return (
+                      <NumberField
+                        {...rest}
+                        step={1000}
+                        defaultValue={0}
+                        minValue={0}
+                        value={value ?? undefined}
+                      >
+                        <Label>Salary Min</Label>
+                        <Group>
+                          <IconButton slot="decrement">-</IconButton>
+                          <Input />
+                          <IconButton slot="increment">+</IconButton>
+                        </Group>
+                      </NumberField>
+                    )
+                  }}
+                />
+                <Controller
+                  name="salaryMax"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <NumberField
+                        {...field}
+                        step={1000}
+                        defaultValue={0}
+                        minValue={0}
+                        value={field.value}
+                      >
+                        <Label>Salary Max</Label>
+                        <Group>
+                          <IconButton slot="decrement">-</IconButton>
+                          <Input />
+                          <IconButton slot="increment">+</IconButton>
+                        </Group>
+                      </NumberField>
                     )
                   }}
                 />
@@ -160,7 +222,7 @@ export function JobForm({ onClose }: JobFormProps) {
                     {...field}
                     className="w-48"
                     items={statusOptions}
-                    selectedKey={field.value as string}
+                    selectedKey={field.value}
                     aria-label="applicationStatus"
                     onSelectionChange={(key: Key) => {
                       field.onChange(key)

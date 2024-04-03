@@ -1,39 +1,35 @@
+import { ApplicationStatus } from '../types'
+
 interface ApplicationStatusData {
   name: string
-  value: string
+  value: ApplicationStatus
   color: string
 }
 
 export const applicationStatuses = {
-  not_applied: {
-    name: 'Not Yet Applied',
-    value: 'not_applied',
+  NOT_APPLIED: {
+    name: 'Saved',
+    value: 'NOT_APPLIED',
     color: '#b3b3b3',
   },
-  applied: { name: 'Applied', value: 'applied', color: '#00A8DD' },
-  interviewing: {
+  APPLIED: {
+    name: 'Applied',
+    value: 'APPLIED',
+    color: '#00A8DD',
+  },
+  INTERVIEWING: {
     name: 'Interviewing',
-    value: 'interviewing',
+    value: 'INTERVIEWING',
     color: '#FFA800',
   },
-  rejected: { name: 'Rejected', value: 'rejected', color: '#F04C4C' },
-  closed: { name: 'Closed', value: 'closed', color: '#505050' },
-  offer_pending: {
+  OFFER_PENDING: {
     name: 'Offer Pending',
-    value: 'offer_pending',
-    color: '#ffdd00',
-  },
-  accepted: {
-    name: 'Accepted',
-    value: 'accepted',
+    value: 'OFFER_PENDING',
     color: '#3CC925',
   },
 } as {
-  not_applied: ApplicationStatusData
-  applied: ApplicationStatusData
-  interviewing: ApplicationStatusData
-  offer_pending: ApplicationStatusData
-  accepted: ApplicationStatusData
-  rejected: ApplicationStatusData
-  [key: string]: ApplicationStatusData
+  NOT_APPLIED: ApplicationStatusData
+  APPLIED: ApplicationStatusData
+  INTERVIEWING: ApplicationStatusData
+  OFFER_PENDING: ApplicationStatusData
 }

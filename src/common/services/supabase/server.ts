@@ -5,6 +5,7 @@ import {
 } from '@/common/data/config/appConfig'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { Database } from './database.types'
 
 /**
  * https://supabase.com/docs/guides/auth/server-side/nextjs
@@ -17,7 +18,7 @@ import { cookies } from 'next/headers'
 export function createClient() {
   const cookieStore = cookies()
 
-  return createServerClient(
+  return createServerClient<Database>(
     NEXT_PUBLIC_SUPABASE_URL!,
     NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
