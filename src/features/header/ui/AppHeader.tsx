@@ -27,7 +27,7 @@ export default function AppHeader({ userData }: AppHeaderProps) {
   }
 
   return (
-    <div className="relative w-full h-16 sm:h-18 bg-white border-b-[1px] border-b-gray-300 flex flex-row items-center justify-between px-6 py-3">
+    <div className="relative w-full h-app-header-h-lg sm:h-18 bg-white border-b-[1px] border-b-gray-300 flex flex-row items-center justify-between px-6 py-3">
       <div className="font-bold text-lg">Job Assistant</div>
 
       {userData && (
@@ -39,7 +39,7 @@ export default function AppHeader({ userData }: AppHeaderProps) {
         />
       )}
 
-      <div className="absolute right-0 bottom-0">
+      <div className="absolute right-0 top-app-header-h-lg">
         <UserMenu
           userData={userData}
           onClose={onCloseUserMenu}

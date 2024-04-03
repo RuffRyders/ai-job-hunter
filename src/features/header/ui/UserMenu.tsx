@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from 'react'
 import { signOut } from '@/features/auth/serverActions/signOut'
 import { AvatarImage } from './AvatarImage'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
+import { cn } from '@/common/utils/style/cn'
+
+const PADDING_RIGHT = 'pr-6'
+const PADDING_LEFT = 'pl-6'
 
 interface UserMenuProps {
   isOpen: boolean
@@ -85,20 +89,34 @@ export const UserMenu = ({ isOpen, onClose, userData }: UserMenuProps) => {
   return (
     <div
       ref={menuRef}
-      className="absolute top-full right-0 py-1 bg-gray-100 shadow-lg rounded-md border border-gray-200 z-50"
+      className="bg-gray-100 w-56 overflow-hidden shadow-lg rounded-md border border-gray-200 z-50"
     >
-      <div className="flex flex-col">
-        <div className="p-2 text-sm font-bold">{userData.email}</div>
-        <div className="border-b border-gray-200 relative">
+      <div
+        className={cn(
+          'flex flex-col py-4 border-slate-300 border-b-[1px] space-y-2',
+          PADDING_LEFT,
+          PADDING_RIGHT,
+        )}
+      >
+        {/* <div className="border-b h-8 w-8 relative">
           <AvatarImage avatarUrl={userData.avatarUrl} email={userData.email} />
-        </div>
+        </div> */}
+        <div className="text-sm font-bold truncate">{userData.email}</div>
       </div>
 
       <ul>
-        <UserMenuItem onClick={handleSettings} onKeyDown={handleKeyDown}>
+        <UserMenuItem
+          className={cn(PADDING_LEFT, PADDING_RIGHT)}
+          onClick={handleSettings}
+          onKeyDown={handleKeyDown}
+        >
           Settings
         </UserMenuItem>
-        <UserMenuItem onClick={handleSignOut} onKeyDown={handleKeyDown}>
+        <UserMenuItem
+          className={cn(PADDING_LEFT, PADDING_RIGHT)}
+          onClick={handleSignOut}
+          onKeyDown={handleKeyDown}
+        >
           Log out
         </UserMenuItem>
       </ul>
@@ -112,12 +130,21 @@ interface UserMenuItemProps {
   children: React.ReactNode
   onClick: () => void
   onKeyDown: (event: React.KeyboardEvent) => void
+  className?: string
 }
 
-const UserMenuItem = ({ children, onClick, onKeyDown }: UserMenuItemProps) => {
+const UserMenuItem = ({
+  children,
+  onClick,
+  onKeyDown,
+  className,
+}: UserMenuItemProps) => {
   return (
     <li
-      className="hover:bg-gray-100 cursor-pointer p-2 pl-6 focus:outline-none focus:bg-gray-200"
+      className={cn(
+        'hover:bg-gray-200 cursor-pointer p-2 focus:outline-none focus:bg-gray-200',
+        className,
+      )}
       tabIndex={0}
       onClick={onClick}
       onKeyDown={onKeyDown}
