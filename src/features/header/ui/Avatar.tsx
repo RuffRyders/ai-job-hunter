@@ -1,6 +1,7 @@
 import { cn } from '@/common/utils/style/cn'
 import Image from 'next/image'
 import { MouseEvent } from 'react'
+import { AvatarImage } from './AvatarImage'
 
 interface AvatarProps {
   email: string
@@ -19,16 +20,12 @@ export default function Avatar({
     <div
       onClick={onClick}
       className={cn(
-        'h-full aspect-square bg-purple-400 rounded-full',
+        'h-full aspect-square bg-purple-400 relative rounded-full',
         className,
       )}
     >
       {avatarUrl ? (
-        <Image
-          src={avatarUrl}
-          alt={email}
-          className="h-full w-full object-cover rounded-full"
-        />
+        <AvatarImage avatarUrl={avatarUrl} email={email} />
       ) : (
         <div className="h-full w-full flex items-center justify-center text-white text-xl">
           {email[0].toUpperCase()}
