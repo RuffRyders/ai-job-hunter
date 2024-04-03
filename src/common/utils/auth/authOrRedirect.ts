@@ -1,3 +1,5 @@
+'use server'
+
 import { createClient } from '@/common/services/supabase/server'
 import { redirect } from 'next/navigation'
 
@@ -6,11 +8,10 @@ interface Params {
 }
 
 /**
- * Should rename this to "handleProtectedRoute" or something similar
  * If user is not logged in, redirect to the login page
  * If user is logged in, but email is not verified, redirect to the verify email page
  */
-export async function getUserOrServerRedirect(params?: Params) {
+export async function authOrRedirect(params?: Params) {
   const redirectTo = params?.redirectTo || '/login'
 
   const supabase = createClient()

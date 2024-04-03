@@ -1,13 +1,16 @@
 import { AppLogger } from '@/common/services/Logger/Logger'
-import fetchUserData from '@/features/header/data/fetchUserData'
+import { getUserData } from '@/common/data/serverActions/getUserData'
 import AppHeader from '@/features/header/ui/AppHeader'
+import { authOrRedirect } from '@/common/utils/auth/authOrRedirect'
 
 interface PrivateLayoutProps {
   children: React.ReactNode
 }
 
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-  const { data, error } = await fetchUserData()
+  await authOrRedirect()
+
+  const { data, error } = await getUserData()
 
   if (error || !data) {
     AppLogger.debug(`PrivateLayout: error fetching user data: ${error}`)

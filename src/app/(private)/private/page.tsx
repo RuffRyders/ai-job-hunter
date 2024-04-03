@@ -1,12 +1,16 @@
 import { SignOutButton } from './SignOutButton'
-import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedirect'
+import getUserData from '@/common/data/serverActions/getUserData'
 
 export default async function PrivatePage() {
-  const user = await getUserOrServerRedirect()
+  const { data, error } = await getUserData()
+
+  if (error || !data) {
+    alert(`Something went wrong: ${error}`)
+  }
 
   return (
     <div>
-      <p className="mb-10">Hello {user?.email}</p>
+      <p className="mb-10">Hello {data?.email}</p>
 
       <SignOutButton />
     </div>
