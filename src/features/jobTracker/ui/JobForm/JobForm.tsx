@@ -19,31 +19,31 @@ import { StatusLabel } from '../../../../common/ui/StatusLabel'
 import { TextArea } from '../../../../common/ui/TextArea'
 import { SelectOption } from '../../../../common/ui/Select/Select'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { addJobApplication } from '../../data/serverActions/addJobApplication'
+import { ApplicationStatus, JobModel } from '../../data/types'
+import { useRouter } from 'next/navigation'
 
 interface JobFormProps {
   onClose?: () => void
 }
 
-interface FormInput {
-  applicationStatus: string
-  jobTitle: string
-  jobDescription: string
-  companyName: string
-}
-
 export function JobForm({ onClose }: JobFormProps) {
+  const router = useRouter()
   const statusOptions = Object.values(applicationStatuses)
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      applicationStatus: 'not_applied',
+      applicationStatus: ApplicationStatus.NOT_APPLIED,
       jobTitle: '',
       jobDescription: '',
       companyName: '',
     },
   })
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
+  const onSubmit: SubmitHandler<JobModel> = async (data) => {
     console.log('form-submitted', data)
+    const result = await addJobApplication(data)
+    console.log('result', result)
+    // router.push('/candidate/job-tracker')
   }
 
   return (
@@ -160,7 +160,7 @@ export function JobForm({ onClose }: JobFormProps) {
                     {...field}
                     className="w-48"
                     items={statusOptions}
-                    selectedKey={field.value as string}
+                    selectedKey={field.value}
                     aria-label="applicationStatus"
                     onSelectionChange={(key: Key) => {
                       field.onChange(key)

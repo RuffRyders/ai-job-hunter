@@ -1,16 +1,13 @@
 'use client'
 
 import { cn } from '@/common/utils/style/cn'
-import { useEffect, useState } from 'react'
+import { ForwardedRef, forwardRef, useEffect, useState } from 'react'
 import { TextArea as AriaTextArea, TextAreaProps } from 'react-aria-components'
 
-export function TextArea({
-  children,
-  className,
-  onChange,
-  value,
-  ...rest
-}: TextAreaProps) {
+export const TextArea = forwardRef(function TextArea(
+  { children, className, onChange, value, ...rest }: TextAreaProps,
+  ref: ForwardedRef<HTMLTextAreaElement>,
+) {
   const [data, setData] = useState(value)
   const [isFocused, setFocused] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,6 +30,7 @@ export function TextArea({
       )}
     >
       <AriaTextArea
+        ref={ref}
         data-focused={isFocused}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -48,4 +46,4 @@ export function TextArea({
       </div>
     </div>
   )
-}
+})

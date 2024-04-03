@@ -1,4 +1,5 @@
 import { createClient } from '@/common/services/supabase/server'
+import { JobModel } from '../types'
 
 const tableName = 'jobApplications'
 
@@ -22,11 +23,19 @@ export async function getJob(id: string) {
   return await supabase.from(tableName).select().eq('id', id)
 }
 
-export async function saveJob(id: string, data: any) {
+export async function createJob(data: JobModel) {
   const supabase = await createClient()
   return await supabase
     .from(tableName)
-    .upsert({ ...data, id })
+    .insert({ ...data })
+    .select()
+}
+
+export async function saveJob(id: string, data: JobModel) {
+  const supabase = await createClient()
+  return await supabase
+    .from(tableName)
+    .update({ ...data, id })
     .select()
 }
 
