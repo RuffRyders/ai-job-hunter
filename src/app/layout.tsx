@@ -2,7 +2,6 @@ import AppProviders from './_providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import AppHeader from '@/features/header/ui/AppHeader'
 
 const inter = Inter({ subsets: ['latin'] })
 
