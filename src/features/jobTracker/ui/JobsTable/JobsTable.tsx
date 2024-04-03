@@ -31,7 +31,7 @@ function StatusCell({ status }: { status: ApplicationStatus }) {
 }
 
 function formatCurrency(value = 0) {
-  new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
