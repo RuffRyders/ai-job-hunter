@@ -7,6 +7,7 @@ import { applicationStatuses } from '@/features/jobTracker/data/contants/applica
 import { useRouter } from 'next/navigation'
 import useSWR from 'swr'
 import { fetcher } from '@/common/utils/fetcher/fetcher'
+import { ApplicationStatus } from '../../data/types'
 
 interface JobApplication {
   jobTitle: string
@@ -25,34 +26,34 @@ const columns = [
   { name: 'Last Update', id: 'updatedAt' },
 ]
 
-let rows = [
-  {
-    id: 1,
-    jobTitle: 'Software Engineer',
-    companyName: 'Google, Inc.',
-    salary: { salaryMin: 178000, salaryMax: 312000 },
-    applicationStatus: 'applied',
-    updatedAt: '10/12/23',
-  },
-  {
-    id: 2,
-    jobTitle: 'Software Engineer, Frontend',
-    companyName: 'Nike, Inc.',
-    salary: { salaryMin: 123000, salaryMax: 224000 },
-    applicationStatus: 'interviewing',
-    updatedAt: '10/12/23',
-  },
-  {
-    id: '123abc',
-    jobTitle: 'Software Engineer',
-    companyName: 'Google, Inc.',
-    salary: { salaryMin: 178000, salaryMax: 312000 },
-    applicationStatus: 'not_applied',
-    updatedAt: '10/12/23',
-  },
-] as JobApplication[]
+// let rows = [
+//   {
+//     id: 1,
+//     jobTitle: 'Software Engineer',
+//     companyName: 'Google, Inc.',
+//     salary: { salaryMin: 178000, salaryMax: 312000 },
+//     applicationStatus: ApplicationStatus.APPLIED,
+//     updatedAt: '10/12/23',
+//   },
+//   {
+//     id: 2,
+//     jobTitle: 'Software Engineer, Frontend',
+//     companyName: 'Nike, Inc.',
+//     salary: { salaryMin: 123000, salaryMax: 224000 },
+//     applicationStatus: ApplicationStatus.INTERVIEWING,
+//     updatedAt: '10/12/23',
+//   },
+//   {
+//     id: '123abc',
+//     jobTitle: 'Software Engineer',
+//     companyName: 'Google, Inc.',
+//     salary: { salaryMin: 178000, salaryMax: 312000 },
+//     applicationStatus: ApplicationStatus.NOT_APPLIED,
+//     updatedAt: '10/12/23',
+//   },
+// ] as JobApplication[]
 
-function StatusCell({ status }: { status: string }) {
+function StatusCell({ status }: { status: ApplicationStatus }) {
   const applicationStatus = applicationStatuses[status]
   if (!applicationStatus) {
     return null
@@ -91,11 +92,11 @@ function SalaryCell({
 
 export function JobsTable() {
   const router = useRouter()
-  const { data, error } = useSWR('/api/candidate/applications', () =>
-    fetcher('/api/candidate/applications'),
+  const { data: rows, error } = useSWR('/api/candidate/applications', () =>
+    fetcher<JobApplication[]>('/api/candidate/applications'),
   )
 
-  console.log('data', data)
+  console.log('data', rows)
   console.log('error', error)
 
   const handleRowAction = (key: Key) => {
@@ -129,12 +130,20 @@ export function JobsTable() {
         {(item) => (
           <Row columns={columns} className="bg-white border-b cursor-pointer">
             {(column) => {
+              if (column.id === 'salary') {
+                return (
+                  <SalaryCell
+                    salary={{
+                      salaryMax: item['salaryMax'],
+                      salaryMin: item['salaryMin'],
+                    }}
+                  />
+                )
+              }
+
               const value = item[column.id]
               if (column.id === 'applicationStatus') {
                 return <StatusCell status={value} />
-              }
-              if (column.id === 'salary') {
-                return <SalaryCell salary={value} />
               }
               return <Cell className="px-6 py-4">{value}</Cell>
             }}
