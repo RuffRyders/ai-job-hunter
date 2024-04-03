@@ -13,8 +13,8 @@ export const UserMenu = ({ isOpen, onClose }: UserMenuProps) => {
 
   const handleSignOut = async () => {
     try {
-      const { error } = await signOut()
-      if (error) throw new Error(error.message)
+      const response = await signOut()
+      if (response?.error) throw new Error(response.error.message)
     } catch (err) {
       console.log('Error signing out: ', err)
       alert('Error signing out. Please try again.')
@@ -51,14 +51,20 @@ export const UserMenu = ({ isOpen, onClose }: UserMenuProps) => {
   }, [isOpen])
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
+    const currentFocus = document.activeElement as HTMLElement
+
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault() // Prevent page scrolling
-      const currentFocus = document.activeElement as HTMLElement
       if (event.key === 'ArrowDown') {
         ;(currentFocus.nextElementSibling as HTMLElement)?.focus()
       } else {
         ;(currentFocus.previousElementSibling as HTMLElement)?.focus()
       }
+    } else if (event.key === 'Enter') {
+      // Simulate click on the currently focused element
+      currentFocus.click()
+    } else if (event.key === 'Escape') {
+      onClose()
     }
   }
 
@@ -69,7 +75,7 @@ export const UserMenu = ({ isOpen, onClose }: UserMenuProps) => {
   return (
     <div
       ref={menuRef}
-      className="absolute top-full right-0 mt-2 py-1 w-48 bg-white shadow-lg rounded-md border border-gray-200 z-50"
+      className="absolute top-full right-0 py-1 w-48 bg-gray-100 shadow-lg rounded-md border border-gray-200 z-50"
     >
       <ul>
         <li
