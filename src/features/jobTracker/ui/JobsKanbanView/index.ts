@@ -1,0 +1,1 @@
+export { JobsKanbanView } from './JobsKanbanView'
