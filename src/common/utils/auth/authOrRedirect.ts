@@ -26,6 +26,4 @@ export async function authOrRedirect(params?: Params) {
   if (!emailVerified) {
     redirect('/verify-email/pending')
   }
-
-  return data.user
 }
