@@ -8,7 +8,7 @@ interface GetUserDataResponse {
   error?: string
 }
 
-export async function getUserData(): Promise<GetUserDataResponse> {
+export async function getAuthUserData(): Promise<GetUserDataResponse> {
   const supabase = createClient()
   const { data, error } = await supabase.auth.getUser()
 

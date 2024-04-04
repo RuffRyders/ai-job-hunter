@@ -68,7 +68,7 @@ export default function LoginPage() {
           </Link>
         </div>
       </form>
-      <LoadingOverlay loading={loading} />
+      <LoadingOverlay loading={loading} displayText="Signing in..." />
     </div>
   )
 }

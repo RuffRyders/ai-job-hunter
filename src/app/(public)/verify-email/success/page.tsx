@@ -1,6 +1,5 @@
 import { Button } from '@/common/ui/Button'
 import { redirectIfLoggedIn } from '@/features/auth/serverActions/redirectIfLoggedIn'
-import Link from 'next/link'
 
 const VerifyEmailSuccessPage = async () => {
   await redirectIfLoggedIn()

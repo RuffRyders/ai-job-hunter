@@ -22,6 +22,10 @@ const config: Config = {
       colors: {
         primary: colors.blue,
       },
+      spacing: {
+        'app-header-h-lg': '4rem',
+        'app-header-h-sm': '2rem',
+      },
     },
   },
   plugins: [

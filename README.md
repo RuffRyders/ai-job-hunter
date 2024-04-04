@@ -209,7 +209,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 Roadmap and other planning notes [here in google docs.](https://docs.google.com/document/d/1K2f0gv-EWTZ1aQYlbWGm-fpakKa6zUASceDoIqw4QsI/edit)
 
-## Build Optimizationsxw
+## Build Optimizations
 
 To optimize bundle size for the `jsPDF` dep check [the readme here](https://github.com/parallax/jsPDF?tab=readme-ov-file#optional-dependencies)
 
