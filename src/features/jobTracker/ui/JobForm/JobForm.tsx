@@ -111,7 +111,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
             <Tabs className="flex flex-1 flex-col">
               <TabList
                 className="flex border-b border-solid border-gray-300"
-                aria-label="History of Ancient Rome"
+                aria-label="Tabs representing parts of a saved job application"
               >
                 <Tab
                   className="p-2 selected:text-blue-500 selected:border-b-4 border-solid border-blue-500 user-select-none cursor-pointer text-sm"

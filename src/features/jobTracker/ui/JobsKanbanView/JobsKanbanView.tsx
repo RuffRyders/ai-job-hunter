@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal, unstable_batchedUpdates } from 'react-dom'
 import {
@@ -38,6 +40,7 @@ import { coordinateGetter as multipleContainersCoordinateGetter } from './multip
 import { Item, Container, ContainerProps } from './components'
 
 import { createRange } from './utils'
+import { getColor } from './utils/getColor'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
   defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -112,7 +115,7 @@ const dropAnimation: DropAnimation = {
 
 type Items = Record<UniqueIdentifier, UniqueIdentifier[]>
 
-interface Props {
+interface JobsKanbanViewProps {
   adjustScale?: boolean
   cancelDrop?: CancelDrop
   columns?: number
@@ -162,7 +165,7 @@ export function JobsKanbanView({
   trashable = false,
   vertical = false,
   scrollable,
-}: Props) {
+}: JobsKanbanViewProps) {
   const [items, setItems] = useState<Items>(
     () =>
       initialItems ?? {
@@ -445,7 +448,6 @@ export function JobsKanbanView({
         style={{
           display: 'inline-grid',
           boxSizing: 'border-box',
-          padding: 20,
           gridAutoFlow: vertical ? 'row' : 'column',
         }}
       >
@@ -596,21 +598,6 @@ export function JobsKanbanView({
 
     return String.fromCharCode(lastContainerId.charCodeAt(0) + 1)
   }
-}
-
-function getColor(id: UniqueIdentifier) {
-  switch (String(id)[0]) {
-    case 'A':
-      return '#7193f1'
-    case 'B':
-      return '#ffda6c'
-    case 'C':
-      return '#00bcd4'
-    case 'D':
-      return '#ef769f'
-  }
-
-  return undefined
 }
 
 function Trash({ id }: { id: UniqueIdentifier }) {

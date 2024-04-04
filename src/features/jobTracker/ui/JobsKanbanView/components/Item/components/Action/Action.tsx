@@ -1,6 +1,6 @@
 import React, { forwardRef, CSSProperties } from 'react'
 
-import styles from './Action.module.css'
+import styles from './Action.module.scss'
 import { cn } from '@/common/utils/style/cn'
 
 export interface ActionProps extends React.HTMLAttributes<HTMLButtonElement> {
