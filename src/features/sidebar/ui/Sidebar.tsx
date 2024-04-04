@@ -1,23 +1,20 @@
 'use client'
 
-import { useState } from 'react'
 import { Menu } from 'react-aria-components'
 
 import { SidebarItem } from './SidebarItem'
 import { cn } from '@/common/utils/style/cn'
-
-import ListIcon from '../../../../public/icons/list.svg'
-import PersonIcon from '../../../../public/icons/person.svg'
-import DocumentIcon from '../../../../public/icons/document.svg'
+import SidebarItemConfig from '../data/config'
+import React, { useState } from 'react'
 
 export const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(false)
+  // const [open, setOpen] = useState(false)
 
   return (
     <div
-      className="h-full w-sidebar-w-closed z-50"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="h-full w-sidebar-w-closed"
+      // onMouseEnter={() => setOpen(true)}
+      // onMouseLeave={() => setOpen(false)}
     >
       <Menu
         className={cn([
@@ -26,33 +23,25 @@ export const Sidebar = () => {
           'w-sidebar-w-closed',
           'hover:w-sidebar-w-open',
           'transition-width',
-          'ease-in-out',
-          'duration-300',
-          'bg-slate-100',
+          'ease-out',
+          'duration-200',
+          'bg-sidebar-light dark:bg-sidebar-dark',
+          'text-black dark:text-white',
           'border-r',
-          'border-layout-divider-color'
+          'border-layout-divider-color',
         ])}
         aria-label="Sidebar"
         onAction={alert}
       >
-        <SidebarItem
-          icon={PersonIcon}
-          id="profile"
-          displayName="Profile"
-          expanded={isHovered}
-        />
-        <SidebarItem
-          icon={ListIcon}
-          id="jobs"
-          displayName="Jobs"
-          expanded={isHovered}
-        />
-        <SidebarItem
-          icon={DocumentIcon}
-          id="resumeStudio"
-          displayName="Resume Studio"
-          expanded={isHovered}
-        />
+        {SidebarItemConfig.map((item) => (
+          <SidebarItem
+            key={item.id}
+            Icon={item.Icon}
+            id={item.id}
+            displayName={item.displayName}
+            // open={open}
+          />
+        ))}
       </Menu>
     </div>
   )

@@ -9,6 +9,7 @@ const config: Config = {
     './src/common/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       backgroundImage: {
@@ -22,12 +23,14 @@ const config: Config = {
       colors: {
         primary: colors.blue,
         'layout-divider-color': colors.gray['300'],
+        'sidebar-light': colors.slate['100'],
+        'sidebar-dark': colors.slate['900'],
       },
       spacing: {
         'app-header-h-lg': '4rem',
         'app-header-h-sm': '2rem',
         'sidebar-w-closed': '4rem',
-        'sidebar-w-open': '16rem',
+        'sidebar-w-open': '13rem',
       },
       borderWidth: {
         DEFAULT: '1px',
@@ -36,6 +39,9 @@ const config: Config = {
       transitionProperty: {
         width: 'width',
         visibility: 'visibility',
+      },
+      zIndex: {
+        '100': '100',
       },
     },
   },
