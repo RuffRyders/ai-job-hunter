@@ -1,7 +1,7 @@
 import { AppLogger } from '@/common/services/Logger/Logger'
-import { getUserData } from '@/common/data/serverActions/getUserData'
 import AppHeader from '@/features/header/ui/AppHeader'
 import { authOrRedirect } from '@/common/utils/auth/authOrRedirect'
+import { getUserData } from '@/common/data/api/user/getUserData'
 
 interface PrivateLayoutProps {
   children: React.ReactNode

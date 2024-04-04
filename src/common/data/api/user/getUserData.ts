@@ -3,6 +3,8 @@
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { createClient } from '@/common/services/supabase/server'
 
+const tableName = 'users'
+
 interface GetUserDataResponse {
   data?: {
     email: string
@@ -24,7 +26,7 @@ export const getUserData = async (): Promise<GetUserDataResponse> => {
     }
 
     const { data, error } = await supabase
-      .from('users')
+      .from(tableName)
       .select('email, avatarUrl')
       .eq('id', userId)
       .single()
@@ -59,5 +61,3 @@ export const getUserData = async (): Promise<GetUserDataResponse> => {
     }
   }
 }
-
-export default getUserData

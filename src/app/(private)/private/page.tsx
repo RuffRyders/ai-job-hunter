@@ -1,5 +1,5 @@
+import { getUserData } from '@/common/data/api/user/getUserData'
 import { SignOutButton } from './SignOutButton'
-import getUserData from '@/common/data/serverActions/getUserData'
 
 export default async function PrivatePage() {
   const { data, error } = await getUserData()

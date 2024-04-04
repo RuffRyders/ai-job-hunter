@@ -6,7 +6,7 @@ import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 export default async function JobTracker() {
   const { data, error } = await getJobs()
   if (data === null) {
-    return <div> Whoops! An error occured.</div>
+    return <div> Whoops! An error occurred.</div>
   }
 
   return (
