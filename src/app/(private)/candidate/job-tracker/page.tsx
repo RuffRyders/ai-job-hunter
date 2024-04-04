@@ -21,10 +21,9 @@ export default async function JobTracker() {
           <h1 className="text-3xl font-bold">Job Tracker</h1>
           <SearchInput
             className="ml-auto"
-            placeholder="Search..."
+            placeholder="Filter..."
             aria-label="Filter applied jobs"
           />
-
           <Button
             linkProps={{
               href: '/candidate/job-tracker/[id]',

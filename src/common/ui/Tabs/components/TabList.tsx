@@ -10,7 +10,7 @@ export function TabList<T extends object>({
 }: TabListProps<T>) {
   return (
     <AriaTabList
-      className={cn(`flex border-b border-solid border-gray-300 ${className}`)}
+      className={cn(`flex border-b border-solid border-gray-200 ${className}`)}
       {...props}
     >
       {children}
