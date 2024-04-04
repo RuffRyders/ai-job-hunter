@@ -7,8 +7,7 @@ import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { cn } from '@/common/utils/style/cn'
 import { Key, Menu, MenuItem } from 'react-aria-components'
 
-const PADDING_RIGHT = 'pr-6'
-const PADDING_LEFT = 'pl-6'
+const PADDING_X = 'px-6'
 
 interface UserMenuProps {
   isOpen: boolean
@@ -82,18 +81,17 @@ export const UserMenu = ({ isOpen, onClose, email }: UserMenuProps) => {
       <div
         className={cn(
           'flex flex-col py-4 border-slate-300 border-b-[1px] space-y-2',
-          PADDING_LEFT,
-          PADDING_RIGHT,
+          PADDING_X,
         )}
       >
         <div className="text-sm font-bold truncate">{email}</div>
       </div>
 
       <Menu aria-label="User Menu" onAction={handleAction}>
-        <UserMenuItem id="settings" className={cn(PADDING_LEFT, PADDING_RIGHT)}>
+        <UserMenuItem id="settings" className={PADDING_X}>
           Settings
         </UserMenuItem>
-        <UserMenuItem id="signout" className={cn(PADDING_LEFT, PADDING_RIGHT)}>
+        <UserMenuItem id="signout" className={PADDING_X}>
           Log out
         </UserMenuItem>
       </Menu>
