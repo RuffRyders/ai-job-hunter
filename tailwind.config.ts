@@ -21,10 +21,21 @@ const config: Config = {
       },
       colors: {
         primary: colors.blue,
+        'layout-divider-color': colors.gray['300'],
       },
       spacing: {
         'app-header-h-lg': '4rem',
         'app-header-h-sm': '2rem',
+        'sidebar-w-closed': '4rem',
+        'sidebar-w-open': '16rem',
+      },
+      borderWidth: {
+        DEFAULT: '1px',
+        'layout-divider': '1px',
+      },
+      transitionProperty: {
+        width: 'width',
+        visibility: 'visibility',
       },
     },
   },

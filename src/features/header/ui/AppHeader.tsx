@@ -27,7 +27,7 @@ export default function AppHeader({ userData }: AppHeaderProps) {
   }
 
   return (
-    <div className="relative w-full h-app-header-h-lg sm:h-18 bg-white border-b-[1px] border-b-gray-300 flex flex-row items-center justify-between px-6 py-3">
+    <div className="relative w-full h-app-header-h-lg sm:h-18 bg-white border-b-layout-divider border-b-layout-divider-color flex flex-row items-center justify-between px-6 py-3">
       <div className="font-bold text-lg">Job Assistant</div>
 
       {userData && (
