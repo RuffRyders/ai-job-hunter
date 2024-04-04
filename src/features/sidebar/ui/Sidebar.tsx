@@ -5,10 +5,12 @@ import { Menu } from 'react-aria-components'
 import { SidebarItem } from './SidebarItem'
 import { cn } from '@/common/utils/style/cn'
 import SidebarItemConfig from '../data/config'
-import React, { useState } from 'react'
+import React from 'react'
+import { usePathname } from 'next/navigation'
 
 export const Sidebar = () => {
   // const [open, setOpen] = useState(false)
+  const currentPath = usePathname()
 
   return (
     <div
@@ -31,7 +33,6 @@ export const Sidebar = () => {
           'border-layout-divider-color',
         ])}
         aria-label="Sidebar"
-        onAction={alert}
       >
         {SidebarItemConfig.map((item) => (
           <SidebarItem
@@ -39,6 +40,8 @@ export const Sidebar = () => {
             Icon={item.Icon}
             id={item.id}
             displayName={item.displayName}
+            path={item.path}
+            currentPath={currentPath}
             // open={open}
           />
         ))}
