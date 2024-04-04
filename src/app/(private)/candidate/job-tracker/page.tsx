@@ -2,7 +2,6 @@ import { Button } from '@/common/ui/Button'
 import { SearchInput } from '@/common/ui/SearchInput'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
-import Link from 'next/link'
 
 export default async function JobTracker() {
   const { data, error } = await getJobs()
