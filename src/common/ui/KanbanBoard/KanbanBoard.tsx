@@ -39,8 +39,7 @@ import { coordinateGetter as multipleContainersCoordinateGetter } from './multip
 
 import { Item, Container, ContainerProps } from './components'
 
-import { createRange } from './utils'
-import { getColor } from './utils/getColor'
+import { createRange, getColor } from './utils'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
   defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -115,7 +114,7 @@ const dropAnimation: DropAnimation = {
 
 type Items = Record<UniqueIdentifier, UniqueIdentifier[]>
 
-interface JobsKanbanViewProps {
+interface KanbanBoardProps {
   adjustScale?: boolean
   cancelDrop?: CancelDrop
   columns?: number
@@ -141,13 +140,16 @@ interface JobsKanbanViewProps {
   trashable?: boolean
   scrollable?: boolean
   vertical?: boolean
+  addableColumns?: boolean
+  removableColumns?: boolean
+  sortableColumns?: boolean
 }
 
 export const TRASH_ID = 'void'
 const PLACEHOLDER_ID = 'placeholder'
 const empty: UniqueIdentifier[] = []
 
-export function JobsKanbanView({
+export function KanbanBoard({
   adjustScale = false,
   itemCount = 3,
   cancelDrop,
@@ -165,7 +167,10 @@ export function JobsKanbanView({
   trashable = false,
   vertical = false,
   scrollable,
-}: JobsKanbanViewProps) {
+  addableColumns = false,
+  removableColumns = false,
+  sortableColumns = false,
+}: KanbanBoardProps) {
   const [items, setItems] = useState<Items>(
     () =>
       initialItems ?? {
@@ -469,7 +474,9 @@ export function JobsKanbanView({
               scrollable={scrollable}
               style={containerStyle}
               unstyled={minimal}
-              onRemove={() => handleRemove(containerId)}
+              onRemove={
+                removableColumns ? () => handleRemove(containerId) : undefined
+              }
             >
               <SortableContext items={items[containerId]} strategy={strategy}>
                 {items[containerId].map((value, index) => {
@@ -491,7 +498,7 @@ export function JobsKanbanView({
               </SortableContext>
             </DroppableContainer>
           ))}
-          {minimal ? undefined : (
+          {minimal || !addableColumns ? undefined : (
             <DroppableContainer
               id={PLACEHOLDER_ID}
               disabled={isSortingContainer}

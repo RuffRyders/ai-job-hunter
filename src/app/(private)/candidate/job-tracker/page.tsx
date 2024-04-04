@@ -4,7 +4,7 @@ import { TabList, Tabs } from '@/common/ui/Tabs'
 import { TabPanel } from '@/common/ui/Tabs/components'
 import { Tab } from '@/common/ui/Tabs/components/Tab'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
-import { JobsKanbanView } from '@/features/jobTracker/ui/JobsKanbanView'
+import { KanbanBoard } from '@/common/ui/KanbanBoard'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import { IconLayoutKanban, IconTable } from '@tabler/icons-react'
 
@@ -54,7 +54,7 @@ export default async function JobTracker() {
               <JobsTable jobs={data} />
             </TabPanel>
             <TabPanel id="kanban" className="overflow-x-auto">
-              <JobsKanbanView
+              <KanbanBoard
                 containerStyle={{
                   // TODO: Replace magic number math with flexbox solution
                   maxHeight: 'calc(100vh - 154px)',

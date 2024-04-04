@@ -14,6 +14,7 @@ export interface ContainerProps {
   hover?: boolean
   handleProps?: React.HTMLAttributes<any>
   scrollable?: boolean
+  sortable?: boolean
   shadow?: boolean
   placeholder?: boolean
   unstyled?: boolean
@@ -35,6 +36,7 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       placeholder,
       style,
       scrollable,
+      sortable = false,
       shadow,
       unstyled,
       ...props
@@ -70,7 +72,7 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
             {label}
             <div className={styles.Actions}>
               {onRemove ? <Remove onClick={onRemove} /> : undefined}
-              <Handle {...handleProps} />
+              {sortable ? <Handle {...handleProps} /> : undefined}
             </div>
           </div>
         ) : null}
