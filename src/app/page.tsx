@@ -2,6 +2,7 @@ import { Button } from '@/common/ui/Button'
 import { redirect } from 'next/navigation'
 
 export default async function Home() {
+  // TODO: Figure out what we want to do with the Home route
   async function redirectToLogin() {
     'use server'
 
