@@ -1,13 +1,10 @@
 import { Button } from '@/common/ui/Button'
 import { SearchInput } from '@/common/ui/SearchInput'
-import { getUserOrServerRedirect } from '@/common/utils/auth/getUserOrServerRedirect'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import Link from 'next/link'
 
 export default async function JobTracker() {
-  // Protect route to ensure a user is signed in
-  await getUserOrServerRedirect()
   const { data, error } = await getJobs()
   if (data === null) {
     return <div> Whoops! An error occured.</div>
@@ -23,12 +20,15 @@ export default async function JobTracker() {
             placeholder="Search..."
             aria-label="Filter applied jobs"
           />
-          <Link
-            href="/candidate/job-tracker/[id]"
-            as="/candidate/job-tracker/new"
+
+          <Button
+            linkProps={{
+              href: '/candidate/job-tracker/[id]',
+              as: '/candidate/job-tracker/new',
+            }}
           >
-            <Button>Add a job</Button>
-          </Link>
+            Add a job
+          </Button>
         </div>
 
         <div className="py-4">

@@ -8,12 +8,8 @@ export default async function Home() {
   return (
     <div className="max-w-5xl h-full p-6 container mx-auto">
       <div className="h-full flex flex-col gap-2 items-center justify-center">
-        <Link href="/cover-letter">
-          <Button>Cover Letter</Button>
-        </Link>
-        <Link href="/resume-editor">
-          <Button>Resume Editor</Button>
-        </Link>
+        <Button linkProps={{ href: '/cover-letter' }}>Cover Letter</Button>
+        <Button linkProps={{ href: '/resume-editor' }}>Resume Editor</Button>
       </div>
     </div>
   )
