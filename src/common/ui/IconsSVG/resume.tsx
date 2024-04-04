@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SVGComponent } from './types'
 
-export const ResumeIconSVG: SVGComponent = (props) => (
+export const ResumeIconSVG: SVGComponent = ({ ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -9,6 +9,6 @@ export const ResumeIconSVG: SVGComponent = (props) => (
     viewBox="0 -960 960 960"
     {...props}
   >
-    <path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
+    <path d="M330.001-250.001h299.998v-59.998H330.001v59.998Zm0-160h299.998v-59.998H330.001v59.998Zm-77.692 310q-30.308 0-51.308-21t-21-51.308v-615.382q0-30.308 21-51.308t51.308-21h317.692l209.998 209.998v477.692q0 30.308-21 51.308t-51.308 21H252.309Zm287.692-520V-800H252.309q-4.616 0-8.463 3.846-3.846 3.847-3.846 8.463v615.382q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846h455.382q4.616 0 8.463-3.846 3.846-3.847 3.846-8.463v-447.692H540.001ZM240-800v179.999V-800v640-640Z" />
   </svg>
 )

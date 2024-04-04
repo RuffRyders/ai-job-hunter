@@ -40,10 +40,13 @@ export const SidebarItem = ({
         ])}
       >
         <div className="w-sidebar-w-closed min-w-sidebar-w-closed flex flex-row justify-center items-center">
-          <Icon className="h-8 w-8 fill-black dark:fill-gray-300" />
+          <Icon
+            strokeWidth={'10px'}
+            className="h-8 w-8 fill-black dark:fill-gray-300"
+          />
         </div>
 
-        <p className={cn(['whitespace-nowrap'])}>{displayName}</p>
+        <p className={cn(['whitespace-nowrap', 'text-sm font-medium'])}>{displayName}</p>
       </div>
       {/* if we want borders between items later */}
       {/* {open && <div className="h-[1px] bg-gray-300 mx-4" />} */}
