@@ -1,16 +1,25 @@
 'use client'
 
 import { cn } from '@/common/utils/style/cn'
+import Link, { LinkProps } from 'next/link'
 import {
   Button as AriaButton,
   ButtonProps as AriaButtonProps,
 } from 'react-aria-components'
 
-interface ButtonProps extends AriaButtonProps {
+interface ButtonProps extends Omit<AriaButtonProps, 'children'> {
   variant?: 'primary'
+  linkProps?: LinkProps
+  children: React.ReactNode
 }
 
-export function Button({ children, className, variant, ...rest }: ButtonProps) {
+export function Button({
+  children,
+  className,
+  variant,
+  linkProps,
+  ...rest
+}: ButtonProps) {
   const styles = [
     'pointer-events-auto',
     'rounded-full',
@@ -30,8 +39,17 @@ export function Button({ children, className, variant, ...rest }: ButtonProps) {
     'bg-primary-500',
     'hover:bg-primary-600',
   ]
+  const finalClassName = cn(styles, primaryStyles, className)
+
+  if (linkProps) {
+    return (
+      <Link className={finalClassName} {...linkProps}>
+        {children}
+      </Link>
+    )
+  }
   return (
-    <AriaButton className={cn(styles, primaryStyles, className)} {...rest}>
+    <AriaButton className={finalClassName} {...rest}>
       {children}
     </AriaButton>
   )
