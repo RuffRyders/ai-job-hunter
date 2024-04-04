@@ -9,7 +9,7 @@ import { UserMenu } from './UserMenu'
 interface AppHeaderProps {
   userData: {
     email: string
-    avatarUrl: string
+    avatarUrl?: string
   }
 }
 
@@ -41,7 +41,7 @@ export default function AppHeader({ userData }: AppHeaderProps) {
 
       <div className="absolute right-0 top-app-header-h-lg">
         <UserMenu
-          userData={userData}
+          email={userData.email}
           onClose={onCloseUserMenu}
           isOpen={userMenuOpen}
         />

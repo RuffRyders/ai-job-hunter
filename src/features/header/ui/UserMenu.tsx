@@ -13,13 +13,10 @@ const PADDING_LEFT = 'pl-6'
 interface UserMenuProps {
   isOpen: boolean
   onClose: () => void
-  userData: {
-    email: string
-    avatarUrl: string
-  }
+  email: string
 }
 
-export const UserMenu = ({ isOpen, onClose, userData }: UserMenuProps) => {
+export const UserMenu = ({ isOpen, onClose, email }: UserMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(false)
 
@@ -89,7 +86,7 @@ export const UserMenu = ({ isOpen, onClose, userData }: UserMenuProps) => {
           PADDING_RIGHT,
         )}
       >
-        <div className="text-sm font-bold truncate">{userData.email}</div>
+        <div className="text-sm font-bold truncate">{email}</div>
       </div>
 
       <Menu aria-label="User Menu" onAction={handleAction}>

@@ -6,8 +6,8 @@ import { createClient } from '@/common/services/supabase/server'
 interface GetUserDataResponse {
   data?: {
     email: string
-    avatarUrl: string
-  } | null
+    avatarUrl?: string
+  }
   error?: string
 }
 
@@ -33,8 +33,18 @@ export const getUserData = async (): Promise<GetUserDataResponse> => {
       throw new Error(error.message)
     }
 
+    const email = data?.email ?? undefined
+    const avatarUrl = data?.avatarUrl ?? undefined
+
+    if (!email) {
+      throw new Error('Email not found')
+    }
+
     return {
-      data,
+      data: {
+        email,
+        avatarUrl,
+      },
     }
   } catch (err) {
     let errorMessage = 'Error fetching user data'
