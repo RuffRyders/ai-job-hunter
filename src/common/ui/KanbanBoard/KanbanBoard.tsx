@@ -472,6 +472,7 @@ export function KanbanBoard({
               columns={columns}
               items={items[containerId]}
               scrollable={scrollable}
+              sortable={sortableColumns}
               style={containerStyle}
               unstyled={minimal}
               onRemove={
