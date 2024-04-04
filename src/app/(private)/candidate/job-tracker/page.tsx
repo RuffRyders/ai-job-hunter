@@ -15,9 +15,9 @@ export default async function JobTracker() {
   }
 
   return (
-    <div className="max-w-5xl h-full p-6 container mx-auto">
+    <div className="h-full pt-6 mx-auto">
       <div className="h-full flex flex-col gap-2">
-        <div className="flex gap-2 items-start items-center">
+        <div className="flex gap-2 items-start items-center px-6">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
           <SearchInput
             className="ml-auto"
@@ -35,9 +35,9 @@ export default async function JobTracker() {
           </Button>
         </div>
 
-        <div className="py-4">
+        <div className="pt-2">
           <Tabs>
-            <TabList>
+            <TabList className="px-6">
               <Tab id="table">
                 <div className="flex gap-2 items-center">
                   <IconTable />
@@ -54,13 +54,14 @@ export default async function JobTracker() {
             <TabPanel id="table">
               <JobsTable jobs={data} />
             </TabPanel>
-            <TabPanel id="kanban">
+            <TabPanel id="kanban" className="overflow-x-auto">
               <JobsKanbanView
-                containerStyle={
-                  {
-                    // maxHeight: '80vh',
-                  }
-                }
+                containerStyle={{
+                  // TODO: Replace magic number math with flexbox solution
+                  maxHeight: 'calc(100vh - 154px)',
+                  flex: 1,
+                  overflowX: 'auto',
+                }}
                 itemCount={15}
                 scrollable
               />
