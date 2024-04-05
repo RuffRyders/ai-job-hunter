@@ -27,17 +27,15 @@ export default function AppHeader({ userData }: AppHeaderProps) {
   }
 
   return (
-    <div className="relative w-full h-app-header-h-lg sm:h-18 bg-white border-b-layout-divider border-b-layout-divider-color flex flex-row items-center justify-between px-6 py-3">
+    <div className="relative w-full h-app-header-h-sm md:h-app-header-h-lg bg-white border-b-layout-divider border-b-layout-divider-color flex flex-row items-center justify-between px-6 py-3">
       <div className="font-bold text-lg">Job Assistant</div>
 
-      {userData && (
-        <Avatar
-          className="cursor-pointer"
-          onClick={onClickUserAvatar}
-          email={userData.email}
-          avatarUrl={userData.avatarUrl}
-        />
-      )}
+      <Avatar
+        className="cursor-pointer"
+        onClick={onClickUserAvatar}
+        email={userData.email}
+        avatarUrl={userData.avatarUrl}
+      />
 
       <div className="absolute right-0 top-app-header-h-lg">
         <UserMenu

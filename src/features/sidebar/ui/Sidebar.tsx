@@ -27,8 +27,7 @@ export const Sidebar = () => {
           'transition-width',
           'ease-out',
           'duration-200',
-          'bg-sidebar-light dark:bg-sidebar-dark',
-          'text-black dark:text-white',
+          'bg-sidebar-bg-light dark:bg-sidebar-bg-dark',
           'border-r',
           'border-layout-divider-color',
         ])}

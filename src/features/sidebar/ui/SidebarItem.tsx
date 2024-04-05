@@ -5,6 +5,7 @@ import { cn } from '@/common/utils/style/cn'
 import { SVGComponent } from '@/common/ui/IconsSVG/types'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 interface SidebarItemProps {
   id: string
@@ -27,14 +28,20 @@ export const SidebarItem = ({
 }: SidebarItemProps) => {
   const router = useRouter()
 
+  const [hovered, setHovered] = useState(false)
   const isCurrentPath = currentPath?.startsWith(path)
 
   return (
     <MenuItem
       className={cn([
         'relative',
-        'hover:bg-gray-200 text-gray-500 hover:text-black cursor-pointer focus:outline-none',
-        isCurrentPath ? 'bg-gray-200' : '',
+        'cursor-pointer focus:outline-none',
+        isCurrentPath
+          ? 'bg-sidebar-item-bg-light-selected'
+          : 'hover:bg-sidebar-item-bg-light-selected hover:bg-opacity-50',
+        isCurrentPath
+          ? 'sidebar-item-text-light-selected'
+          : 'text-sidebar-item-text-light hover:text-sidebar-item-text-light-hover',
         'overflow-hidden',
         'flex flex-col',
         className,
@@ -47,7 +54,11 @@ export const SidebarItem = ({
         href={path}
         // prefetch on hover
         // https://stackoverflow.com/questions/77921256/next-js-how-to-prefetch-links-on-hover-instead-of-initial-render
-        onMouseEnter={() => router.prefetch(path)}
+        onMouseEnter={() => {
+          setHovered(true)
+          router.prefetch(path)
+        }}
+        onMouseLeave={() => setHovered(false)}
       >
         <div
           className={cn([
@@ -59,15 +70,24 @@ export const SidebarItem = ({
         >
           <div className="w-sidebar-w-closed min-w-sidebar-w-closed flex flex-row justify-center items-center">
             <Icon
-              strokeWidth={'10px'}
               className={cn([
-                'h-8 w-8 fill-current',
-                isCurrentPath ? 'text-black' : '',
+                'h-8 w-8',
+                isCurrentPath
+                  ? 'fill-sidebar-item-icon-light-selected'
+                  : 'fill-current',
               ])}
             />
           </div>
 
-          <p className={cn(['whitespace-nowrap', 'text-sm font-medium'])}>
+          <p
+            className={cn([
+              'whitespace-nowrap',
+              'text-sm font-medium',
+              hovered
+                ? 'text-sidebar-item-text-light-hover'
+                : 'text-sidebar-item-text-light',
+            ])}
+          >
             {displayName}
           </p>
         </div>
