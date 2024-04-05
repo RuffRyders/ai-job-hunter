@@ -37,14 +37,13 @@ const config: Config = {
         'sidebar-item-icon-dark-selected': colors.black,
       },
       spacing: {
-        'app-header-h-lg': '3rem',
+        'app-header-h-lg': '4rem',
         'app-header-h-sm': '2rem',
         'sidebar-w-closed': '4rem',
         'sidebar-w-open': '13rem',
       },
       borderWidth: {
         DEFAULT: '1px',
-        'layout-divider': '1px',
       },
       transitionProperty: {
         width: 'width',
