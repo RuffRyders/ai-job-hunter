@@ -8,7 +8,7 @@ import { cn } from '@/common/utils/style/cn'
 export interface ContainerProps {
   children: React.ReactNode
   columns?: number
-  label?: string
+  label?: string | React.ReactElement
   style?: React.CSSProperties
   horizontal?: boolean
   hover?: boolean

@@ -134,6 +134,7 @@ interface KanbanBoardProps {
   itemCount?: number
   items?: Items
   handle?: boolean
+  renderColumnHeader?(columnKey: UniqueIdentifier): React.ReactElement | string
   renderItem?(args?: KanbanRenderItemProps): React.ReactElement
   renderItemContents?(value: any): React.ReactElement
   strategy?: SortingStrategy
@@ -164,6 +165,7 @@ export function KanbanBoard({
   wrapperStyle = () => ({}),
   minimal = false,
   modifiers,
+  renderColumnHeader,
   renderItem,
   renderItemContents,
   strategy = verticalListSortingStrategy,
@@ -174,6 +176,12 @@ export function KanbanBoard({
   removableColumns = false,
   sortableColumns = false,
 }: KanbanBoardProps) {
+  const myitems = {
+    applied: {
+      columnName: 'Applied',
+      items: ['item0', 'item1', 'item2'],
+    },
+  }
   const [items, setItems] = useState<Items>(
     () =>
       initialItems ?? {
@@ -377,10 +385,14 @@ export function KanbanBoard({
         }
       }}
       onDragEnd={({ active, over }) => {
+        console.log('item drag over', active, over)
         if (active.id in items && over?.id) {
           setContainers((containers) => {
             const activeIndex = containers.indexOf(active.id)
             const overIndex = containers.indexOf(over.id)
+
+            console.log('active', activeIndex)
+            console.log('over', overIndex)
 
             return arrayMove(containers, activeIndex, overIndex)
           })
@@ -430,6 +442,8 @@ export function KanbanBoard({
 
         const overContainer = findContainer(overId)
 
+        console.log({ overContainer, active, over })
+
         if (overContainer) {
           const activeIndex = items[activeContainer].indexOf(active.id)
           const overIndex = items[overContainer].indexOf(overId)
@@ -473,7 +487,13 @@ export function KanbanBoard({
             <DroppableContainer
               key={containerId}
               id={containerId}
-              label={minimal ? undefined : `Column ${containerId}`}
+              label={
+                minimal
+                  ? undefined
+                  : renderColumnHeader
+                    ? renderColumnHeader(containerId)
+                    : `Column ${containerId}`
+              }
               columns={columns}
               items={items[containerId]}
               scrollable={scrollable}

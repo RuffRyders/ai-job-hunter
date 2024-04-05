@@ -25,7 +25,7 @@ export function JobEditor({ jobId, isNew, values, ...rest }: CardEditorProps) {
 
   return (
     <ModalOverlay
-      className="fixed inset-0 bg-black/50 overflow-y-auto"
+      className="fixed inset-0 bg-black/50 overflow-y-auto z-200"
       isDismissable
       onOpenChange={handleOpenChange}
       {...rest}

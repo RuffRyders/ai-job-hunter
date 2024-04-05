@@ -4,15 +4,16 @@ import {
   Header,
   TextField,
   Input,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanel,
+  // Tabs,
+  // TabList,
+  // Tab,
+  // TabPanel,
   Key,
   Label,
   Group,
 } from 'react-aria-components'
-import { IconX } from '@tabler/icons-react'
+import { Tab, TabList, TabPanel, Tabs } from '@/common/ui/Tabs'
+import { IconWand, IconX } from '@tabler/icons-react'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { Button } from '../../../../common/ui/Button/Button'
 import { IconButton } from '../../../../common/ui/IconButton'
@@ -64,26 +65,11 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
   return (
     <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col flex-1 gap-2">
-        <Header className="flex gap-2">
-          <Controller
-            name="jobTitle"
-            control={control}
-            render={({ field }) => {
-              return (
-                <TextField
-                  aria-label="jobTitle"
-                  className="flex flex-1"
-                  autoFocus
-                >
-                  <Input
-                    {...field}
-                    className="text-2xl flex-1 font-bold"
-                    placeholder="Enter a job title..."
-                  />
-                </TextField>
-              )
-            }}
-          />
+        <Header className="flex gap-2 items-start">
+          <div className="flex flex-col flex-1 h-24">
+            <div className="font-bold">{'{Job Title}'}</div>
+            <div>{'{Company Name}'}</div>
+          </div>
           <IconButton onPress={onClose}>
             <div className="flex">
               <IconX />
@@ -92,50 +78,135 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
         </Header>
         <div className="flex flex-1 gap-2">
           <div className="flex flex-1 flex-col gap-2">
-            <Controller
-              name="companyName"
-              control={control}
-              render={({ field }) => {
-                return (
-                  <TextField className="flex flex-none">
-                    <Input
-                      {...field}
-                      aria-label="company"
-                      className="text-xl flex-1"
-                      placeholder="Enter a company name..."
-                    />
-                  </TextField>
-                )
-              }}
-            />
-            <Tabs className="flex flex-1 flex-col">
-              <TabList
-                className="flex border-b border-solid border-gray-300"
-                aria-label="Tabs representing parts of a saved job application"
-              >
-                <Tab
-                  className="p-2 selected:text-blue-500 selected:border-b-4 border-solid border-blue-500 user-select-none cursor-pointer text-sm"
-                  id="description"
-                >
-                  Description
-                </Tab>
-                <Tab
-                  className="p-2 selected:text-blue-500 selected:border-b-4 border-solid border-blue-500 user-select-none cursor-pointer text-sm"
-                  id="cover-letter"
-                >
-                  Cover Letter
-                </Tab>
-                <Tab
-                  className="p-2 selected:text-blue-500 selected:border-b-4 border-solid border-blue-500 user-select-none cursor-pointer text-sm"
-                  id="resume"
-                >
-                  Tailored Resume
-                </Tab>
+            <Tabs>
+              <TabList aria-label="Tabs representing parts of a saved job application">
+                <Tab id="details">Job Details</Tab>
+                <Tab id="cover-letter">Cover Letter</Tab>
+                <Tab id="resume">Tailored Resume</Tab>
               </TabList>
-              <TabPanel
-                className="flex flex-col flex-1 gap-4 pt-2"
-                id="description"
-              >
+              <TabPanel id="details">
+                <div className="flex">
+                  <Controller
+                    name="jobTitle"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <TextField
+                          aria-label="jobTitle"
+                          className="flex flex-1 flex-col"
+                          autoFocus
+                        >
+                          <Label className="text-xs font-bold ">
+                            Job Title
+                          </Label>
+                          <Input
+                            {...field}
+                            className="flex-1 border border-gray-300 border-solid"
+                            placeholder="Enter a job title..."
+                          />
+                        </TextField>
+                      )
+                    }}
+                  />
+                  <Controller
+                    name="applicationStatus"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <Select
+                          {...field}
+                          className="w-48"
+                          items={statusOptions}
+                          selectedKey={field.value}
+                          aria-label="applicationStatus"
+                          onSelectionChange={(key: Key) => {
+                            field.onChange(key)
+                          }}
+                        >
+                          {(item) => (
+                            <SelectOption id={item.value}>
+                              <StatusLabel
+                                statusText={item.name}
+                                color={item.color}
+                              />
+                            </SelectOption>
+                          )}
+                        </Select>
+                      )
+                    }}
+                  />
+                </div>
+                <Controller
+                  name="companyName"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <TextField className="flex flex-none flex-col">
+                        <Label className="text-xs font-bold">
+                          Company Name
+                        </Label>
+                        <Input
+                          {...field}
+                          aria-label="company"
+                          className="flex-1 border border-gray-300 border-solid"
+                          placeholder="Enter a company name..."
+                        />
+                      </TextField>
+                    )
+                  }}
+                />
+                <div className="flex flex-1">
+                  <Controller
+                    name="salaryMin"
+                    control={control}
+                    render={({ field: { value, ...rest } }) => {
+                      return (
+                        <NumberField
+                          {...rest}
+                          step={1000}
+                          defaultValue={0}
+                          minValue={0}
+                          value={value ?? undefined}
+                          className="flex flex-col"
+                        >
+                          <Label className="text-xs font-bold">
+                            Salary Min
+                          </Label>
+                          <Group>
+                            <IconButton slot="decrement">-</IconButton>
+                            <Input className="border border-gray-300 border-solid" />
+                            <IconButton slot="increment">+</IconButton>
+                          </Group>
+                        </NumberField>
+                      )
+                    }}
+                  />
+                  <Controller
+                    name="salaryMax"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <NumberField
+                          {...field}
+                          step={1000}
+                          defaultValue={0}
+                          minValue={0}
+                          value={field.value}
+                          className="flex flex-col"
+                        >
+                          <Label className="text-xs font-bold">
+                            Salary Max
+                          </Label>
+                          <Group>
+                            <IconButton slot="decrement">-</IconButton>
+                            <Input className="flex-1 border border-gray-300 border-solid" />
+                            <IconButton slot="increment">+</IconButton>
+                          </Group>
+                        </NumberField>
+                      )
+                    }}
+                  />
+                </div>
                 <Controller
                   name="jobDescription"
                   control={control}
@@ -151,59 +222,21 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                     )
                   }}
                 />
-                <Controller
-                  name="salaryMin"
-                  control={control}
-                  render={({ field: { value, ...rest } }) => {
-                    return (
-                      <NumberField
-                        {...rest}
-                        step={1000}
-                        defaultValue={0}
-                        minValue={0}
-                        value={value ?? undefined}
-                      >
-                        <Label>Salary Min</Label>
-                        <Group>
-                          <IconButton slot="decrement">-</IconButton>
-                          <Input />
-                          <IconButton slot="increment">+</IconButton>
-                        </Group>
-                      </NumberField>
-                    )
-                  }}
-                />
-                <Controller
-                  name="salaryMax"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <NumberField
-                        {...field}
-                        step={1000}
-                        defaultValue={0}
-                        minValue={0}
-                        value={field.value}
-                      >
-                        <Label>Salary Max</Label>
-                        <Group>
-                          <IconButton slot="decrement">-</IconButton>
-                          <Input />
-                          <IconButton slot="increment">+</IconButton>
-                        </Group>
-                      </NumberField>
-                    )
-                  }}
-                />
               </TabPanel>
-              <TabPanel className="flex flex-1 pt-2" id="cover-letter">
+              <TabPanel id="cover-letter">
                 <div className="rounded bg-gray-100 flex flex-1 items-center justify-center">
-                  <Button>Generate Cover Letter</Button>
+                  <Button>
+                    <span>Generate Cover Letter</span>
+                    <IconWand size={20} />
+                  </Button>
                 </div>
               </TabPanel>
-              <TabPanel className="flex flex-1 pt-2" id="resume">
+              <TabPanel id="resume">
                 <div className="rounded bg-gray-100 flex flex-1 items-center justify-center">
-                  <Button>Generate Resume</Button>
+                  <Button>
+                    <span>Generate Resume</span>
+                    <IconWand size={20} />
+                  </Button>
                 </div>
               </TabPanel>
             </Tabs>
@@ -212,35 +245,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
               Save
             </Button>
           </div>
-          <div id="sidebar" className="flex-col">
-            <Controller
-              name="applicationStatus"
-              control={control}
-              render={({ field }) => {
-                return (
-                  <Select
-                    {...field}
-                    className="w-48"
-                    items={statusOptions}
-                    selectedKey={field.value}
-                    aria-label="applicationStatus"
-                    onSelectionChange={(key: Key) => {
-                      field.onChange(key)
-                    }}
-                  >
-                    {(item) => (
-                      <SelectOption id={item.value}>
-                        <StatusLabel
-                          statusText={item.name}
-                          color={item.color}
-                        />
-                      </SelectOption>
-                    )}
-                  </Select>
-                )
-              }}
-            />
-          </div>
+          <div id="sidebar" className="flex-col"></div>
         </div>
       </div>
     </form>
