@@ -40,6 +40,7 @@ import { coordinateGetter as multipleContainersCoordinateGetter } from './multip
 import { Item, Container, ContainerProps } from './components'
 
 import { createRange, getColor } from './utils'
+import { KanbanRenderItemProps } from './components/Item/Item'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
   defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -133,7 +134,8 @@ interface KanbanBoardProps {
   itemCount?: number
   items?: Items
   handle?: boolean
-  renderItem?: any
+  renderItem?(args?: KanbanRenderItemProps): React.ReactElement
+  renderItemContents?(value: any): React.ReactElement
   strategy?: SortingStrategy
   modifiers?: Modifiers
   minimal?: boolean
@@ -163,6 +165,7 @@ export function KanbanBoard({
   minimal = false,
   modifiers,
   renderItem,
+  renderItemContents,
   strategy = verticalListSortingStrategy,
   trashable = false,
   vertical = false,
@@ -491,6 +494,7 @@ export function KanbanBoard({
                       style={getItemStyles}
                       wrapperStyle={wrapperStyle}
                       renderItem={renderItem}
+                      renderItemContents={renderItemContents}
                       containerId={containerId}
                       getIndex={getIndex}
                     />
@@ -545,6 +549,7 @@ export function KanbanBoard({
         color={getColor(id)}
         wrapperStyle={wrapperStyle({ index: 0 })}
         renderItem={renderItem}
+        renderItemContents={renderItemContents}
         dragOverlay
       />
     )
@@ -578,6 +583,7 @@ export function KanbanBoard({
             color={getColor(item)}
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
+            renderItemContents={renderItemContents}
           />
         ))}
       </Container>
@@ -644,7 +650,8 @@ interface SortableItemProps {
   disabled?: boolean
   style(args: any): React.CSSProperties
   getIndex(id: UniqueIdentifier): number
-  renderItem(): React.ReactElement
+  renderItem?(): React.ReactElement
+  renderItemContents?(value: any): React.ReactElement
   wrapperStyle({ index }: { index: number }): React.CSSProperties
 }
 
@@ -654,6 +661,7 @@ function SortableItem({
   index,
   handle,
   renderItem,
+  renderItemContents,
   style,
   containerId,
   getIndex,
@@ -699,6 +707,7 @@ function SortableItem({
       fadeIn={mountedWhileDragging}
       listeners={listeners}
       renderItem={renderItem}
+      renderItemContents={renderItemContents}
     />
   )
 }

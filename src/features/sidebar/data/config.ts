@@ -1,6 +1,4 @@
-import { ProfileIconSVG } from '@/common/ui/IconsSVG/profile'
-import { JobsIconSVG } from '@/common/ui/IconsSVG/jobs'
-import { ResumeIconSVG } from '@/common/ui/IconsSVG/resume'
+import { IconFileText, IconList, IconUserEdit } from '@tabler/icons-react'
 
 export interface SidebarItem {
   Icon: any
@@ -11,19 +9,19 @@ export interface SidebarItem {
 
 const SidebarItemConfig: SidebarItem[] = [
   {
-    Icon: ProfileIconSVG,
+    Icon: IconUserEdit,
     id: 'profile',
     displayName: 'Profile',
     path: '/candidate/profile',
   },
   {
-    Icon: JobsIconSVG,
+    Icon: IconList,
     id: 'jobs',
-    displayName: 'Jobs',
+    displayName: 'Job Tracker',
     path: '/candidate/job-tracker',
   },
   {
-    Icon: ResumeIconSVG,
+    Icon: IconFileText,
     id: 'resumeStudio',
     displayName: 'Resume Studio',
     path: '/candidate/resume',

@@ -6,6 +6,20 @@ import { cn } from '@/common/utils/style/cn'
 import styles from './Item.module.scss'
 import { Handle, Remove } from './components'
 
+export interface KanbanRenderItemProps {
+  dragOverlay: boolean
+  dragging: boolean
+  sorting: boolean
+  index: number | undefined
+  fadeIn: boolean
+  listeners: DraggableSyntheticListeners
+  ref: React.Ref<HTMLElement>
+  style: React.CSSProperties | undefined
+  transform: Props['transform']
+  transition: Props['transition']
+  value: Props['value']
+}
+
 export interface Props {
   dragOverlay?: boolean
   color?: string
@@ -24,19 +38,8 @@ export interface Props {
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
   onRemove?(): void
-  renderItem?(args: {
-    dragOverlay: boolean
-    dragging: boolean
-    sorting: boolean
-    index: number | undefined
-    fadeIn: boolean
-    listeners: DraggableSyntheticListeners
-    ref: React.Ref<HTMLElement>
-    style: React.CSSProperties | undefined
-    transform: Props['transform']
-    transition: Props['transition']
-    value: Props['value']
-  }): React.ReactElement
+  renderItem?(args: KanbanRenderItemProps): React.ReactElement
+  renderItemContents?(value: any): React.ReactElement
 }
 
 export const Item = React.memo(
@@ -55,6 +58,7 @@ export const Item = React.memo(
         listeners,
         onRemove,
         renderItem,
+        renderItemContents,
         sorting,
         style,
         transition,
@@ -138,7 +142,7 @@ export const Item = React.memo(
             {...props}
             tabIndex={!handle ? 0 : undefined}
           >
-            {value}
+            {renderItemContents ? renderItemContents(value) : value}
             <span className={styles.Actions}>
               {onRemove ? (
                 <Remove className={styles.Remove} onClick={onRemove} />

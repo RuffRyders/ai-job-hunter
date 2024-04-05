@@ -6,7 +6,9 @@ import { Tab } from '@/common/ui/Tabs/components/Tab'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { KanbanBoard } from '@/common/ui/KanbanBoard'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
-import { IconLayoutKanban, IconTable } from '@tabler/icons-react'
+import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
+import { KanbanRenderItemProps } from '@/common/ui/KanbanBoard/components/Item/Item'
+import { JobsKanbanBoard, KanbanItem } from './_components/JobsKanbanBoard'
 
 export default async function JobTracker() {
   const { data, error } = await getJobs()
@@ -17,7 +19,7 @@ export default async function JobTracker() {
   return (
     <div className="h-full pt-6 mx-auto">
       <div className="h-full flex flex-col gap-2">
-        <div className="flex gap-2 items-start items-center px-6">
+        <div className="flex gap-2 items-start items-center px-10">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
           <SearchInput
             className="ml-auto"
@@ -30,13 +32,14 @@ export default async function JobTracker() {
               as: '/candidate/job-tracker/new',
             }}
           >
-            Add a job
+            <span>Add a job</span>
+            <IconPlus size={20} />
           </Button>
         </div>
 
         <div className="pt-2">
           <Tabs>
-            <TabList className="px-6">
+            <TabList className="px-10">
               <Tab id="table">
                 <div className="flex gap-2 items-center">
                   <IconTable />
@@ -54,22 +57,7 @@ export default async function JobTracker() {
               <JobsTable jobs={data} />
             </TabPanel>
             <TabPanel id="kanban" className="overflow-x-auto">
-              <KanbanBoard
-                containerStyle={{
-                  // TODO: Replace magic number math with flexbox solution
-                  maxHeight: 'calc(100vh - 154px)',
-                  flex: 1,
-                  overflowX: 'auto',
-                }}
-                itemCount={15}
-                items={{
-                  saved: ['one', 'two', 'three'],
-                  applied: ['four', 'five', 'six', 'seven'],
-                  interviewing: ['eight', 'nine', 'ten', 'eleven'],
-                  offered: [],
-                }}
-                scrollable
-              />
+              <JobsKanbanBoard />
             </TabPanel>
           </Tabs>
         </div>

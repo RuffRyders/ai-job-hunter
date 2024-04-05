@@ -30,6 +30,7 @@ export const Sidebar = () => {
           'bg-sidebar-bg-light dark:bg-sidebar-bg-dark',
           'border-r',
           'border-layout-divider-color',
+          'z-100',
         ])}
         aria-label="Sidebar"
       >

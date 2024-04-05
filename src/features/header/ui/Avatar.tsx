@@ -20,7 +20,7 @@ export default function Avatar({
     <div
       onClick={onClick}
       className={cn(
-        'h-full aspect-square bg-gray-200 relative rounded-full',
+        'h-10 aspect-square bg-gray-200 relative rounded-full',
         className,
       )}
     >

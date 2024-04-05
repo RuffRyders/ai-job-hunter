@@ -22,21 +22,19 @@ const config: Config = {
       },
       colors: {
         primary: colors.blue,
-        'layout-divider-color': colors.gray['300'],
+        'layout-divider-color': colors.gray['200'],
         // sidebar light
-        'sidebar-bg-light': colors.slate['100'],
-        'sidebar-item-bg-light-selected': colors.gray['300'],
+        'sidebar-bg-light': colors.white,
+        'sidebar-item-bg-light-selected': colors.blue,
         'sidebar-item-text-light': colors.gray['500'],
-        'sidebar-item-text-light-selected': colors.black,
+        'sidebar-item-text-light-selected': colors.white,
         'sidebar-item-text-light-hover': colors.black,
-        'sidebar-item-icon-light-selected': colors.black,
         // sidebar dark
         'sidebar-bg-dark': colors.slate['900'],
         'sidebar-item-bg-dark-selected': colors.gray['200'],
         'sidebar-item-text-dark': colors.white,
         'sidebar-item-text-dark-selected': colors.black,
         'sidebar-item-text-dark-hover': colors.white,
-        'sidebar-item-icon-dark-selected': colors.black,
       },
       spacing: {
         'app-header-h-lg': '4rem',
