@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Avatar from '@/features/header/ui/Avatar'
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { UserMenu } from './UserMenu'
+import { cn } from '@/common/utils/style/cn'
 
 interface AppHeaderProps {
   userData: {
@@ -27,17 +28,24 @@ export default function AppHeader({ userData }: AppHeaderProps) {
   }
 
   return (
-    <div className="relative w-full h-app-header-h-lg sm:h-18 bg-white border-b-[1px] border-b-gray-300 flex flex-row items-center justify-between px-6 py-3">
+    <div
+      className={cn([
+        'relative',
+        'w-full h-app-header-h-sm md:h-app-header-h-lg',
+        'flex flex-row items-center justify-between',
+        'bg-white',
+        'px-6 py-2',
+        'border-b border-b-layout-divider-color',
+      ])}
+    >
       <div className="font-bold text-lg">Job Assistant</div>
 
-      {userData && (
-        <Avatar
-          className="cursor-pointer"
-          onClick={onClickUserAvatar}
-          email={userData.email}
-          avatarUrl={userData.avatarUrl}
-        />
-      )}
+      <Avatar
+        className="cursor-pointer"
+        onClick={onClickUserAvatar}
+        email={userData.email}
+        avatarUrl={userData.avatarUrl}
+      />
 
       <div className="absolute right-0 top-app-header-h-lg">
         <UserMenu

@@ -8,8 +8,8 @@ export default function LoadingOverlay({
   displayText,
 }: LoadingOverlayProps) {
   return loading ? (
-    <div className="fixed w-full text-center top-0 left-0 right-0 bottom-0 bg-black opacity-50 flex flex-col items-center justify-center z-50">
-      <div className="text-white text-3xl">{displayText ?? 'Loading...'}</div>
+    <div className="fixed w-full text-center top-0 left-0 right-0 bottom-0 bg-black opacity-50 flex flex-col items-center justify-center z-100">
+      <div className="text-white text-3xl select-none">{displayText ?? 'Loading...'}</div>
     </div>
   ) : null
 }

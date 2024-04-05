@@ -7,6 +7,6 @@ export interface PageProps {
 
 export default async function Page({ params: { id } }: PageProps) {
   const result = await getJob(id)
-  console.log('ssr result', result)
+
   return <JobEditor isOpen={true} jobId={id} values={result.data?.[0]} />
 }
