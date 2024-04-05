@@ -39,20 +39,21 @@ export default function AppHeader({ userData }: AppHeaderProps) {
       ])}
     >
       <div className="font-bold text-lg">Job Assistant</div>
-
-      <Avatar
-        className="cursor-pointer"
-        onClick={onClickUserAvatar}
-        email={userData.email}
-        avatarUrl={userData.avatarUrl}
-      />
-
-      <div className="absolute right-0 top-app-header-h-lg">
-        <UserMenu
+      <div className="relative">
+        <Avatar
+          className="cursor-pointer"
+          onClick={onClickUserAvatar}
           email={userData.email}
-          onClose={onCloseUserMenu}
-          isOpen={userMenuOpen}
+          avatarUrl={userData.avatarUrl}
         />
+
+        <div className="absolute right-0 top-app-header-h-lg">
+          <UserMenu
+            email={userData.email}
+            onClose={onCloseUserMenu}
+            isOpen={userMenuOpen}
+          />
+        </div>
       </div>
     </div>
   )
