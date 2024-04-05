@@ -62,6 +62,12 @@ export default async function JobTracker() {
                   overflowX: 'auto',
                 }}
                 itemCount={15}
+                items={{
+                  saved: ['one', 'two', 'three'],
+                  applied: ['four', 'five', 'six', 'seven'],
+                  interviewing: ['eight', 'nine', 'ten', 'eleven'],
+                  offered: [],
+                }}
                 scrollable
               />
             </TabPanel>

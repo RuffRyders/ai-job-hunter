@@ -18,7 +18,6 @@ interface CardEditorProps extends ModalOverlayProps {
 
 export function JobEditor({ jobId, isNew, values, ...rest }: CardEditorProps) {
   const router = useRouter()
-  console.log('values', values)
 
   const handleOpenChange = () => {
     router.push('/candidate/job-tracker')

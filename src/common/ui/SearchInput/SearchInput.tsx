@@ -19,7 +19,7 @@ export function SearchInput({
 }: SearchInputProps) {
   return (
     <SearchField
-      className={`flex gap-1 items-center border border-slate-300 border-solid text-sm rounded-full ${className} px-4`}
+      className={`flex gap-1 items-center border border-gray-200 border-solid text-sm rounded-full ${className} px-4`}
       {...rest}
     >
       <IconSearch stroke={3} />
