@@ -454,6 +454,8 @@ export function KanbanBoard({
     >
       <div
         style={{
+          marginLeft: 8,
+          paddingRight: 8,
           display: 'inline-grid',
           boxSizing: 'border-box',
           gridAutoFlow: vertical ? 'row' : 'column',
