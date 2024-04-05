@@ -32,7 +32,9 @@ const config: Config = {
         'sidebar-item-icon-light-selected': colors.black,
         // sidebar dark
         'sidebar-bg-dark': colors.slate['900'],
+        'sidebar-item-bg-dark-selected': colors.gray['200'],
         'sidebar-item-text-dark': colors.white,
+        'sidebar-item-text-dark-selected': colors.black,
         'sidebar-item-text-dark-hover': colors.white,
         'sidebar-item-icon-dark-selected': colors.black,
       },
