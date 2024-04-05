@@ -17,6 +17,7 @@ export const AvatarImage = ({
       fill
       src={avatarUrl}
       alt={email}
+      draggable={false}
       className={cn('h-full w-full object-cover rounded-full', className)}
     />
   )
