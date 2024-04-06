@@ -36,7 +36,7 @@ const ResumeTestPage = () => {
   }
 
   return (
-    <div className="flex-1 flex-col overflow-auto bg-purple-300">
+    <div className="flex-1 flex flex-col overflow-auto">
       <LoadingOverlay loading={loading} />
 
       <div className="flex flex-row justify-center mb-12">
@@ -45,8 +45,8 @@ const ResumeTestPage = () => {
         <Button onPress={runSimpleTest}>Test Hardcoded Generation</Button>
       </div>
 
-      <div className="flex flex-1 overflow-auto">
-        <RichTextEditor content={resume} />
+      <div className="flex flex-1 flex-col overflow-auto">
+        <RichTextEditor content={resume} className="" />
       </div>
     </div>
   )
