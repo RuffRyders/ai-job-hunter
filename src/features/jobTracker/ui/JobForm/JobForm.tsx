@@ -85,7 +85,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                 <Tab id="resume">Tailored Resume</Tab>
               </TabList>
               <TabPanel id="details">
-                <div className="flex">
+                <div className="flex gap-2">
                   <Controller
                     name="jobTitle"
                     control={control}
@@ -96,9 +96,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                           className="flex flex-1 flex-col"
                           autoFocus
                         >
-                          <Label className="text-xs font-bold ">
-                            Job Title
-                          </Label>
+                          <Label className="text-xs font-bold">Job Title</Label>
                           <Input
                             {...field}
                             className="flex-1 border border-gray-300 border-solid"
@@ -113,25 +111,30 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                     control={control}
                     render={({ field }) => {
                       return (
-                        <Select
-                          {...field}
-                          className="w-48"
-                          items={statusOptions}
-                          selectedKey={field.value}
-                          aria-label="applicationStatus"
-                          onSelectionChange={(key: Key) => {
-                            field.onChange(key)
-                          }}
-                        >
-                          {(item) => (
-                            <SelectOption id={item.value}>
-                              <StatusLabel
-                                statusText={item.name}
-                                color={item.color}
-                              />
-                            </SelectOption>
-                          )}
-                        </Select>
+                        <div>
+                          <Label className="text-xs font-bold">
+                            Application Status
+                          </Label>
+                          <Select
+                            {...field}
+                            className="w-48"
+                            items={statusOptions}
+                            selectedKey={field.value}
+                            aria-label="applicationStatus"
+                            onSelectionChange={(key: Key) => {
+                              field.onChange(key)
+                            }}
+                          >
+                            {(item) => (
+                              <SelectOption id={item.value}>
+                                <StatusLabel
+                                  statusText={item.name}
+                                  color={item.color}
+                                />
+                              </SelectOption>
+                            )}
+                          </Select>
+                        </div>
                       )
                     }}
                   />
