@@ -14,4 +14,10 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "tailwindCSS.classAttributes": [
+        // var name patterns to allow tailwind intelisense
+        ".*className.*",
+        ".*ClassName.*",
+        // ".*Styles"
+    ]
 }

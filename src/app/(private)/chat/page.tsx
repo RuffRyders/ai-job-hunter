@@ -6,8 +6,6 @@ import { Input } from '@/common/ui/Input/Input'
 import { cn } from '@/common/utils/style/cn'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
 import { sendMessage } from './data/sendMessage'
-import { Button } from '@/common/ui/Button'
-import { is } from 'date-fns/locale'
 
 interface Message {
   type: 'user' | 'bot'

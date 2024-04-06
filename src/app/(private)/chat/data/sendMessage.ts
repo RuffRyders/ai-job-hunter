@@ -10,6 +10,7 @@ const AGENT_PREMISE =
 interface SendMessageParams {
   message: string
 }
+
 export const sendMessage = async ({ message }: SendMessageParams) => {
   try {
     const response = await queryModel({

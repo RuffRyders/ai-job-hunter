@@ -5,12 +5,18 @@ import {
 } from '../../config/appConfig'
 import { CURRENT_MODEL } from './models'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
-import { gemma_7b_it } from './configs'
+import { DEFAULT } from './configs'
+import {
+  HuggingFaceInput,
+  HuggingFaceTextGenerationOptions,
+  HuggingFaceTextGenerationParameters,
+} from '../types/HuggingFaceTextGenerationParameters'
 
-interface QueryModelParams {
-  input: string
+interface QueryHFTextGenModelParams {
+  input: HuggingFaceInput
   modelUrl?: string
-  parameters?: Record<string, any>
+  parameters?: HuggingFaceTextGenerationParameters
+  options?: HuggingFaceTextGenerationOptions
 }
 
 interface QueryModelResponse<T = any> {
@@ -21,8 +27,9 @@ interface QueryModelResponse<T = any> {
 export const queryModel = async <T>({
   input,
   modelUrl,
-  parameters = gemma_7b_it.parameters,
-}: QueryModelParams): Promise<QueryModelResponse<T>> => {
+  parameters = DEFAULT.parameters,
+  options,
+}: QueryHFTextGenModelParams): Promise<QueryModelResponse<T>> => {
   const requestUrl = modelUrl || `${HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`
   AppLogger.info('queryModel: ', requestUrl)
 
@@ -30,6 +37,7 @@ export const queryModel = async <T>({
   const body = JSON.stringify({
     inputs: input,
     parameters,
+    options,
   })
 
   console.log('body: ', body)
