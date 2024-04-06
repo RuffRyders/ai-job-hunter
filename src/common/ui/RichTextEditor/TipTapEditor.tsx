@@ -15,29 +15,32 @@ interface RichTextEditorProps {
 }
 
 export const RichTextEditor = ({ content }: RichTextEditorProps) => {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    editorProps: {
-      attributes: {
-        id: editorContentActual,
-        // TODO: We may need to use real world units?  Play around and test
-        // width: 210mm;
-        // height: 297mm;
-        // padding: 20mm;
-        class: cn(
-          'm-2 bg-white text-black',
-          'aspect-a4-document', // Aspect ratio of A4 paper
-          'w-[794px]', // Width of A4 paper in pixels
-          'm-auto p-[20px]', // Centered and padding inside the editor to simulate margins
-          // Allows scrolling within the editor if the content exceeds A4 height
-          // TODO: display a line in the editor representing the end of the page
-          'overflow-y-auto',
-          'shadow-md',
-        ),
+  const editor = useEditor(
+    {
+      extensions: [StarterKit],
+      editorProps: {
+        attributes: {
+          id: editorContentActual,
+          // TODO: We may need to use real world units?  Play around and test
+          // width: 210mm;
+          // height: 297mm;
+          // padding: 20mm;
+          class: cn(
+            'm-2 bg-white text-black',
+            'aspect-a4-document', // Aspect ratio of A4 paper
+            'w-[794px]', // Width of A4 paper in pixels
+            'm-auto p-[20px]', // Centered and padding inside the editor to simulate margins
+            // Allows scrolling within the editor if the content exceeds A4 height
+            // TODO: display a line in the editor representing the end of the page
+            'overflow-y-auto',
+            'shadow-md',
+          ),
+        },
       },
+      content,
     },
-    content,
-  })
+    [content],
+  )
 
   const copyHTMLToClipboard = () => {
     const currentHTML = editor?.getHTML()
