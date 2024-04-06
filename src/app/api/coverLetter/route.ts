@@ -2,7 +2,7 @@ import {
   HF_INFERENCE_API_BASE_URL,
   HF_INFERENCE_API_KEY,
 } from '@/common/data/config/appConfig'
-import { CURRENT_MODEL } from '@/common/data/constants/models'
+import { CURRENT_MODEL } from '@/common/data/api/ai/models'
 import { promptCoverLetter } from '@/features/bot/data/prompts'
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { formatPrompt } from '@/common/utils/prompt/formatPrompt'
