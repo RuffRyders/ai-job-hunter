@@ -1,4 +1,8 @@
-// TODO should break resume into smaller components, but will start simply
+// TODO store base rules near ai service...
+const BASE_RULES = [
+  'Format your response in HTML',
+  'Do not include markdown syntax in your response',
+]
 
 interface CreateResumePromptParams {
   userInfo: ResumeInputUserInfo
@@ -17,23 +21,21 @@ export const createResumePrompt = ({
   rules: rulesProp = [],
 }: CreateResumePromptParams) => {
   let prompt =
-    'Generate a resume that follows popular resume writing conventions.'
+`
+${BASE_RULES.join('\n')}
 
-  if (jobDescription) {
-    prompt += ` The resume should be tailored to a job posting for a ${jobDescription}.`
-  }
+Generate a resume using the provided user information${jobDescription ? ', job description' : ''}${previousResume ? ', existing resume ' : ''} that follows popular resume writing conventions and follows the guidelines provided.
+`
 
   if (previousResume) {
-    prompt += ` This is an existing resume for the same person to use as a guide to fill in any gaps: ${previousResume}.`
+    prompt += `This is an existing resume for the same person to use as a guide to fill in any gaps: ${previousResume}.`
   }
 
-  if (resumeTemplate) {
-    prompt += ` The resume should be based on the following template: ${resumeTemplate}.`
-  }
+  // if (resumeTemplate) {
+  //   prompt += `The resume should be based on the following template: ${resumeTemplate}.`
+  // }
 
-  prompt += ` Use this user info to write the details of the resume: ${JSON.stringify(userInfo)}.`
-
-  let base_rules = [
+  let resume_rules = [
     'Use these base rules to guide the resume creation:',
     'The resume should be no longer than one page.',
     'The resume should be easy to read and well-organized.',
@@ -51,7 +53,7 @@ export const createResumePrompt = ({
   ]
 
   
-  for (const rule of base_rules) {
+  for (const rule of resume_rules) {
     prompt += `\n${rule}`
   }
     
@@ -61,6 +63,12 @@ export const createResumePrompt = ({
     for (const rule of rulesProp) {
       prompt += `\n${rule}`
     }
+  }
+
+  prompt += `\n\nUser information START\n${JSON.stringify(userInfo)}.\nUser information END`
+
+  if (jobDescription) {
+    prompt += `\n\nJob description START\n${jobDescription}.\nJob description END`
   }
 
   return prompt

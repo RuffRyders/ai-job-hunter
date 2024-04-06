@@ -11,13 +11,15 @@ export const resumeTest = async () => {
     jobDescription: job1,
   })
 
+  console.log('prompt: ', prompt)
+
   const response = await queryModel({ prompt })
 
   return (response.data as any)[0].generated_text
 }
 
 export const simpleTest = async () => {
-  const prompt = 'Tell me how to say "hi" in 5 different languages'
+  const prompt = 'Say hello in pygmy.'
 
   const response = await queryModel({ prompt })
 

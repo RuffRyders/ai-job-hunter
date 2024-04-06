@@ -32,6 +32,8 @@ export const queryModel = async <T>({
     parameters: modelParams,
   })
 
+  console.log('body: ', body)
+
   try {
     const res = await fetch(requestUrl, {
       headers: {

@@ -12,6 +12,8 @@ const ResumeTestPage = () => {
   const [loading, setLoading] = useState(false)
   const [resume, setResume] = useState('' as string)
 
+  const [message, setMessage] = useState('' as string)
+
   console.log('resume: ', resume)
 
   const runResumeTest = async () => {
@@ -28,7 +30,7 @@ const ResumeTestPage = () => {
 
   const runSimpleTest = async () => {
     setLoading(true)
-    await simpleTest()
+    setResume(textToHtml(await simpleTest()))
     setLoading(false)
   }
 
@@ -36,9 +38,15 @@ const ResumeTestPage = () => {
     <div className="flex-1 flex justify-center items-center flex-col px-28 py-10">
       <LoadingOverlay loading={loading} />
 
-      <Button onPress={runResumeTest} className="mb-12">
-        Test Resume Generation
-      </Button>
+      <div className="flex flex-row">
+        <Button onPress={runResumeTest} className="mb-12">
+          Test Resume Generation
+        </Button>
+
+        <Button onPress={runSimpleTest} className="mb-12">
+          Test Hardcoded Generation
+        </Button>
+      </div>
       <div className="flex-1 relative">
         <RichTextEditor content={resume} />
       </div>
