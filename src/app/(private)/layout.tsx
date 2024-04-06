@@ -28,7 +28,7 @@ export default async function PrivateLayout({ children }: PrivateLayoutProps) {
         <div className="shrink-0 z-50">
           <Sidebar />
         </div>
-        <div className="flex-1 overflow-auto">{children}</div>
+        <div className="flex flex-1 overflow-auto">{children}</div>
       </div>
     </div>
   )
