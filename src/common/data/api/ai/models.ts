@@ -10,7 +10,7 @@
  */
 export const HF_MODELS = {
   gpt2: {
-    id: 'gpt2',
+    id: 'openai-community/gpt2',
   },
   gemma: {
     id: 'google/gemma-7b-it',
@@ -23,4 +23,4 @@ export const HF_MODELS = {
 /**
  * The model used for the HF inference API
  */
-export const CURRENT_MODEL = HF_MODELS.gpt2.id
+export const CURRENT_MODEL = HF_MODELS.mistral.id

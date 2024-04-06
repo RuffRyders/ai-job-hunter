@@ -8,9 +8,9 @@ import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
 import { gemma_7b_it } from './configs'
 
 interface QueryModelParams {
-  prompt: string
+  input: string
   modelUrl?: string
-  modelParams?: Record<string, any>
+  parameters?: Record<string, any>
 }
 
 interface QueryModelResponse<T = any> {
@@ -19,17 +19,17 @@ interface QueryModelResponse<T = any> {
 }
 
 export const queryModel = async <T>({
-  prompt,
+  input,
   modelUrl,
-  modelParams = gemma_7b_it.parameters,
+  parameters = gemma_7b_it.parameters,
 }: QueryModelParams): Promise<QueryModelResponse<T>> => {
   const requestUrl = modelUrl || `${HF_INFERENCE_API_BASE_URL}/${CURRENT_MODEL}`
   AppLogger.info('queryModel: ', requestUrl)
 
   // TODO - this body structure may be unique to each model
   const body = JSON.stringify({
-    inputs: prompt,
-    parameters: modelParams,
+    inputs: input,
+    parameters,
   })
 
   console.log('body: ', body)

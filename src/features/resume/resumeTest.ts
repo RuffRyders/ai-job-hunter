@@ -13,7 +13,7 @@ export const resumeTest = async () => {
 
   console.log('prompt: ', prompt)
 
-  const response = await queryModel({ prompt })
+  const response = await queryModel({ input: prompt })
 
   return (response.data as any)[0].generated_text
 }
@@ -21,7 +21,7 @@ export const resumeTest = async () => {
 export const simpleTest = async () => {
   const prompt = 'Say hello in pygmy.'
 
-  const response = await queryModel({ prompt })
+  const response = await queryModel({ input: prompt })
 
   return (response.data as any)[0].generated_text
 }

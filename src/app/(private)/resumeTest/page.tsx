@@ -47,7 +47,7 @@ const ResumeTestPage = () => {
           Test Hardcoded Generation
         </Button>
       </div>
-      <div className="flex-1 relative">
+      <div className="flex flex-1 relative">
         <RichTextEditor content={resume} />
       </div>
     </div>
