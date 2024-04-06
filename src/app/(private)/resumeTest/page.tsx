@@ -4,6 +4,7 @@ import { Button } from '@/common/ui/Button'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { RichTextEditor } from '@/common/ui/RichTextEditor'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
+import { textToHtml } from '@/common/utils/string/textToHtml'
 import { resumeTest, simpleTest } from '@/features/resume/resumeTest'
 import { useState } from 'react'
 
@@ -11,10 +12,12 @@ const ResumeTestPage = () => {
   const [loading, setLoading] = useState(false)
   const [resume, setResume] = useState('' as string)
 
+  console.log('resume: ', resume)
+
   const runResumeTest = async () => {
     setLoading(true)
     try {
-      setResume(await resumeTest())
+      setResume(textToHtml(await resumeTest()))
     } catch (err) {
       console.error(err)
       const errorMessage = getErrorMessage(err)
@@ -30,12 +33,15 @@ const ResumeTestPage = () => {
   }
 
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col">
+    <div className="flex-1 flex justify-center items-center flex-col px-28 py-10">
       <LoadingOverlay loading={loading} />
 
-      <Button onPress={runResumeTest}>Test Resume Generation</Button>
-
-      <RichTextEditor content={resume} />
+      <Button onPress={runResumeTest} className="mb-12">
+        Test Resume Generation
+      </Button>
+      <div className="flex-1 relative">
+        <RichTextEditor content={resume} />
+      </div>
     </div>
   )
 }
