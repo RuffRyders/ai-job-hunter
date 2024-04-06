@@ -14,7 +14,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className="h-full w-sidebar-w-closed relative"
+      className="h-full w-sidebar-w-closed relative z-50"
       // onMouseEnter={() => setOpen(true)}
       // onMouseLeave={() => setOpen(false)}
     >
