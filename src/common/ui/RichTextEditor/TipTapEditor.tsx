@@ -116,10 +116,7 @@ export const RichTextEditor = ({
       {editor && (
         <MenuSimple
           editor={editor}
-          className={cn([
-            'border-y-2 border-black p-4',
-            toolbarClassName,
-          ])}
+          className={cn(['border-y-2 border-black p-4', toolbarClassName])}
         />
       )}
       <div className="flex-1 overflow-auto">
