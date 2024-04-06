@@ -50,6 +50,7 @@ const config: Config = {
         visibility: 'visibility',
       },
       zIndex: {
+        '60': '60',
         '100': '100',
         '200': '200',
       },
