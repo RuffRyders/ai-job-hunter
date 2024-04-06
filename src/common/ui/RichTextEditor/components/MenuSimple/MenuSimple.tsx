@@ -4,15 +4,16 @@ import styles from './MenuSimple.module.css'
 
 interface MenuSimpleProps {
   editor: Editor
+  className?: string
 }
 
-const MenuSimple = ({ editor }: MenuSimpleProps) => {
+const MenuSimple = ({ editor, className }: MenuSimpleProps) => {
   if (!editor) {
     return null
   }
 
   return (
-    <>
+    <div className={className}>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -201,7 +202,7 @@ const MenuSimple = ({ editor }: MenuSimpleProps) => {
       >
         purple
       </button>
-    </>
+    </div>
   )
 }
 

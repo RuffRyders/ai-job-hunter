@@ -12,9 +12,15 @@ const editorContentActual = 'editor-content-actual'
 
 interface RichTextEditorProps {
   content: string
+  toolbarClassName?: string
+  className?: string
 }
 
-export const RichTextEditor = ({ content }: RichTextEditorProps) => {
+export const RichTextEditor = ({
+  content,
+  toolbarClassName,
+  className,
+}: RichTextEditorProps) => {
   const editor = useEditor(
     {
       extensions: [StarterKit],
@@ -26,14 +32,13 @@ export const RichTextEditor = ({ content }: RichTextEditorProps) => {
           // height: 297mm;
           // padding: 20mm;
           class: cn(
-            'm-2 bg-white text-black',
             'aspect-a4-document', // Aspect ratio of A4 paper
             'w-[794px]', // Width of A4 paper in pixels
-            'm-auto p-[20px]', // Centered and padding inside the editor to simulate margins
-            // Allows scrolling within the editor if the content exceeds A4 height
+            'bg-white text-black',
+            'p-[20px]', // Padding inside the editor to simulate margins
             // TODO: display a line in the editor representing the end of the page
-            'overflow-y-auto',
             'shadow-md',
+            'mx-auto',
           ),
         },
       },
@@ -102,9 +107,35 @@ export const RichTextEditor = ({ content }: RichTextEditorProps) => {
   }
 
   return (
-    <div>
-      {editor && <MenuSimple editor={editor} />}
-      <EditorContent editor={editor} className="editor-content" />
+    <div
+      className={cn([
+        'flex-1 flex flex-col max-w-full bg-gray-200 overflow-auto',
+        className,
+      ])}
+    >
+      {editor && (
+        <MenuSimple
+          editor={editor}
+          className={cn([
+            'border-y-2 border-black p-4',
+            toolbarClassName,
+          ])}
+        />
+      )}
+      <div className="flex-1 overflow-auto">
+        <EditorContent
+          editor={editor}
+          className={cn([
+            'editor-content',
+            'py-3',
+            'pb-4',
+            'px-6',
+            'flex-1',
+            'overflow-auto',
+            'bg-gray-200',
+          ])}
+        />
+      </div>
       <div className="absolute top-1/2 right-6 flex flex-col">
         <button
           onClick={downloadPDF}
