@@ -1,8 +1,8 @@
 'use client'
 
 import { KanbanBoard } from '@/common/ui/KanbanBoard'
-import { KanbanRenderItemProps } from '@/common/ui/KanbanBoard/components/Item/Item'
-import { cn } from '@/common/utils/style/cn'
+import { JobModel } from '../../data/types'
+import { CSSProperties } from 'react'
 
 const columns = {
   NOT_APPLIED: 'Saved',
@@ -11,15 +11,25 @@ const columns = {
   OFFERED: 'Offered',
 } as { [key: string]: string }
 
-export function JobsKanbanBoard() {
+const containerStyle = {
+  // TODO: Replace magic number math with flexbox solution
+  height: 'calc(100vh - 220px)',
+  flex: 1,
+  overflowX: 'auto',
+} as CSSProperties
+
+interface JobsKanbanBoardProps {
+  jobs?: JobModel[]
+}
+
+export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
+  // TODO: build items from jobs
+  // TODO: build renderIttemContents callback
+  // TODO: build renderColumnHeader callback
+
   return (
     <KanbanBoard
-      containerStyle={{
-        // TODO: Replace magic number math with flexbox solution
-        height: 'calc(100vh - 220px)',
-        flex: 1,
-        overflowX: 'auto',
-      }}
+      containerStyle={containerStyle}
       itemCount={15}
       items={{
         NOT_APPLIED: ['one', 'two', 'three'],

@@ -8,7 +8,10 @@ import { KanbanBoard } from '@/common/ui/KanbanBoard'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
 import { KanbanRenderItemProps } from '@/common/ui/KanbanBoard/components/Item/Item'
-import { JobsKanbanBoard, KanbanItem } from './_components/JobsKanbanBoard'
+import {
+  JobsKanbanBoard,
+  KanbanItem,
+} from '../../../../features/jobTracker/ui/JobsKanbanBoard/JobsKanbanBoard'
 
 export default async function JobTracker() {
   const { data, error } = await getJobs()
