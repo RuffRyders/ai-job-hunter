@@ -1,17 +1,10 @@
+import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
 import { Button } from '@/common/ui/Button'
 import { SearchInput } from '@/common/ui/SearchInput'
-import { TabList, Tabs } from '@/common/ui/Tabs'
-import { TabPanel } from '@/common/ui/Tabs/components'
-import { Tab } from '@/common/ui/Tabs/components/Tab'
+import { TabList, Tabs, TabPanel, Tab } from '@/common/ui/Tabs'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
-import { KanbanBoard } from '@/common/ui/KanbanBoard'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
-import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
-import { KanbanRenderItemProps } from '@/common/ui/KanbanBoard/components/Item/Item'
-import {
-  JobsKanbanBoard,
-  KanbanItem,
-} from '../../../../features/jobTracker/ui/JobsKanbanBoard/JobsKanbanBoard'
+import { JobsKanbanBoard } from '@/features/jobTracker/ui/JobsKanbanBoard'
 
 export default async function JobTracker() {
   const { data, error } = await getJobs()
@@ -60,7 +53,7 @@ export default async function JobTracker() {
               <JobsTable jobs={data} />
             </TabPanel>
             <TabPanel id="kanban" className="overflow-x-auto">
-              <JobsKanbanBoard />
+              <JobsKanbanBoard jobs={data} />
             </TabPanel>
           </Tabs>
         </div>
