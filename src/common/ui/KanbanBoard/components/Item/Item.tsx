@@ -38,6 +38,7 @@ export interface Props {
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
   onRemove?(): void
+  onClick?(): void
   renderItem?(args: KanbanRenderItemProps): React.ReactElement
   renderItemContents?(value: any): React.ReactElement
 }
@@ -57,6 +58,7 @@ export const Item = React.memo(
         index,
         listeners,
         onRemove,
+        onClick,
         renderItem,
         renderItemContents,
         sorting,
@@ -103,6 +105,7 @@ export const Item = React.memo(
             sorting && styles.sorting,
             dragOverlay && styles.dragOverlay,
           )}
+          onClick={onClick}
           style={
             {
               ...wrapperStyle,

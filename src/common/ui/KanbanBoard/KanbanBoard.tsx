@@ -165,6 +165,7 @@ export function KanbanBoard({
   wrapperStyle = () => ({}),
   minimal = false,
   modifiers,
+  // extractItemKey = () => {},
   renderColumnHeader,
   renderItem,
   renderItemContents,
@@ -176,12 +177,6 @@ export function KanbanBoard({
   removableColumns = false,
   sortableColumns = false,
 }: KanbanBoardProps) {
-  const myitems = {
-    applied: {
-      columnName: 'Applied',
-      items: ['item0', 'item1', 'item2'],
-    },
-  }
   const [items, setItems] = useState<Items>(
     () =>
       initialItems ?? {
