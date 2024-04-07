@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
-import type { DraggableSyntheticListeners } from '@dnd-kit/core'
+import type {
+  DraggableSyntheticListeners,
+  UniqueIdentifier,
+} from '@dnd-kit/core'
 import type { Transform } from '@dnd-kit/utilities'
 import { cn } from '@/common/utils/style/cn'
 
@@ -36,9 +39,9 @@ export interface Props {
   style?: React.CSSProperties
   transition?: string | null
   wrapperStyle?: React.CSSProperties
-  value: React.ReactNode
+  value: UniqueIdentifier
   onRemove?(): void
-  onClick?(): void
+  onClick?(itemKey: UniqueIdentifier): void
   renderItem?(args: KanbanRenderItemProps): React.ReactElement
   renderItemContents?(value: any): React.ReactElement
 }
@@ -105,7 +108,7 @@ export const Item = React.memo(
             sorting && styles.sorting,
             dragOverlay && styles.dragOverlay,
           )}
-          onClick={onClick}
+          onClick={() => onClick?.(value)}
           style={
             {
               ...wrapperStyle,

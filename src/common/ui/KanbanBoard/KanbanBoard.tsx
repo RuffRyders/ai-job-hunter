@@ -134,6 +134,8 @@ interface KanbanBoardProps {
   itemCount?: number
   items?: Items
   handle?: boolean
+  onItemClick?: (itemKey: UniqueIdentifier) => void
+  onItemMove?: (itemKey: UniqueIdentifier, columnKey: UniqueIdentifier) => void
   renderColumnHeader?(columnKey: UniqueIdentifier): React.ReactElement | string
   renderItem?(args?: KanbanRenderItemProps): React.ReactElement
   renderItemContents?(value: any): React.ReactElement
@@ -166,6 +168,8 @@ export function KanbanBoard({
   minimal = false,
   modifiers,
   // extractItemKey = () => {},
+  onItemClick,
+  onItemMove,
   renderColumnHeader,
   renderItem,
   renderItemContents,
@@ -265,9 +269,14 @@ export function KanbanBoard({
     [activeId, items],
   )
   const [clonedItems, setClonedItems] = useState<Items | null>(null)
+  const pointerSensorContraints = {
+    activationConstraint: {
+      distance: 8,
+    },
+  }
   const sensors = useSensors(
-    useSensor(MouseSensor),
-    useSensor(TouchSensor),
+    useSensor(MouseSensor, pointerSensorContraints),
+    useSensor(TouchSensor, pointerSensorContraints),
     useSensor(KeyboardSensor, {
       coordinateGetter,
     }),
@@ -514,6 +523,7 @@ export function KanbanBoard({
                       renderItemContents={renderItemContents}
                       containerId={containerId}
                       getIndex={getIndex}
+                      onClick={onItemClick}
                     />
                   )
                 })}
@@ -565,6 +575,7 @@ export function KanbanBoard({
         })}
         color={getColor(id)}
         wrapperStyle={wrapperStyle({ index: 0 })}
+        onClick={onItemClick}
         renderItem={renderItem}
         renderItemContents={renderItemContents}
         dragOverlay
@@ -667,6 +678,7 @@ interface SortableItemProps {
   disabled?: boolean
   style(args: any): React.CSSProperties
   getIndex(id: UniqueIdentifier): number
+  onClick?(itemKey: UniqueIdentifier): void
   renderItem?(): React.ReactElement
   renderItemContents?(value: any): React.ReactElement
   wrapperStyle({ index }: { index: number }): React.CSSProperties
@@ -677,6 +689,7 @@ function SortableItem({
   id,
   index,
   handle,
+  onClick,
   renderItem,
   renderItemContents,
   style,
@@ -723,6 +736,7 @@ function SortableItem({
       transform={transform}
       fadeIn={mountedWhileDragging}
       listeners={listeners}
+      onClick={onClick}
       renderItem={renderItem}
       renderItemContents={renderItemContents}
     />

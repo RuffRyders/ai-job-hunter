@@ -58,11 +58,15 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
   return (
     <KanbanBoard
       containerStyle={containerStyle}
-      itemCount={15}
       items={items}
       scrollable
-      // onItemMove={({ item, column }) => { /* update database */ }}
-      // onItemClick={(itemKey: UniqueIdentifier) => { /* open model */ }}
+      onItemMove={(itemKey: UniqueIdentifier, columnKey: UniqueIdentifier) => {
+        /* update database */
+      }}
+      onItemClick={(itemKey: UniqueIdentifier) => {
+        console.log('open item', itemKey)
+        /* open model */
+      }}
       renderColumnHeader={renderColumnHeader}
       renderItemContents={renderItemContent}
     />
