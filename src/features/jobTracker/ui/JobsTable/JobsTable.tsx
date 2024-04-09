@@ -67,7 +67,6 @@ export function JobsTable({ jobs }: JobsTableProps) {
   const router = useRouter()
 
   const handleRowAction = (key: Key) => {
-    console.log('handled key', key)
     if (!key) {
       return
     }

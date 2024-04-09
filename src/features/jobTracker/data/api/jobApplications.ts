@@ -16,6 +16,7 @@ export async function getJobs(limit = 10, offset = 0) {
     .from(tableName)
     .select()
     .range(offset, offset + limit)
+    .order('updatedAt', { ascending: false })
 }
 
 export async function getJob(id: string) {

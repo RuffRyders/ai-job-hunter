@@ -55,13 +55,21 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
     [],
   )
 
-  const renderItemContent = useCallback((itemKey: UniqueIdentifier) => {
-    return <div>Custom {itemKey}</div>
-  }, [])
+  const renderItemContent = useCallback(
+    (itemKey: UniqueIdentifier) => {
+      const job = jobs?.find((job) => job.id === itemKey)
+      return (
+        <div className="flex flex-col gap">
+          <div className="">{job?.jobTitle}</div>
+          <div className="font-bold text-xs">{job?.companyName}</div>
+        </div>
+      )
+    },
+    [jobs],
+  )
 
   const onItemClick = useCallback(
     (itemKey: UniqueIdentifier) => {
-      console.log('open item', itemKey)
       if (!itemKey) {
         return
       }
