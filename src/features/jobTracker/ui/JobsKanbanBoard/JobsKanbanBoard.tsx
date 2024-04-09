@@ -4,6 +4,8 @@ import { KanbanBoard } from '@/common/ui/KanbanBoard'
 import { ApplicationStatus, JobModel } from '../../data/types'
 import { CSSProperties, useCallback, useMemo } from 'react'
 import { UniqueIdentifier } from '@dnd-kit/core'
+import { useRouter } from 'next/navigation'
+import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 const columns = {
   NOT_APPLIED: 'Saved',
@@ -24,6 +26,8 @@ interface JobsKanbanBoardProps {
 }
 
 export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
+  const router = useRouter()
+
   // build and memoize items from jobs
   const items = useMemo(
     () =>
@@ -55,6 +59,18 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
     return <div>Custom {itemKey}</div>
   }, [])
 
+  const onItemClick = useCallback(
+    (itemKey: UniqueIdentifier) => {
+      console.log('open item', itemKey)
+      if (!itemKey) {
+        return
+      }
+
+      router.push(`${JOB_TRACKER_BASEURL}/${itemKey}`)
+    },
+    [router],
+  )
+
   return (
     <KanbanBoard
       containerStyle={containerStyle}
@@ -63,10 +79,7 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
       onItemMove={(itemKey: UniqueIdentifier, columnKey: UniqueIdentifier) => {
         /* update database */
       }}
-      onItemClick={(itemKey: UniqueIdentifier) => {
-        console.log('open item', itemKey)
-        /* open model */
-      }}
+      onItemClick={onItemClick}
       renderColumnHeader={renderColumnHeader}
       renderItemContents={renderItemContent}
     />

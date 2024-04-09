@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { ApplicationStatus, JobModel } from '../../data/types'
 import { formatDistance } from 'date-fns'
 import { Database } from '@/common/services/supabase/database.types'
+import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 const columns = [
   { name: 'Job Title', id: 'jobTitle', isRowHeader: true },
@@ -71,7 +72,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
       return
     }
 
-    router.push(`/candidate/job-tracker/${key}`)
+    router.push(`${JOB_TRACKER_BASEURL}/${key}`)
   }
 
   return (

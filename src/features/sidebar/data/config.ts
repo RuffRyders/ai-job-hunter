@@ -1,3 +1,4 @@
+import { JOB_TRACKER_BASEURL } from '@/features/jobTracker/data/contants/routes'
 import { IconFileText, IconList, IconUserEdit } from '@tabler/icons-react'
 
 export interface SidebarItem {
@@ -18,7 +19,7 @@ const SidebarItemConfig: SidebarItem[] = [
     Icon: IconList,
     id: 'jobs',
     displayName: 'Job Tracker',
-    path: '/candidate/job-tracker',
+    path: JOB_TRACKER_BASEURL,
   },
   {
     Icon: IconFileText,

@@ -27,6 +27,7 @@ import { JobModel } from '../../data/types'
 import { useRouter } from 'next/navigation'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 import { NumberField } from '@/common/ui/NumberField'
+import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 interface JobFormProps {
   jobId?: string
@@ -59,7 +60,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
       const result = await updateJobApplication(jobId, data)
       console.log('updated', result)
     }
-    router.push('/candidate/job-tracker')
+    router.push(JOB_TRACKER_BASEURL)
   }
 
   return (

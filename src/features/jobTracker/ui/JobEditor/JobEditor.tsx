@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { JobForm } from '../JobForm'
 import { JobModel } from '../../data/types'
+import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string
@@ -20,7 +21,7 @@ export function JobEditor({ jobId, isNew, values, ...rest }: CardEditorProps) {
   const router = useRouter()
 
   const handleOpenChange = () => {
-    router.push('/candidate/job-tracker')
+    router.push(JOB_TRACKER_BASEURL)
   }
 
   return (
