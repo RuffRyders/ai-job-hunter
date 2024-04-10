@@ -1,6 +1,7 @@
 'use client'
 
 import { IconChevronDown } from '@tabler/icons-react'
+import { ForwardedRef, forwardRef } from 'react'
 import {
   Button,
   ListBox,
@@ -29,13 +30,12 @@ export function SelectOption({ children, ...rest }: ListBoxItemProps) {
   )
 }
 
-export function Select<T extends object>({
-  items,
-  children,
-  ...rest
-}: SelectProps<T>) {
+export const Select = forwardRef(function Select<T extends object>(
+  { items, children, ...rest }: SelectProps<T>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   return (
-    <AriaSelect {...rest}>
+    <AriaSelect ref={ref} {...rest}>
       <Button className="p-1 border-solid border border-transparent hover:border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500 items-center">
         <SelectValue className="flex-auto display-block" />
         <div aria-hidden="true">
@@ -49,4 +49,4 @@ export function Select<T extends object>({
       </Popover>
     </AriaSelect>
   )
-}
+})

@@ -8,11 +8,11 @@ import { JobsKanbanBoard } from '@/features/jobTracker/ui/JobsKanbanBoard'
 import { JobsFilter } from '@/features/jobTracker/ui/JobsFilter'
 
 export default async function JobTracker({
-  searchParams: { filter },
+  searchParams,
 }: {
   searchParams: { filter: string }
 }) {
-  const { data, error } = await getJobs({ filter })
+  const { data, error } = await getJobs({ filter: searchParams?.filter })
   if (data === null) {
     return <div> Whoops! An error occurred.</div>
   }

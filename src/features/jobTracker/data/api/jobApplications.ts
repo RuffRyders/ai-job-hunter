@@ -14,12 +14,12 @@ export async function getJobs({
   limit = 10,
   offset = 0,
   orderBy = 'updatedAt',
-  filter,
+  filter = '',
 }: {
-  limit: number
-  offset: number
-  orderBy: string
-  filter: string
+  limit?: number
+  offset?: number
+  orderBy?: string
+  filter?: string
 }) {
   const supabase = await createClient()
   return await supabase

@@ -128,7 +128,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                               field.onChange(key)
                             }}
                           >
-                            {(item) => (
+                            {(item: any) => (
                               <SelectOption id={item.value}>
                                 <StatusLabel
                                   statusText={item.name}

@@ -1,6 +1,6 @@
 import { ApplicationStatus } from '../types'
 
-interface ApplicationStatusData {
+export interface ApplicationStatusData {
   name: string
   value: ApplicationStatus
   color: string
