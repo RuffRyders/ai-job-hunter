@@ -5,9 +5,14 @@ import { TabList, Tabs, TabPanel, Tab } from '@/common/ui/Tabs'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import { JobsKanbanBoard } from '@/features/jobTracker/ui/JobsKanbanBoard'
+import { JobsFilter } from '@/features/jobTracker/ui/JobsFilter'
 
-export default async function JobTracker() {
-  const { data, error } = await getJobs()
+export default async function JobTracker({
+  searchParams: { filter },
+}: {
+  searchParams: { filter: string }
+}) {
+  const { data, error } = await getJobs({ filter })
   if (data === null) {
     return <div> Whoops! An error occurred.</div>
   }
@@ -17,11 +22,7 @@ export default async function JobTracker() {
       <div className="h-full flex flex-col gap-2">
         <div className="flex gap-2 items-start items-center px-10">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
-          <SearchInput
-            className="ml-auto"
-            placeholder="Filter..."
-            aria-label="Filter applied jobs"
-          />
+          <JobsFilter />
           <Button
             linkProps={{
               href: '/candidate/job-tracker/[id]',
