@@ -28,6 +28,8 @@ import { useRouter } from 'next/navigation'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 import { NumberField } from '@/common/ui/NumberField'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
+import { JobTitleWatched } from './components/JobTitleWatched'
+import { CompanyNameWatched } from './components'
 
 interface JobFormProps {
   jobId?: string
@@ -68,8 +70,8 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
       <div className="flex flex-col flex-1 gap-2">
         <Header className="flex gap-2 items-start">
           <div className="flex flex-col flex-1 h-24">
-            <div className="font-bold">{'{Job Title}'}</div>
-            <div>{'{Company Name}'}</div>
+            <JobTitleWatched control={control} />
+            <CompanyNameWatched control={control} />
           </div>
           <IconButton onPress={onClose}>
             <div className="flex">

@@ -198,6 +198,12 @@ export function KanbanBoard({
   const recentlyMovedToNewContainer = useRef(false)
   const isSortingContainer = activeId ? containers.includes(activeId) : false
 
+  useEffect(() => {
+    if (initialItems) {
+      setItems(initialItems)
+    }
+  }, [initialItems])
+
   /**
    * Custom collision detection strategy optimized for multiple containers
    *
@@ -389,14 +395,10 @@ export function KanbanBoard({
         }
       }}
       onDragEnd={({ active, over }) => {
-        console.log('item drag over', active, over)
         if (active.id in items && over?.id) {
           setContainers((containers) => {
             const activeIndex = containers.indexOf(active.id)
             const overIndex = containers.indexOf(over.id)
-
-            console.log('active', activeIndex)
-            console.log('over', overIndex)
 
             return arrayMove(containers, activeIndex, overIndex)
           })
@@ -449,8 +451,15 @@ export function KanbanBoard({
         console.log({ overContainer, active, over })
 
         if (overContainer) {
+          onItemMove?.(active.id, overContainer)
+        }
+
+        if (overContainer) {
           const activeIndex = items[activeContainer].indexOf(active.id)
           const overIndex = items[overContainer].indexOf(overId)
+
+          console.log('activeIndex', activeIndex)
+          console.log('overIndex', overIndex)
 
           if (activeIndex !== overIndex) {
             setItems((items) => ({

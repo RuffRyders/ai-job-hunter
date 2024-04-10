@@ -6,6 +6,8 @@ import { CSSProperties, useCallback, useMemo } from 'react'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { useRouter } from 'next/navigation'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
+import { updateJob } from '../../data/api/jobApplications'
+import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 
 const columns = {
   NOT_APPLIED: 'Saved',
@@ -26,6 +28,7 @@ interface JobsKanbanBoardProps {
 }
 
 export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
+  console.log('jobs', jobs)
   const router = useRouter()
 
   // build and memoize items from jobs
@@ -79,14 +82,25 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
     [router],
   )
 
+  const onItemMove = useCallback(
+    (itemKey: UniqueIdentifier, applicationStatus: UniqueIdentifier) => {
+      console.log('on item move', itemKey, applicationStatus)
+      // TODO: Set the lexorank on the item
+      updateJobApplication(itemKey as string, {
+        applicationStatus: applicationStatus as ApplicationStatus,
+      })
+    },
+    [],
+  )
+
+  console.log('items', items)
+
   return (
     <KanbanBoard
       containerStyle={containerStyle}
       items={items}
       scrollable
-      onItemMove={(itemKey: UniqueIdentifier, columnKey: UniqueIdentifier) => {
-        /* update database */
-      }}
+      onItemMove={onItemMove}
       onItemClick={onItemClick}
       renderColumnHeader={renderColumnHeader}
       renderItemContents={renderItemContent}

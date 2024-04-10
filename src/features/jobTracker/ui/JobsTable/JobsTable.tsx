@@ -49,7 +49,6 @@ function SalaryCell({
 }: {
   salary: { salaryMin?: number; salaryMax?: number }
 }) {
-  console.log('val type', Boolean(salaryMax))
   return (
     <Cell className="px-6 py-4">
       <span>
