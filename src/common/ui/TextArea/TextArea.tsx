@@ -32,7 +32,7 @@ export const TextArea = forwardRef(function TextArea(
   return (
     <div
       className={cn(
-        'grid bg-white overflow-y-none overflow-y-auto rounded h-full w-full p-2 bg-gray-100',
+        'grid bg-white overflow-y-none overflow-y-auto rounded-xl h-full w-full p-2 bg-gray-100',
         isFocused && ['p-2', 'outline', 'outline-2', 'outline-blue-500'],
       )}
     >

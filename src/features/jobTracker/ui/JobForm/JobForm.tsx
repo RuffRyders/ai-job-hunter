@@ -1,17 +1,6 @@
 'use client'
 
-import {
-  Header,
-  TextField,
-  Input,
-  // Tabs,
-  // TabList,
-  // Tab,
-  // TabPanel,
-  Key,
-  Label,
-  Group,
-} from 'react-aria-components'
+import { Header, Key, Group, Input } from 'react-aria-components'
 import { Tab, TabList, TabPanel, Tabs } from '@/common/ui/Tabs'
 import { IconWand, IconX } from '@tabler/icons-react'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
@@ -30,6 +19,9 @@ import { NumberField } from '@/common/ui/NumberField'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 import { JobTitleWatched } from './components/JobTitleWatched'
 import { CompanyNameWatched } from './components'
+import { TextField } from '@/common/ui/TextField/TextField'
+import { Label } from '@/common/ui/Label'
+import { NumberInput, TextInput } from '@/common/ui/Form'
 
 interface JobFormProps {
   jobId?: string
@@ -94,18 +86,13 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                     control={control}
                     render={({ field }) => {
                       return (
-                        <TextField
-                          aria-label="jobTitle"
-                          className="flex flex-1 flex-col"
+                        <TextInput
+                          ariaLabel="jobTitle"
                           autoFocus
-                        >
-                          <Label className="text-xs font-bold">Job Title</Label>
-                          <Input
-                            {...field}
-                            className="flex-1 border border-gray-300 border-solid"
-                            placeholder="Enter a job title..."
-                          />
-                        </TextField>
+                          label="Job Title"
+                          placeholder="Enter a job title..."
+                          {...field}
+                        />
                       )
                     }}
                   />
@@ -147,69 +134,28 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                   control={control}
                   render={({ field }) => {
                     return (
-                      <TextField className="flex flex-none flex-col">
-                        <Label className="text-xs font-bold">
-                          Company Name
-                        </Label>
-                        <Input
-                          {...field}
-                          aria-label="company"
-                          className="flex-1 border border-gray-300 border-solid"
-                          placeholder="Enter a company name..."
-                        />
-                      </TextField>
+                      <TextInput
+                        ariaLabel="company"
+                        label="Company Name"
+                        placeholder="Enter a company name..."
+                        {...field}
+                      />
                     )
                   }}
                 />
-                <div className="flex flex-1">
+                <div className="flex flex-1 gap-2">
                   <Controller
                     name="salaryMin"
                     control={control}
-                    render={({ field: { value, ...rest } }) => {
-                      return (
-                        <NumberField
-                          {...rest}
-                          step={1000}
-                          defaultValue={0}
-                          minValue={0}
-                          value={value ?? undefined}
-                          className="flex flex-col"
-                        >
-                          <Label className="text-xs font-bold">
-                            Salary Min
-                          </Label>
-                          <Group>
-                            <IconButton slot="decrement">-</IconButton>
-                            <Input className="border border-gray-300 border-solid" />
-                            <IconButton slot="increment">+</IconButton>
-                          </Group>
-                        </NumberField>
-                      )
+                    render={({ field }) => {
+                      return <NumberInput label="Salary Min" {...field} />
                     }}
                   />
                   <Controller
                     name="salaryMax"
                     control={control}
                     render={({ field }) => {
-                      return (
-                        <NumberField
-                          {...field}
-                          step={1000}
-                          defaultValue={0}
-                          minValue={0}
-                          value={field.value}
-                          className="flex flex-col"
-                        >
-                          <Label className="text-xs font-bold">
-                            Salary Max
-                          </Label>
-                          <Group>
-                            <IconButton slot="decrement">-</IconButton>
-                            <Input className="flex-1 border border-gray-300 border-solid" />
-                            <IconButton slot="increment">+</IconButton>
-                          </Group>
-                        </NumberField>
-                      )
+                      return <NumberInput label="Salary Max" {...field} />
                     }}
                   />
                 </div>
@@ -218,7 +164,8 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                   control={control}
                   render={({ field }) => {
                     return (
-                      <TextField className="flex flex-1">
+                      <TextField>
+                        <Label>Job Description</Label>
                         <TextArea
                           {...field}
                           className="min-h-48"
