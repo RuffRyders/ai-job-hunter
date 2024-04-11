@@ -28,7 +28,6 @@ interface JobsKanbanBoardProps {
 }
 
 export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
-  console.log('jobs', jobs)
   const router = useRouter()
 
   // build and memoize items from jobs
@@ -92,8 +91,6 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
     },
     [],
   )
-
-  console.log('items', items)
 
   return (
     <KanbanBoard

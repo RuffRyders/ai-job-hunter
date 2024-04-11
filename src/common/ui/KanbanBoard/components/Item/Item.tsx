@@ -6,7 +6,7 @@ import type {
 import type { Transform } from '@dnd-kit/utilities'
 import { cn } from '@/common/utils/style/cn'
 
-import styles from './Item.module.scss'
+import styles from './Item.module.css'
 import { Handle, Remove } from './components'
 
 export interface KanbanRenderItemProps {
@@ -86,6 +86,13 @@ export const Item = React.memo(
         }
       }, [dragOverlay])
 
+      const cssWrapperClass = [
+        'flex',
+        'box-border',
+        '[transform:translate3d(var(--translate-x,_0),_var(--translate-y,_0),_0)_scaleX(var(--scale-x,_1))_scaleY(var(--scale-y,_1))]',
+        'origin-[0_0]',
+      ]
+
       return renderItem ? (
         renderItem({
           dragOverlay: Boolean(dragOverlay),
@@ -103,8 +110,9 @@ export const Item = React.memo(
       ) : (
         <li
           className={cn(
-            styles.Wrapper,
-            fadeIn && styles.fadeIn,
+            // styles.Wrapper,
+            cssWrapperClass,
+            fadeIn && 'animate-[fadeIn_500ms_ease]',
             sorting && styles.sorting,
             dragOverlay && styles.dragOverlay,
           )}
