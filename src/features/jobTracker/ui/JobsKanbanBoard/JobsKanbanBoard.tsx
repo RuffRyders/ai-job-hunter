@@ -8,13 +8,36 @@ import { useRouter } from 'next/navigation'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 import { updateJob } from '../../data/api/jobApplications'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
+import { StatusLabel } from '@/common/ui/StatusLabel'
+import { applicationStatuses } from '../../data/contants/applicationStatuses'
 
-const columns = {
-  NOT_APPLIED: 'Saved',
-  APPLIED: 'Applied',
-  INTERVIEWING: 'Interviewing',
-  OFFER_PENDING: 'Offered',
-} as { [key: string]: string }
+// const columns = {
+//   NOT_APPLIED: <StatusLabel statusText="Saved" />,
+//   APPLIED: 'Applied',
+//   INTERVIEWING: 'Interviewing',
+//   OFFER_PENDING: 'Offered',
+// } as { [key: string]: string | JSX.Element }
+
+const columns = (
+  [
+    'NOT_APPLIED',
+    'APPLIED',
+    'INTERVIEWING',
+    'OFFER_PENDING',
+  ] as ApplicationStatus[]
+).reduce(
+  (acc, statusKey: ApplicationStatus) => {
+    acc[statusKey] = (
+      <StatusLabel
+        key={statusKey}
+        statusText={applicationStatuses[statusKey].name}
+        color={applicationStatuses[statusKey].color}
+      />
+    )
+    return acc
+  },
+  {} as { [key: string]: string | JSX.Element },
+)
 
 const containerStyle = {
   // TODO: Replace magic number math with flexbox solution
@@ -53,7 +76,7 @@ export function JobsKanbanBoard({ jobs }: JobsKanbanBoardProps) {
   )
 
   const renderColumnHeader = useCallback(
-    (columnKey: ApplicationStatus) => <span>{columns[columnKey]}</span>,
+    (columnKey: ApplicationStatus) => columns[columnKey],
     [],
   )
 

@@ -2,8 +2,10 @@ import { cn } from '@/common/utils/style/cn'
 
 export function StatusLabel({
   statusText,
+  className,
   color,
 }: {
+  className?: string
   statusText: string
   color: string
 }) {
@@ -11,6 +13,7 @@ export function StatusLabel({
     <div
       className={cn(
         'text-white p-1 rounded bg-slate-300 w-full text-center user-select-none',
+        className,
       )}
       style={{ backgroundColor: color }}
     >

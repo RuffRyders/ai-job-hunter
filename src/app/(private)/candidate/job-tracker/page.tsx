@@ -37,16 +37,16 @@ export default async function JobTracker({
         <div className="pt-2">
           <Tabs>
             <TabList className="px-10">
-              <Tab id="table">
-                <div className="flex gap-2 items-center">
-                  <IconTable />
-                  <span>Table View</span>
-                </div>
-              </Tab>
               <Tab id="kanban">
                 <div className="flex gap-2 items-center">
                   <IconLayoutKanban />
                   <span>Column View</span>
+                </div>
+              </Tab>
+              <Tab id="table">
+                <div className="flex gap-2 items-center">
+                  <IconTable />
+                  <span>Table View</span>
                 </div>
               </Tab>
             </TabList>

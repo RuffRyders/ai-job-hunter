@@ -18,10 +18,8 @@ export const NumberInput = forwardRef(function NumberInput(
   return (
     <NumberField
       ref={ref}
-      step={1000}
       defaultValue={0}
       minValue={0}
-      // value={rest.value}
       className="flex flex-1 flex-col gap-2"
       {...rest}
     >

@@ -197,6 +197,8 @@ export function KanbanBoard({
   const lastOverId = useRef<UniqueIdentifier | null>(null)
   const recentlyMovedToNewContainer = useRef(false)
   const isSortingContainer = activeId ? containers.includes(activeId) : false
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => setIsClient(true), [])
 
   useEffect(() => {
     if (initialItems) {
@@ -552,16 +554,17 @@ export function KanbanBoard({
           )}
         </SortableContext>
       </div>
-      {createPortal(
-        <DragOverlay adjustScale={adjustScale} dropAnimation={dropAnimation}>
-          {activeId
-            ? containers.includes(activeId)
-              ? renderContainerDragOverlay(activeId)
-              : renderSortableItemDragOverlay(activeId)
-            : null}
-        </DragOverlay>,
-        document.body,
-      )}
+      {isClient &&
+        createPortal(
+          <DragOverlay adjustScale={adjustScale} dropAnimation={dropAnimation}>
+            {activeId
+              ? containers.includes(activeId)
+                ? renderContainerDragOverlay(activeId)
+                : renderSortableItemDragOverlay(activeId)
+              : null}
+          </DragOverlay>,
+          document.body,
+        )}
       {trashable && activeId && !containers.includes(activeId) ? (
         <Trash id={TRASH_ID} />
       ) : null}
