@@ -144,6 +144,7 @@ export const Item = React.memo(
           <div
             className={cn(
               styles.Item,
+              ['rounded-lg'],
               dragging && styles.dragging,
               handle && styles.withHandle,
               dragOverlay && styles.dragOverlay,

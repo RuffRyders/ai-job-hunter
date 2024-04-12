@@ -29,6 +29,7 @@ const columns = (
   (acc, statusKey: ApplicationStatus) => {
     acc[statusKey] = (
       <StatusLabel
+        className="font-semibold text-sm"
         key={statusKey}
         statusText={applicationStatuses[statusKey].name}
         color={applicationStatuses[statusKey].color}
