@@ -11,7 +11,7 @@ interface ButtonProps extends AriaInputProps {}
 export function Input({ children, className, ...rest }: ButtonProps) {
   return (
     <AriaInput
-      className={cn('flex-1 p-2 border rounded-xl', className)}
+      className={cn('flex-1 p-2 border rounded-lg', className)}
       {...rest}
     >
       {children}

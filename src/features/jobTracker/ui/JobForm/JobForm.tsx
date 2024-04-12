@@ -15,7 +15,6 @@ import { addJobApplication } from '../../data/serverActions/addJobApplication'
 import { JobModel } from '../../data/types'
 import { useRouter } from 'next/navigation'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
-import { NumberField } from '@/common/ui/NumberField'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 import { JobTitleWatched } from './components/JobTitleWatched'
 import { CompanyNameWatched } from './components'
@@ -38,6 +37,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
       applicationStatus: 'NOT_APPLIED',
       jobTitle: '',
       jobDescription: '',
+      jobUrl: '',
       companyName: '',
       salaryMax: undefined,
       salaryMin: undefined,
@@ -138,6 +138,20 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                         ariaLabel="company"
                         label="Company Name"
                         placeholder="Enter a company name..."
+                        {...field}
+                      />
+                    )
+                  }}
+                />
+                <Controller
+                  name="jobUrl"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <TextInput
+                        ariaLabel="jobUrl"
+                        label="Job Post URL"
+                        placeholder="https://example.com/job/123"
                         {...field}
                       />
                     )
