@@ -9,5 +9,5 @@ export function JobTitleWatched({ control }: { control: Control<JobModel> }) {
     name: 'jobTitle',
     defaultValue: 'Job Title',
   })
-  return <div className="font-bold">{jobTitle || 'Job Title'}</div>
+  return <div className="font-bold text-xl">{jobTitle || 'Job Title'}</div>
 }

@@ -22,8 +22,6 @@ export const TextArea = forwardRef(function TextArea(
     onChange?.(event)
   }
 
-  console.log({ isFocused })
-
   useEffect(() => {
     setData(value)
   }, [value])
@@ -34,7 +32,7 @@ export const TextArea = forwardRef(function TextArea(
   return (
     <div
       className={cn(
-        'grid bg-white overflow-y-none overflow-y-auto rounded-lg h-full w-full p-2 bg-white',
+        'grid bg-white overflow-y-none overflow-y-auto rounded-lg h-full w-full p-2 bg-white border border-solid border-gray-300',
         isFocused && ['p-2', 'outline', 'outline-2', 'outline-blue-500'],
       )}
     >

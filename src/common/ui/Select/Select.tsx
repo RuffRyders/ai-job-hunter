@@ -39,7 +39,7 @@ export const Select = forwardRef(function Select<T extends object>(
   return (
     <AriaSelect ref={ref} {...rest}>
       {label && <Label className="text-xs font-bold">{label}</Label>}
-      <Button className="p-1 border-solid border border-transparent hover:border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500 items-center">
+      <Button className="p-1 border-solid border border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500 items-center">
         <SelectValue className="flex-auto display-block" />
         <div aria-hidden="true">
           <IconChevronDown />

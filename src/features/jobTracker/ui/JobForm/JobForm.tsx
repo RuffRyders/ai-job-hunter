@@ -61,7 +61,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
     <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col flex-1 gap-2">
         <Header className="flex gap-2 items-start">
-          <div className="flex flex-col flex-1 h-24">
+          <div className="flex flex-col flex-1 min-h-16">
             <JobTitleWatched control={control} />
             <CompanyNameWatched control={control} />
           </div>
