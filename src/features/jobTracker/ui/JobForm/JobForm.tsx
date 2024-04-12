@@ -75,7 +75,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
           <div className="flex flex-1 flex-col gap-2">
             <Tabs>
               <TabList aria-label="Tabs representing parts of a saved job application">
-                <Tab id="details">Job Details</Tab>
+                <Tab id="details">Job</Tab>
                 <Tab id="cover-letter">Cover Letter</Tab>
                 <Tab id="resume">Tailored Resume</Tab>
               </TabList>
