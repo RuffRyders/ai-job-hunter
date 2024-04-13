@@ -19,14 +19,16 @@ export default async function PrivateLayout({ children }: PrivateLayoutProps) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <header>
+    <div className="flex flex-col w-full h-full">
+      <header className="shrink-0 z-60">
         <AppHeader userData={data} />
       </header>
 
-      <div className="w-full h-full flex flex-row">
-        <Sidebar />
-        <div className="h-full w-full overflow-auto">{children}</div>
+      <div className="flex flex-1 overflow-hidden">
+        <div className="shrink-0 z-50">
+          <Sidebar />
+        </div>
+        <div className="flex-1 overflow-auto">{children}</div>
       </div>
     </div>
   )
