@@ -19,7 +19,8 @@ export const sendMessage = async ({ message }: SendMessageParams) => {
         return_full_text: false,
         max_new_tokens: wordCountToMaxTokens({
           wordCount: message.length - AGENT_PREMISE.length,
-          curveFactor: 2,
+          curveFactor: 3,
+          minTokens: 20,
         }),
       },
     })

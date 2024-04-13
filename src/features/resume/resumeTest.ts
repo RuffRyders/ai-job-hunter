@@ -1,7 +1,7 @@
 'use server'
 
 import { queryModel } from '@/common/data/api/ai/queryModel'
-import { createResumePrompt } from './data/createResumePrompt'
+import { createResumePrompt } from './data/prompt/createResumePrompt'
 import { job1 } from './data/fixtures/jobDescription'
 import { user1 } from './data/fixtures/userInfo'
 

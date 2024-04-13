@@ -57,7 +57,7 @@ Generate a resume using the provided user information${jobDescription ? ', job d
 
   if (rulesProp.length > 0) {
     prompt +=
-      '\nAlso consider these supplementary rules.  They should take precedents over the base rules:'
+      '\nAlso consider these supplementary rules.  They should take precedence over the base rules:'
     for (const rule of rulesProp) {
       prompt += `\n${rule}`
     }

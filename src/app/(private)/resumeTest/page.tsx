@@ -1,5 +1,6 @@
 'use client'
 
+import { HF_MODELS } from '@/common/data/api/ai/models'
 import { Button } from '@/common/ui/Button'
 import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { RichTextEditor } from '@/common/ui/RichTextEditor'
@@ -12,9 +13,7 @@ const ResumeTestPage = () => {
   const [loading, setLoading] = useState(false)
   const [resume, setResume] = useState('' as string)
 
-  const [message, setMessage] = useState('' as string)
-
-  console.log('resume: ', resume)
+  const [selectedModel, setSelectedModel] = useState(HF_MODELS.mistral)
 
   const runResumeTest = async () => {
     setLoading(true)

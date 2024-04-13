@@ -7,6 +7,16 @@ interface WordCountToMaxTokensParams {
   maxTokens?: number
 }
 
+/**
+ * 
+ * Example usage:
+ * 
+ * wordCountToMaxTokens({ wordCount: 10, curveFactor: 0.5 }) // Smaller curveFactor, less growth
+ * 
+ * wordCountToMaxTokens({ wordCount: 25, curveFactor: 1.0 }) // Linear growth
+ * 
+ * wordCountToMaxTokens({ wordCount: 40, curveFactor: 2.0 }) // Larger curveFactor, more growth
+ */
 export function wordCountToMaxTokens({
   wordCount,
   curveFactor = 1,
@@ -30,8 +40,3 @@ export function wordCountToMaxTokens({
   // Ensure tokens value is within the specified bounds and rounded to the nearest whole number
   return Math.round(Math.max(minTokens, Math.min(maxTokens, tokens)))
 }
-
-// Example usage:
-console.log(wordCountToMaxTokens({ wordCount: 10, curveFactor: 0.5 })) // Smaller curveFactor, less growth
-console.log(wordCountToMaxTokens({ wordCount: 25, curveFactor: 1.0 })) // Linear growth
-console.log(wordCountToMaxTokens({ wordCount: 40, curveFactor: 2.0 })) // Larger curveFactor, more growth

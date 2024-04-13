@@ -1,3 +1,6 @@
+/**
+ * User/profile data for resume generation
+ */
 interface ResumeInputUserInfo {
   firstName: string
   lastName: string
@@ -27,3 +30,7 @@ interface ResumeInputEducation {
   startDate: string
   endDate: string
 }
+
+/**
+ * 
+ */
