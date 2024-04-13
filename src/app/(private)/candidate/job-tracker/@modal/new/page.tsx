@@ -1,5 +1,5 @@
-import { JobEditor } from '@/features/jobTracker/ui/JobEditor'
+import { NewJobDialog } from '@/features/jobTracker/ui/NewJobDialog'
 
 export default function Page() {
-  return <JobEditor isNew isOpen />
+  return <NewJobDialog />
 }
