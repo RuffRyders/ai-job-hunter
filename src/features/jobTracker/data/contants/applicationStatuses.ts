@@ -1,6 +1,6 @@
 import { ApplicationStatus } from '../types'
 
-interface ApplicationStatusData {
+export interface ApplicationStatusData {
   name: string
   value: ApplicationStatus
   color: string
@@ -18,12 +18,12 @@ export const applicationStatuses = {
     color: '#00A8DD',
   },
   INTERVIEWING: {
-    name: 'Interviewing',
+    name: 'Interview',
     value: 'INTERVIEWING',
     color: '#FFA800',
   },
   OFFER_PENDING: {
-    name: 'Offer Pending',
+    name: 'Offer',
     value: 'OFFER_PENDING',
     color: '#3CC925',
   },

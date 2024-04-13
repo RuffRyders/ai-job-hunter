@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { ApplicationStatus, JobModel } from '../../data/types'
 import { formatDistance } from 'date-fns'
 import { Database } from '@/common/services/supabase/database.types'
+import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 const columns = [
   { name: 'Job Title', id: 'jobTitle', isRowHeader: true },
@@ -48,7 +49,6 @@ function SalaryCell({
 }: {
   salary: { salaryMin?: number; salaryMax?: number }
 }) {
-  console.log('val type', Boolean(salaryMax))
   return (
     <Cell className="px-6 py-4">
       <span>
@@ -66,12 +66,11 @@ export function JobsTable({ jobs }: JobsTableProps) {
   const router = useRouter()
 
   const handleRowAction = (key: Key) => {
-    console.log('handled key', key)
     if (!key) {
       return
     }
 
-    router.push(`/candidate/job-tracker/${key}`)
+    router.push(`${JOB_TRACKER_BASEURL}/${key}`)
   }
 
   return (

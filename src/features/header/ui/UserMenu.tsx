@@ -76,7 +76,7 @@ export const UserMenu = ({ isOpen, onClose, email }: UserMenuProps) => {
     <div
       onKeyDown={handleKeyDown}
       ref={menuRef}
-      className="bg-gray-100 w-56 overflow-hidden shadow-lg rounded-md border border-gray-200 z-50"
+      className="bg-white w-56 overflow-hidden shadow-lg rounded-md border border-gray-200 z-50"
     >
       <div
         className={cn(
@@ -113,7 +113,7 @@ const UserMenuItem = ({ children, id, className }: UserMenuItemProps) => {
       aria-label={`Menu Item - ${id}`}
       id={id}
       className={cn(
-        'hover:bg-gray-200 cursor-pointer p-2 focus:outline-none focus:bg-gray-200',
+        'hover:bg-gray-100 cursor-pointer p-2 focus:outline-none focus:bg-gray-100',
         className,
       )}
     >

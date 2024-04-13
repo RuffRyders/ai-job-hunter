@@ -12,7 +12,7 @@ interface TextAreaProps extends Omit<AriaTextAreaProps, 'value'> {
 }
 
 export const TextArea = forwardRef(function TextArea(
-  { children, className, onChange, value, ...rest }: TextAreaProps,
+  { children, className, onChange, onBlur, value, ...rest }: TextAreaProps,
   ref: ForwardedRef<HTMLTextAreaElement>,
 ) {
   const [data, setData] = useState(value)
@@ -32,7 +32,7 @@ export const TextArea = forwardRef(function TextArea(
   return (
     <div
       className={cn(
-        'grid bg-white overflow-y-none overflow-y-auto rounded h-full w-full p-2 bg-gray-100',
+        'grid bg-white overflow-y-none overflow-y-auto rounded-lg h-full w-full p-2 bg-white border border-solid border-gray-300',
         isFocused && ['p-2', 'outline', 'outline-2', 'outline-blue-500'],
       )}
     >
@@ -40,7 +40,10 @@ export const TextArea = forwardRef(function TextArea(
         ref={ref}
         data-focused={isFocused}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onBlur={(event) => {
+          setFocused(false)
+          onBlur?.(event)
+        }}
         onChange={handleChange}
         value={data ?? undefined}
         className={`${sameStyles} overflow-hidden resize-none outline-none bg-transparent ${className}`}

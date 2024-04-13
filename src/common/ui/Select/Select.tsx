@@ -1,6 +1,7 @@
 'use client'
 
 import { IconChevronDown } from '@tabler/icons-react'
+import { ForwardedRef, forwardRef } from 'react'
 import {
   Button,
   ListBox,
@@ -11,9 +12,11 @@ import {
   ListBoxItem,
   ListBoxItemProps,
 } from 'react-aria-components'
+import { Label } from '../Label'
 
 interface SelectProps<T extends object>
   extends Omit<AriaSelectProps<T>, 'children'> {
+  label?: string
   items?: Iterable<T>
   children: React.ReactNode | ((item: T) => React.ReactNode)
 }
@@ -29,14 +32,14 @@ export function SelectOption({ children, ...rest }: ListBoxItemProps) {
   )
 }
 
-export function Select<T extends object>({
-  items,
-  children,
-  ...rest
-}: SelectProps<T>) {
+export const Select = forwardRef(function Select<T extends object>(
+  { items, label, children, ...rest }: SelectProps<T>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   return (
-    <AriaSelect {...rest}>
-      <Button className="p-1 border-solid border border-transparent hover:border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500">
+    <AriaSelect ref={ref} {...rest}>
+      {label && <Label className="text-xs font-bold">{label}</Label>}
+      <Button className="p-1 border-solid border border-gray-300 flex gap-2 w-full rounded-lg focus:outline focus:outline-2 focus:outline-blue-500 items-center">
         <SelectValue className="flex-auto display-block" />
         <div aria-hidden="true">
           <IconChevronDown />
@@ -49,4 +52,4 @@ export function Select<T extends object>({
       </Popover>
     </AriaSelect>
   )
-}
+})
