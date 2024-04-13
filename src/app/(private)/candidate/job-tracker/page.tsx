@@ -18,7 +18,7 @@ export default async function JobTracker({
   }
 
   return (
-    <div className="h-full pt-6 mx-auto">
+    <div className="h-full w-full pt-6">
       <div className="h-full flex flex-col gap-2">
         <div className="flex gap-2 items-start items-center px-10">
           <h1 className="text-3xl font-bold">Job Tracker</h1>
