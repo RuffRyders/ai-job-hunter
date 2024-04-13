@@ -10,7 +10,7 @@ import { JobsFilter } from '@/features/jobTracker/ui/JobsFilter'
 export default async function JobTracker({
   searchParams,
 }: {
-  searchParams: { filter: string }
+  searchParams?: { filter: string }
 }) {
   const { data, error } = await getJobs({ filter: searchParams?.filter })
   if (data === null) {
