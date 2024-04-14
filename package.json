@@ -20,6 +20,7 @@
     "@tiptap/pm": "^2.2.4",
     "@tiptap/react": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
+    "cheerio": "^1.0.0-rc.12",
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.0.8",
