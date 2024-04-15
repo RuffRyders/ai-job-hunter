@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         },
       }),
       {
-        status: 500,
+        status: 400,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -49,10 +49,18 @@ export async function POST(req: NextRequest) {
     })
   } catch (error) {
     console.log(error)
-    return {
-      error: {
-        message: 'server error',
+    return new NextResponse(
+      JSON.stringify({
+        error: {
+          message: 'error fetching job',
+        },
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    }
+    )
   }
 }
