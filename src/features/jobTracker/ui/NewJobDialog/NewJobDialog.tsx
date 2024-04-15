@@ -25,9 +25,9 @@ export function NewJobDialog(props: ModalOverlayProps) {
       onOpenChange={handleOpenChange}
       {...props}
     >
-      <Modal className="flex my-20 mx-auto bg-white max-w-3xl min-h-[500px] h-[calc(100vh - 100px)] drop-shadow-2xl rounded-3xl">
-        <Dialog className="p-5 flex flex-1">
-          {({ close }) => <NewJobForm />}
+      <Modal className="flex my-20 mx-auto bg-white max-w-3xl min-h-[450px] h-[calc(100vh - 100px)] drop-shadow-2xl rounded-3xl">
+        <Dialog aria-label="Add a job dialog" className="p-5 flex flex-1">
+          {({ close }) => <NewJobForm onClose={close} />}
         </Dialog>
       </Modal>
     </ModalOverlay>

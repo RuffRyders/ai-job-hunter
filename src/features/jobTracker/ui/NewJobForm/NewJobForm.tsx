@@ -3,18 +3,30 @@
 import { VALID_URL } from '@/common/data/constants/validation'
 import { Button } from '@/common/ui/Button'
 import { Input } from '@/common/ui/Input'
-import { useState } from 'react'
+import { LoadingIndicator } from '@/common/ui/LoadingIndicator'
+import { useCallback, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { addJobApplication } from '../../data/serverActions/addJobApplication'
+import { JobModel } from '../../data/types'
 
 type FormValues = {
   jobUrl: string
 }
 
-export function NewJobForm() {
-  const [jobData, setJobData] = useState(
-    {} as { jobTitle: string; companyName: string },
-  )
-  const { control, handleSubmit, formState } = useForm({
+interface NewJobFormProps {
+  onClose?(): void
+}
+
+export function NewJobForm({ onClose }: NewJobFormProps) {
+  const [jobData, setJobData] = useState<{
+    jobTitle: string
+    jobDescription: string
+    companyName: string
+    companyLogo: string
+    salaryMin: number
+    salaryMax: number
+  }>()
+  const { control, handleSubmit, formState, getValues } = useForm({
     defaultValues: {
       jobUrl: '',
     },
@@ -36,10 +48,33 @@ export function NewJobForm() {
     }
   }
 
+  const onSaveJob = useCallback(async () => {
+    const formData = getValues()
+
+    await addJobApplication({
+      applicationStatus: 'NOT_APPLIED',
+      companyName: jobData?.companyName || '',
+      jobDescription: jobData?.jobDescription || '',
+      jobTitle: jobData?.jobTitle || '',
+      jobUrl: formData?.jobUrl,
+      salaryMin: jobData?.salaryMin,
+      salaryMax: jobData?.salaryMax,
+    } as JobModel)
+
+    // Close modal
+    onClose?.()
+  }, [
+    getValues,
+    jobData?.companyName,
+    jobData?.jobDescription,
+    jobData?.jobTitle,
+    onClose,
+  ])
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-1 flex-col items-stretch"
+      className="relative flex flex-1 flex-col items-stretch"
     >
       <div className="flex self-center pb-6">
         <h1 className="flex flex-1 font-bold text-xl justify-center">
@@ -68,11 +103,32 @@ export function NewJobForm() {
           Scan
         </Button>
       </div>
-      {formState.isSubmitting && <div>Loading...</div>}
+      <div className="mt-4">
+        {formState.isSubmitting && <LoadingIndicator size="xl" />}
+        {jobData && (
+          <div className="flex gap-4 p-4 border border-solid border-grey-300 rounded-xl">
+            <div className="flex-none">
+              <img
+                className="rounded-lg object-cover"
+                src={jobData['companyLogo']}
+                alt={`Logo for ${jobData['companyName']}`}
+                width="100"
+                height="100"
+              />
+            </div>
+            <div className="flex-1">
+              <div>{jobData?.['jobTitle']}</div>
+              <div>{jobData?.['companyName']}</div>
+              <div className="line-clamp-6">{jobData?.['jobDescription']}</div>
+            </div>
+          </div>
+        )}
+      </div>
       {jobData && (
-        <div>
-          <div>{jobData?.['jobTitle']}</div>
-          <div>{jobData?.['companyName']}</div>
+        <div className="absolute bottom-0 right-0">
+          <Button variant="primary" onPress={onSaveJob}>
+            Save
+          </Button>
         </div>
       )}
     </form>

@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio'
+import { convert as convertHtml } from 'html-to-text'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
@@ -18,6 +19,7 @@ export async function POST(req: NextRequest) {
     const $ = cheerio.load(body)
     const script = $('script[type="application/ld+json"]').html()
 
+    ///
     if (script) {
       const parsed = JSON.parse(script)
       console.log(parsed)
@@ -26,11 +28,13 @@ export async function POST(req: NextRequest) {
         companyName: parsed?.hiringOrganization?.name,
         companyUrl: parsed?.hiringOrganization?.sameAs,
         datePosted: parsed?.datePosted,
-        description: parsed?.description,
+        jobDescription: convertHtml(parsed?.description),
         employmentType: parsed?.employmentType,
         jobLocationType: parsed?.jobLocationType,
         jobLocation: parsed?.jobLocation?.address?.addressCountry,
         jobTitle: parsed?.title,
+        salaryMin: parsed?.baseSalary?.value?.minValue,
+        salaryMax: parsed?.baseSalary?.value?.maxValue,
       }
     }
 
