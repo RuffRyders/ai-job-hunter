@@ -6,11 +6,19 @@ export async function POST(req: NextRequest) {
   let schema
   const { jobUrl } = await req.json()
   if (!jobUrl) {
-    return {
-      errror: {
-        message: 'missing job url',
+    return new NextResponse(
+      JSON.stringify({
+        error: {
+          message: 'missing job url',
+        },
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    }
+    )
   }
   try {
     const res = await fetch(jobUrl)
