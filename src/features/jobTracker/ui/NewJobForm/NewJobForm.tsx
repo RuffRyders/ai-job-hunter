@@ -33,15 +33,12 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
   })
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data)
-
     const res = await fetch('/api/job-reader', {
       method: 'POST',
       body: JSON.stringify({ jobUrl: data.jobUrl }),
     })
 
     const { schema } = await res.json()
-    console.log(schema)
 
     if (schema) {
       setJobData(schema)
