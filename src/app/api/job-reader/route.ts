@@ -19,10 +19,8 @@ export async function POST(req: NextRequest) {
     const $ = cheerio.load(body)
     const script = $('script[type="application/ld+json"]').html()
 
-    ///
     if (script) {
       const parsed = JSON.parse(script)
-      console.log(parsed)
       schema = {
         companyLogo: parsed?.hiringOrganization?.logo,
         companyName: parsed?.hiringOrganization?.name,

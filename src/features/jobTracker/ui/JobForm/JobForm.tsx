@@ -31,7 +31,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
   const router = useRouter()
   const statusOptions = Object.values(applicationStatuses)
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, formState } = useForm({
     defaultValues: {
       applicationStatus: 'NOT_APPLIED',
       jobTitle: '',
@@ -45,15 +45,16 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
   })
 
   const onSubmit: SubmitHandler<JobModel> = async (data) => {
-    console.log('form-submitted', data)
-    if (!jobId) {
-      const result = await addJobApplication(data)
-      console.log('result', result)
-    } else {
-      const result = await updateJobApplication(jobId, data)
-      console.log('updated', result)
+    try {
+      if (!jobId) {
+        await addJobApplication(data)
+      } else {
+        await updateJobApplication(jobId, data)
+      }
+      router.push(JOB_TRACKER_BASEURL)
+    } catch (error) {
+      console.error(error)
     }
-    router.push(JOB_TRACKER_BASEURL)
   }
 
   return (
@@ -207,7 +208,12 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
               </TabPanel>
             </Tabs>
 
-            <Button className="mt-2" variant="primary" type="submit">
+            <Button
+              className="mt-2"
+              variant="primary"
+              type="submit"
+              isDisabled={formState.isSubmitting}
+            >
               Save
             </Button>
           </div>
