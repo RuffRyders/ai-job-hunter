@@ -39,6 +39,7 @@ export const RichTextEditor = ({
             // TODO: display a line in the editor representing the end of the page
             'shadow-md',
             'mx-auto',
+            'focus:outline-none'
           ),
         },
       },
