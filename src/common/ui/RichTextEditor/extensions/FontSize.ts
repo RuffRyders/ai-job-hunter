@@ -54,14 +54,27 @@ export const TextStyleExtended = TextStyle.extend({
         },
       increaseFontSize:
         () =>
-        ({ chain, editor }) => {
-          const currentSize = parseInt(
-            editor.getAttributes('textStyle').fontSize || '16',
-            10,
-          )
-          return chain()
-            .setMark('textStyle', { fontSize: `${currentSize + 1}px` })
-            .run()
+        ({ chain, state }) => {
+          const { from, to } = state.selection
+          let sizeIncreased = false
+          state.doc.nodesBetween(from, to, (node, pos) => {
+            if (node.marks.length > 0) {
+              node.marks.forEach((mark) => {
+                if (mark.type.name === 'textStyle' && mark.attrs.fontSize) {
+                  const currentSize = parseInt(mark.attrs.fontSize, 10)
+                  chain()
+                    .setMark(
+                      'textStyle',
+                      { fontSize: `${currentSize + 1}px` },
+                      { from: pos, to: pos + node.nodeSize },
+                    )
+                    .run()
+                  sizeIncreased = true
+                }
+              })
+            }
+          })
+          return sizeIncreased
         },
       decreaseFontSize:
         () =>
