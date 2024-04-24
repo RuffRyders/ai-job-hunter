@@ -6,6 +6,8 @@ import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { RichTextEditor } from '@/common/ui/RichTextEditor'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
 import { textToHtml } from '@/common/utils/string/textToHtml'
+import { generateResume } from '@/features/resume/data/api/generateResume'
+import { user1 } from '@/features/resume/data/fixtures/userInfo'
 import { resumeTest, simpleTest } from '@/features/resume/resumeTest'
 import { useState } from 'react'
 
@@ -30,7 +32,8 @@ const ResumeTestPage = () => {
 
   const runSimpleTest = async () => {
     setLoading(true)
-    setResume(textToHtml(await simpleTest()))
+    // setResume(textToHtml(await simpleTest()))
+    setResume(await generateResume(user1))
     setLoading(false)
   }
 
@@ -38,10 +41,10 @@ const ResumeTestPage = () => {
     <div className="flex-1 flex flex-col overflow-auto">
       <LoadingOverlay loading={loading} />
 
-      <div className="flex flex-row justify-center mb-12">
-        <Button onPress={runResumeTest}>Test Resume Generation</Button>
+      <div className="flex flex-row justify-center my-6">
+        {/* <Button onPress={runResumeTest}>Test Resume Generation</Button> */}
 
-        <Button onPress={runSimpleTest}>Test Hardcoded Generation</Button>
+        <Button onPress={runSimpleTest}>Generate Resume</Button>
       </div>
 
       <div className="flex flex-1 flex-col overflow-auto">

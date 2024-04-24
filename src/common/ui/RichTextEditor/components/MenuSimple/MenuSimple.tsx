@@ -202,6 +202,24 @@ const MenuSimple = ({ editor, className }: MenuSimpleProps) => {
       >
         purple
       </button>
+
+      <div style={{ backgroundColor: '#958DF166' }}>
+        <div>font size</div>
+        <button
+          onClick={() => editor.chain().focus().increaseFontSize().run()}
+          className={cn(styles.menuButton)}
+          disabled={!editor.can().chain().focus().increaseFontSize().run()}
+        >
+          +
+        </button>
+        <button
+          onClick={() => editor.chain().focus().decreaseFontSize().run()}
+          className={cn(styles.menuButton)}
+          disabled={!editor.can().chain().focus().decreaseFontSize().run()}
+        >
+          -
+        </button>
+      </div>
     </div>
   )
 }

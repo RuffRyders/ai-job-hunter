@@ -1,7 +1,7 @@
 /**
  * User/profile data for resume generation
  */
-interface ResumeInputUserInfo {
+export interface ResumeInputUserInfo {
   firstName: string
   lastName: string
   email: string
@@ -15,7 +15,7 @@ interface ResumeInputUserInfo {
   education: ResumeInputEducation[]
 }
 
-interface ResumeInputExperience {
+export interface ResumeInputExperience {
   title: string
   company: string
   startDate: string
@@ -23,7 +23,7 @@ interface ResumeInputExperience {
   summary: string[]
 }
 
-interface ResumeInputEducation {
+export interface ResumeInputEducation {
   institution: string
   credentialType: string
   fieldOfStudy: string
@@ -32,5 +32,5 @@ interface ResumeInputEducation {
 }
 
 /**
- * 
+ *
  */
