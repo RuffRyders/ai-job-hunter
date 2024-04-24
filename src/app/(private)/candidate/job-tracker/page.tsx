@@ -1,6 +1,5 @@
 import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
 import { Button } from '@/common/ui/Button'
-import { SearchInput } from '@/common/ui/SearchInput'
 import { TabList, Tabs, TabPanel, Tab } from '@/common/ui/Tabs'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
