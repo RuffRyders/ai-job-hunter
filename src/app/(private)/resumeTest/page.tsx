@@ -6,6 +6,7 @@ import LoadingOverlay from '@/common/ui/LoadingOverlay'
 import { RichTextEditor } from '@/common/ui/RichTextEditor'
 import { getErrorMessage } from '@/common/utils/getErrorMessage/getErrorMessage'
 import { generateResume } from '@/features/resume/data/api/generateResume'
+import { job1 } from '@/features/resume/data/fixtures/jobDescription'
 import { user1 } from '@/features/resume/data/fixtures/userInfo'
 import { resumeTest, simpleTest } from '@/features/resume/resumeTest'
 import { useState } from 'react'
@@ -32,7 +33,7 @@ const ResumeTestPage = () => {
   const runSimpleTest = async () => {
     setLoading(true)
     // setResume(textToHtml(await simpleTest()))
-    setResume(await generateResume(user1))
+    setResume(await generateResume(user1, job1))
     setLoading(false)
   }
 

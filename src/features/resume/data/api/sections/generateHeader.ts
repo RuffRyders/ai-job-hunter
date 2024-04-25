@@ -1,4 +1,4 @@
-import { ResumeInputUserInfo } from '../../types/types'
+import { ResumeInputUserInfo } from '../../../types/types'
 
 export const generateHeader = ({
   firstName,
