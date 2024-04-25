@@ -7,6 +7,7 @@ import { jsPDF } from 'jspdf'
 import MenuSimple from './components/MenuSimple/MenuSimple'
 import { cn } from '@/common/utils/style/cn'
 import './TipTapEditor.css'
+import { TextStyleExtended } from './extensions/TextStyleExtended'
 
 const editorContentActual = 'editor-content-actual'
 
@@ -23,7 +24,7 @@ export const RichTextEditor = ({
 }: RichTextEditorProps) => {
   const editor = useEditor(
     {
-      extensions: [StarterKit],
+      extensions: [StarterKit, TextStyleExtended],
       editorProps: {
         attributes: {
           id: editorContentActual,

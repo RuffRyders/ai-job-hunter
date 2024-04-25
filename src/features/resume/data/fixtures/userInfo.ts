@@ -1,3 +1,5 @@
+import { ResumeInputUserInfo } from '../../types/types'
+
 export const user1: ResumeInputUserInfo = {
   firstName: 'John',
   lastName: 'Appleseed',

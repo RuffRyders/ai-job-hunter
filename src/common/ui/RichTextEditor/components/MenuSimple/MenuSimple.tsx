@@ -1,6 +1,9 @@
 import { cn } from '@/common/utils/style/cn'
 import { Editor } from '@tiptap/react'
 import styles from './MenuSimple.module.css'
+import { Select } from '@/common/ui/Select'
+import { Key } from 'react-aria-components'
+import { SelectOption } from '@/common/ui/Select/Select'
 
 interface MenuSimpleProps {
   editor: Editor
@@ -12,8 +15,18 @@ const MenuSimple = ({ editor, className }: MenuSimpleProps) => {
     return null
   }
 
+  const fontSizeOptions = Array.from({ length: 23 }, (_, i) => ({
+    name: `${8 + i}px`,
+    value: `${8 + i}`,
+  }))
+
+  const handleFontSizeChange = (key: Key) => {
+    const size = parseInt(key as string, 10)
+    editor.chain().focus().setFontSize(size).run()
+  }
+
   return (
-    <div className={className}>
+    <div className={cn(['flex flex-row flex-wrap', className])}>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -194,7 +207,7 @@ const MenuSimple = ({ editor, className }: MenuSimpleProps) => {
       <button
         // TODO fix this setColor
         // onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-        onClick={() => editor.chain().focus().run()}
+        // disabled={!editor.can().chain().focus().setColor('#958DF1').run()}
         className={cn(
           styles.menuButton,
           editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : '',
@@ -203,22 +216,37 @@ const MenuSimple = ({ editor, className }: MenuSimpleProps) => {
         purple
       </button>
 
-      <div style={{ backgroundColor: '#958DF166' }}>
+      <div className="bg-purple-200 p-1">
         <div>font size</div>
         <button
           onClick={() => editor.chain().focus().increaseFontSize().run()}
-          className={cn(styles.menuButton)}
-          disabled={!editor.can().chain().focus().increaseFontSize().run()}
+          className={cn(styles.menuButton, 'w-8 h-8 disabled:bg-gray-400')}
+          // disabled={!editor.can().chain().focus().increaseFontSize().run()}
         >
           +
         </button>
         <button
           onClick={() => editor.chain().focus().decreaseFontSize().run()}
-          className={cn(styles.menuButton)}
-          disabled={!editor.can().chain().focus().decreaseFontSize().run()}
+          className={cn(styles.menuButton, 'w-8 h-8 disabled:bg-gray-400')}
+          // disabled={!editor.can().chain().focus().decreaseFontSize().run()}
         >
           -
         </button>
+      </div>
+
+      <div className="bg-purple-200 p-1">
+        <div>Font Size</div>
+        <Select
+          items={fontSizeOptions}
+          // TODO - figure out how to set selectedKey
+          // selectedKey={}
+          aria-label="Font Size"
+          onSelectionChange={handleFontSizeChange}
+        >
+          {(item: any) => (
+            <SelectOption id={item.value}>{item.name}</SelectOption>
+          )}
+        </Select>
       </div>
     </div>
   )

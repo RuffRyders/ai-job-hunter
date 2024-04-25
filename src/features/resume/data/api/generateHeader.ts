@@ -14,17 +14,17 @@ export const generateHeader = ({
 
   if (linkedin) {
     links.push(
-      `<a href="${encodeURI(linkedin)}" target="_blank" aria-label="LinkedIn Profile">LinkedIn</a>`,
+      `<a href="${encodeURI(linkedin)}" target="_blank" aria-label="LinkedIn Profile">${linkedin}</a>`,
     )
   }
   if (github) {
     links.push(
-      `<a href="${encodeURI(github)}" target="_blank" aria-label="GitHub Profile">GitHub</a>`,
+      `<a href="${encodeURI(github)}" target="_blank" aria-label="GitHub Profile">${github}</a>`,
     )
   }
   if (website) {
     links.push(
-      `<a href="${encodeURI(website)}" target="_blank" aria-label="Personal Website">Website</a>`,
+      `<a href="${encodeURI(website)}" target="_blank" aria-label="Personal Website">${website}</a>`,
     )
   }
 
@@ -32,12 +32,13 @@ export const generateHeader = ({
 
   return `
     <p>
-        <strong style="font-size: 24px; font-weight: bold;">${firstName} ${lastName}</strong><br>
-        ${location ? `${location} | ` : ''}${phone}<br>
-        ${email}<br>
-        ${links.length > 0 ? `${linksHTML}` : ''}
+        <strong><span style="font-size: 24px">${firstName} ${lastName}</span></strong>
+        <span style="font-size: 14px">
+        ${location ? `${location}` : ''} | ${phone}
+        ${email ? ` | ${email}` : ''}
+        ${links.length > 0 ? ` | ${linksHTML}` : ''}
+        </span>
     </p>
     <hr>
   `
 }
-
