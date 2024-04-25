@@ -68,6 +68,7 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
     onClose,
   ])
 
+  console.log('jobData', jobData)
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -105,18 +106,22 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
         {jobData && (
           <div className="flex gap-4 p-4 border border-solid border-grey-300 rounded-xl">
             <div className="flex-none">
-              <img
-                className="rounded-lg object-cover"
-                src={jobData['companyLogo']}
-                alt={`Logo for ${jobData['companyName']}`}
-                width="100"
-                height="100"
-              />
+              {jobData['companyLogo'] && (
+                <img
+                  className="rounded-lg object-cover"
+                  src={jobData['companyLogo']}
+                  alt={`Logo for ${jobData['companyName']}`}
+                  width="100"
+                  height="100"
+                />
+              )}
             </div>
             <div className="flex-1">
               <div>{jobData?.['jobTitle']}</div>
               <div>{jobData?.['companyName']}</div>
-              <div className="line-clamp-6">{jobData?.['jobDescription']}</div>
+              <div className="line-clamp-6 [overflow-wrap:anywhere]">
+                {jobData?.['jobDescription']}
+              </div>
             </div>
           </div>
         )}

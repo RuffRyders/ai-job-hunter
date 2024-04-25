@@ -27,7 +27,7 @@ export const TextArea = forwardRef(function TextArea(
   }, [value])
 
   const sameStyles =
-    'text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2'
+    'text-balance text-black row-start-1 row-end-2 col-start-1 col-end-2 [overflow-wrap:anywhere]'
 
   return (
     <div
