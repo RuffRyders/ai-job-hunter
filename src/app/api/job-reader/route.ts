@@ -44,8 +44,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    console.log(schema?.jobDescription)
-
     return NextResponse.json({
       schema,
     })

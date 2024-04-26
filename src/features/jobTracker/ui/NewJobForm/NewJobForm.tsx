@@ -68,7 +68,6 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
     onClose,
   ])
 
-  console.log('jobData', jobData)
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
