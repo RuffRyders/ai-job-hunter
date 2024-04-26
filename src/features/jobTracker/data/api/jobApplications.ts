@@ -11,7 +11,7 @@ export async function getJobsCount() {
 }
 
 export async function getJobs({
-  limit = 10,
+  limit = 100,
   offset = 0,
   orderBy = 'updatedAt',
   filter = '',
@@ -45,7 +45,6 @@ export async function createJob(data: JobModel) {
 
 export async function updateJob(id: string, data: Partial<JobModel>) {
   const supabase = await createClient()
-  console.log('update', id, data)
   return await supabase
     .from(tableName)
     .update({ ...data, id })

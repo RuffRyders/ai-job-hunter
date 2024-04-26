@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-import { convert as convertHtml } from 'html-to-text'
+import { htmlToText } from '@/common/utils/string/htmlToText'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         companyName: parsed?.hiringOrganization?.name,
         companyUrl: parsed?.hiringOrganization?.sameAs,
         datePosted: parsed?.datePosted,
-        jobDescription: convertHtml(parsed?.description),
+        jobDescription: htmlToText(parsed?.description),
         employmentType: parsed?.employmentType,
         jobLocationType: parsed?.jobLocationType,
         jobLocation: parsed?.jobLocation?.address?.addressCountry,
@@ -43,6 +43,8 @@ export async function POST(req: NextRequest) {
         salaryMax: parsed?.baseSalary?.value?.maxValue,
       }
     }
+
+    console.log(schema?.jobDescription)
 
     return NextResponse.json({
       schema,
