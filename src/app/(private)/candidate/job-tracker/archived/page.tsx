@@ -9,7 +9,11 @@ export default async function ArchivedJobsPage() {
     isArchived: true,
     fields: ['jobTitle', 'companyName', 'id', 'archivedAt'],
   })
-  console.log(data)
+
+  if (error) {
+    return <div>Sorry, an error occured.</div>
+  }
+
   return (
     <div className="flex flex-col gap-4 p-10">
       <Link
