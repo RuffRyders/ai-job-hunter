@@ -14,7 +14,7 @@ export function ArchivedJobsList({
   }
 
   return (
-    <ul>
+    <ul className="flex flex-col gap-2">
       {jobs?.map((job) => (
         <li className="flex gap-2" key={job.id}>
           <span>
