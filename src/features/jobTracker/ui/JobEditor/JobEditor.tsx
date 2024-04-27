@@ -33,7 +33,7 @@ export function JobEditor({ jobId, isNew, values, ...rest }: CardEditorProps) {
       {...rest}
     >
       <Modal className="flex my-20 mx-auto bg-white max-w-3xl min-h-[500px] h-[calc(100vh - 100px)] drop-shadow-2xl rounded-3xl">
-        <Dialog className="p-5 flex flex-1">
+        <Dialog className="p-6 flex flex-1">
           {({ close }) => (
             <JobForm jobId={jobId} values={values} onClose={close} />
           )}
