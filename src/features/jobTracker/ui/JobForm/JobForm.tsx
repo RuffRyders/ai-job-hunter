@@ -103,6 +103,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                 {values?.archivedAt !== null ? (
                   <Button
                     className="justify-self-end"
+                    color="danger"
                     onPress={handleUnarchivePress}
                   >
                     <IconArchiveOff />
@@ -111,6 +112,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                 ) : (
                   <Button
                     className="justify-self-end"
+                    color="danger"
                     onPress={handleArchivePress}
                   >
                     <IconArchive />
@@ -249,7 +251,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
 
             <Button
               className="mt-2"
-              variant="primary"
+              color="primary"
               type="submit"
               isDisabled={formState.isSubmitting}
             >

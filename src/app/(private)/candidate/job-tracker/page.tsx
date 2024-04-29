@@ -57,7 +57,10 @@ export default async function JobTracker({
                   </div>
                 </Tab>
               </TabList>
-              <Button linkProps={{ href: `${JOB_TRACKER_BASEURL}/archived` }}>
+              <Button
+                variant="outline"
+                linkProps={{ href: `${JOB_TRACKER_BASEURL}/archived` }}
+              >
                 <IconArchive size={22} /> View Archived
               </Button>
             </div>
