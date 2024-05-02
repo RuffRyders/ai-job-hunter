@@ -1,9 +1,9 @@
 'use client'
 
 import { FieldError, Group } from 'react-aria-components'
-import { Label } from '../../Label'
-import { NumberField } from '../../NumberField'
-import { Input } from '../../Input'
+import { Label } from '@/common/ui/Label'
+import { NumberField } from '@/common/ui/NumberField'
+import { Input } from '@/common/ui/Input'
 import { ForwardedRef, forwardRef } from 'react'
 
 interface NumberInputProps {
