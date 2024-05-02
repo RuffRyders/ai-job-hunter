@@ -94,6 +94,10 @@ export type Database = {
       jobApplications: {
         Row: {
           applicationStatus: Database["public"]["Enums"]["jobApplicationStatus"]
+          archivedAt: string | null
+          archivedReason:
+            | Database["public"]["Enums"]["jobApplicationArchivedReason"]
+            | null
           companyName: string
           coverLetter: string | null
           createdAt: string
@@ -102,6 +106,7 @@ export type Database = {
           jobTitle: string
           jobUrl: string | null
           notes: string | null
+          rank: string | null
           salaryMax: number | null
           salaryMin: number | null
           updatedAt: string | null
@@ -109,6 +114,10 @@ export type Database = {
         }
         Insert: {
           applicationStatus?: Database["public"]["Enums"]["jobApplicationStatus"]
+          archivedAt?: string | null
+          archivedReason?:
+            | Database["public"]["Enums"]["jobApplicationArchivedReason"]
+            | null
           companyName: string
           coverLetter?: string | null
           createdAt?: string
@@ -117,6 +126,7 @@ export type Database = {
           jobTitle: string
           jobUrl?: string | null
           notes?: string | null
+          rank?: string | null
           salaryMax?: number | null
           salaryMin?: number | null
           updatedAt?: string | null
@@ -124,6 +134,10 @@ export type Database = {
         }
         Update: {
           applicationStatus?: Database["public"]["Enums"]["jobApplicationStatus"]
+          archivedAt?: string | null
+          archivedReason?:
+            | Database["public"]["Enums"]["jobApplicationArchivedReason"]
+            | null
           companyName?: string
           coverLetter?: string | null
           createdAt?: string
@@ -132,6 +146,7 @@ export type Database = {
           jobTitle?: string
           jobUrl?: string | null
           notes?: string | null
+          rank?: string | null
           salaryMax?: number | null
           salaryMin?: number | null
           updatedAt?: string | null
@@ -214,6 +229,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      jobApplicationArchivedReason:
+        | "REJECTED"
+        | "ACCEPTED"
+        | "GHOSTED"
+        | "CLOSED"
+        | "WITHDRAWN"
       jobApplicationStatus:
         | "NOT_APPLIED"
         | "APPLIED"

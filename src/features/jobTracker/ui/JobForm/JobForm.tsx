@@ -2,24 +2,30 @@
 
 import { Header, Key } from 'react-aria-components'
 import { useRouter } from 'next/navigation'
-import { Tab, TabList, TabPanel, Tabs } from '@/common/ui/Tabs'
-import { IconWand, IconX } from '@tabler/icons-react'
-import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
-import { NumberInput, TextInput } from '@/common/ui/Form'
-import { TextField } from '@/common/ui/TextField'
-import { Label } from '@/common/ui/Label'
-import { Button } from '../../../../common/ui/Button/Button'
-import { IconButton } from '../../../../common/ui/IconButton'
-import { Select } from '../../../../common/ui/Select'
-import { StatusLabel } from '../../../../common/ui/StatusLabel'
-import { TextArea } from '../../../../common/ui/TextArea'
-import { SelectOption } from '../../../../common/ui/Select/Select'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  IconWand,
+  IconX,
+  IconArchive,
+  IconArchiveOff,
+} from '@tabler/icons-react'
+import { NumberInput, TextInput } from '@/common/ui/Form'
+import { Label } from '@/common/ui/Label'
+import { Button } from '@/common/ui/Button'
+import { IconButton } from '@/common/ui/IconButton'
+import { Select, SelectOption } from '@/common/ui/Select'
+import { StatusLabel } from '@/common/ui/StatusLabel'
+import { Tab, TabList, TabPanel, Tabs } from '@/common/ui/Tabs'
+import { TextArea } from '@/common/ui/TextArea'
+import { TextField } from '@/common/ui/TextField'
+import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { addJobApplication } from '../../data/serverActions/addJobApplication'
 import { JobModel } from '../../data/types'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 import { CompanyNameWatched, JobTitleWatched } from './components'
+import { archiveJobApplication } from '../../data/serverActions/archiveJobApplication'
+import { unarchiveJobApplication } from '../../data/serverActions/unarchiveJobApplication'
 
 interface JobFormProps {
   jobId?: string
@@ -57,6 +63,20 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
     }
   }
 
+  const handleArchivePress = async () => {
+    // TODO: Put action behind confirm dialog
+    if (jobId) {
+      await archiveJobApplication(jobId)
+    }
+  }
+
+  const handleUnarchivePress = async () => {
+    // TODO: Put action behind confirm dialog
+    if (jobId) {
+      await unarchiveJobApplication(jobId)
+    }
+  }
+
   return (
     <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col flex-1 gap-2">
@@ -74,11 +94,32 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
         <div className="flex flex-1 gap-2">
           <div className="flex flex-1 flex-col gap-2">
             <Tabs>
-              <TabList aria-label="Tabs representing parts of a saved job application">
-                <Tab id="details">Job</Tab>
-                <Tab id="cover-letter">Cover Letter</Tab>
-                <Tab id="resume">Tailored Resume</Tab>
-              </TabList>
+              <div className="flex">
+                <TabList aria-label="Tabs representing parts of a saved job application">
+                  <Tab id="details">Job</Tab>
+                  <Tab id="cover-letter">Cover Letter</Tab>
+                  <Tab id="resume">Tailored Resume</Tab>
+                </TabList>
+                {values?.archivedAt !== null ? (
+                  <Button
+                    className="justify-self-end"
+                    color="danger"
+                    onPress={handleUnarchivePress}
+                  >
+                    <IconArchiveOff />
+                    Unarchive
+                  </Button>
+                ) : (
+                  <Button
+                    className="justify-self-end"
+                    color="danger"
+                    onPress={handleArchivePress}
+                  >
+                    <IconArchive />
+                    Archive
+                  </Button>
+                )}
+              </div>
               <TabPanel id="details">
                 <div className="flex gap-2">
                   <Controller
@@ -210,7 +251,7 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
 
             <Button
               className="mt-2"
-              variant="primary"
+              color="primary"
               type="submit"
               isDisabled={formState.isSubmitting}
             >

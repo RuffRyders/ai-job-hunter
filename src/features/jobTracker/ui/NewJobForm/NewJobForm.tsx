@@ -65,6 +65,8 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
     jobData?.companyName,
     jobData?.jobDescription,
     jobData?.jobTitle,
+    jobData?.salaryMax,
+    jobData?.salaryMin,
     onClose,
   ])
 
@@ -127,7 +129,7 @@ export function NewJobForm({ onClose }: NewJobFormProps) {
       </div>
       {jobData && (
         <div className="absolute bottom-0 right-0">
-          <Button variant="primary" onPress={onSaveJob}>
+          <Button color="primary" onPress={onSaveJob}>
             Save
           </Button>
         </div>

@@ -3,6 +3,9 @@ import { Database } from '@/common/services/supabase/database.types'
 export type ApplicationStatus =
   Database['public']['Enums']['jobApplicationStatus']
 
+export type ArchivedReason =
+  Database['public']['Enums']['jobApplicationArchivedReason']
+
 // export interface JobModel {
 //   applicationStatus: ApplicationStatus
 //   jobTitle: string | null

@@ -1,10 +1,17 @@
-import { IconLayoutKanban, IconPlus, IconTable } from '@tabler/icons-react'
+import {
+  IconArchive,
+  IconLayoutKanban,
+  IconPlus,
+  IconTable,
+} from '@tabler/icons-react'
 import { Button } from '@/common/ui/Button'
 import { TabList, Tabs, TabPanel, Tab } from '@/common/ui/Tabs'
 import { getJobs } from '@/features/jobTracker/data/api/jobApplications'
 import { JobsTable } from '@/features/jobTracker/ui/JobsTable'
 import { JobsKanbanBoard } from '@/features/jobTracker/ui/JobsKanbanBoard'
 import { JobsFilter } from '@/features/jobTracker/ui/JobsFilter'
+import Link from 'next/link'
+import { JOB_TRACKER_BASEURL } from '@/features/jobTracker/data/contants/routes'
 
 export default async function JobTracker({
   searchParams,
@@ -35,20 +42,28 @@ export default async function JobTracker({
 
         <div className="pt-2">
           <Tabs>
-            <TabList className="px-10">
-              <Tab id="kanban">
-                <div className="flex gap-2 items-center">
-                  <IconLayoutKanban />
-                  <span>Column View</span>
-                </div>
-              </Tab>
-              <Tab id="table">
-                <div className="flex gap-2 items-center">
-                  <IconTable />
-                  <span>Table View</span>
-                </div>
-              </Tab>
-            </TabList>
+            <div className="flex items-center px-10">
+              <TabList>
+                <Tab id="kanban">
+                  <div className="flex gap-2 items-center">
+                    <IconLayoutKanban />
+                    <span>Column View</span>
+                  </div>
+                </Tab>
+                <Tab id="table">
+                  <div className="flex gap-2 items-center">
+                    <IconTable />
+                    <span>Table View</span>
+                  </div>
+                </Tab>
+              </TabList>
+              <Button
+                variant="outline"
+                linkProps={{ href: `${JOB_TRACKER_BASEURL}/archived` }}
+              >
+                <IconArchive size={22} /> View Archived
+              </Button>
+            </div>
             <TabPanel id="table">
               <JobsTable jobs={data} />
             </TabPanel>
