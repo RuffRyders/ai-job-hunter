@@ -62,7 +62,7 @@ export default function LoginPage() {
           <Link
             href="/signup"
             passHref
-            className="text-blue-500 hover:text-blue-700 font-bold"
+            className="text-primary-500 hover:text-primary-700 font-bold"
           >
             Sign Up
           </Link>

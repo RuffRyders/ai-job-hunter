@@ -21,11 +21,11 @@ const config: Config = {
         'a4-document': '210 / 297',
       },
       colors: {
-        primary: colors.blue,
+        primary: colors.sky,
         'layout-divider-color': colors.gray['200'],
         // sidebar light
         'sidebar-bg-light': colors.white,
-        'sidebar-item-bg-light-selected': colors.blue,
+        'sidebar-item-bg-light-selected': colors.sky,
         'sidebar-item-text-light': colors.gray['500'],
         'sidebar-item-text-light-selected': colors.white,
         'sidebar-item-text-light-hover': colors.black,

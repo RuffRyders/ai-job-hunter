@@ -7,7 +7,7 @@ export function Tab({ children, className = '', ...props }: TabProps) {
   return (
     <AriaTab
       className={cn(
-        `p-2 selected:text-blue-500 border-b-4 border-transparent border-solid selected:border-blue-500 user-select-none cursor-pointer text-sm ${className}`,
+        `px-4 py-2 self-center hover:bg-gray-200 selected:text-white selected:bg-primary-500 rounded-full user-select-none cursor-pointer text-sm ${className}`,
       )}
       {...props}
     >

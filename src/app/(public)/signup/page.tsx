@@ -31,7 +31,9 @@ export default function SignupPage() {
   return (
     <div>
       <form onSubmit={onSubmit} className="w-full h-full flex flex-col">
-        <div className="w-full text-center text-3xl mb-4">Create An Account</div>
+        <div className="w-full text-center text-3xl mb-4">
+          Create An Account
+        </div>
 
         {error && (
           <div className="w-full bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
@@ -62,7 +64,7 @@ export default function SignupPage() {
           <Link
             href="/login"
             passHref
-            className="text-blue-500 hover:text-blue-700 font-bold"
+            className="text-primary-500 hover:text-primary-700 font-bold"
           >
             Log In
           </Link>

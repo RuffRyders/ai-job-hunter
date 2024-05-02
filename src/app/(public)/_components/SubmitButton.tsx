@@ -14,7 +14,7 @@ const SubmitButton = ({ children, disabled }: SubmitButtonProps) => {
       type="submit"
       aria-disabled={disabled}
       disabled={disabled}
-      className="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-700 disabled:bg-gray-500"
+      className="p-2 bg-primary-500 text-white rounded-2xl hover:bg-primary-700 disabled:bg-gray-500"
     >
       {children}
     </button>

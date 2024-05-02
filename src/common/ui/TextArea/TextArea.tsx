@@ -33,7 +33,7 @@ export const TextArea = forwardRef(function TextArea(
     <div
       className={cn(
         'grid bg-white overflow-y-none overflow-y-auto rounded-lg h-full w-full p-2 bg-white border border-solid border-gray-300',
-        isFocused && ['p-2', 'outline', 'outline-2', 'outline-blue-500'],
+        isFocused && ['p-2', 'outline', 'outline-2', 'outline-primary-500'],
       )}
     >
       <AriaTextArea

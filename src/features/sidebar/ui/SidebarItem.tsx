@@ -40,7 +40,7 @@ export const SidebarItem = ({
           ? 'bg-sidebar-item-bg-light-selected'
           : 'hover:bg-sidebar-item-bg-light-selected hover:bg-opacity-50',
         isCurrentPath
-          ? 'text-sidebar-item-text-light-selected text-white bg-blue-500'
+          ? 'text-sidebar-item-text-light-selected text-white bg-primary-500'
           : 'text-gray-600 hover:text-sidebar-item-text-light-hover',
         'overflow-hidden',
         'flex flex-col',
