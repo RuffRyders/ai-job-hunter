@@ -10,7 +10,6 @@ import {
   JobModel,
 } from '@/common/services/supabase/database.helper.types'
 import { formatDistance } from 'date-fns'
-import { Database } from '@/common/services/supabase/database.types'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 const columns = [
@@ -112,10 +111,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
                 )
               }
 
-              const value =
-                item[
-                  column.id as keyof Database['public']['Tables']['jobApplications']['Row']
-                ]
+              const value = item[column.id as keyof JobModel]
               if (column.id === 'applicationStatus') {
                 return <StatusCell status={value as any} />
               }
