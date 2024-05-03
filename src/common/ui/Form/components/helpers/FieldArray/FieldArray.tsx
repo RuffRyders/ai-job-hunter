@@ -2,8 +2,8 @@
 
 import React from 'react'
 import {
-  ArrayPath,
   Control,
+  FieldArrayPath,
   FieldArrayWithId,
   FieldValues,
   UseFieldArrayAppend,
@@ -12,7 +12,10 @@ import {
   useFieldArray,
 } from 'react-hook-form'
 
-export const CustomFieldArray = <FormData extends FieldValues>({
+export const FieldArray = <
+  TFieldValues extends FieldValues,
+  TFieldArrayName extends FieldArrayPath<TFieldValues>,
+>({
   control,
   name,
   renderHeader,
@@ -20,18 +23,18 @@ export const CustomFieldArray = <FormData extends FieldValues>({
   renderRow,
   renderWrapper,
 }: {
-  control: Control<FormData>
-  name: ArrayPath<FormData>
+  control: Control<TFieldValues>
+  name: TFieldArrayName
   renderHeader?(actions: {
-    append: UseFieldArrayAppend<FormData, ArrayPath<FormData>>
-    prepend: UseFieldArrayPrepend<FormData, ArrayPath<FormData>>
+    append: UseFieldArrayAppend<TFieldValues, TFieldArrayName>
+    prepend: UseFieldArrayPrepend<TFieldValues, TFieldArrayName>
   }): React.ReactNode
   renderFooter?(actions: {
-    append: UseFieldArrayAppend<FormData, ArrayPath<FormData>>
-    prepend: UseFieldArrayPrepend<FormData, ArrayPath<FormData>>
+    append: UseFieldArrayAppend<TFieldValues, TFieldArrayName>
+    prepend: UseFieldArrayPrepend<TFieldValues, TFieldArrayName>
   }): React.ReactNode
   renderRow(
-    fieldConfig: FieldArrayWithId<FormData, ArrayPath<FormData>, 'id'>,
+    fieldConfig: FieldArrayWithId<TFieldValues, TFieldArrayName, 'id'>,
     index: number,
     actions: { remove: UseFieldArrayRemove },
   ): React.ReactNode
@@ -40,13 +43,13 @@ export const CustomFieldArray = <FormData extends FieldValues>({
     fields,
   }: {
     children: React.ReactNode
-    fields: FieldArrayWithId<FormData, ArrayPath<FormData>, 'id'>[]
+    fields: FieldArrayWithId<TFieldValues, TFieldArrayName, 'id'>[]
   }): React.ReactNode
 }): React.ReactNode => {
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
-      control, // control props comes from useForm (optional: if you are using FormProvider)
-      name, // unique name for your Field Array
+      control,
+      name,
     },
   )
 

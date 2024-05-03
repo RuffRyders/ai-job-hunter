@@ -1,6 +1,6 @@
 'use client'
 
-import { JobModel } from '@/features/jobTracker/data/types'
+import { JobModel } from '@/common/services/supabase/database.helper.types'
 import { Control, useWatch } from 'react-hook-form'
 
 export function JobTitleWatched({ control }: { control: Control<JobModel> }) {

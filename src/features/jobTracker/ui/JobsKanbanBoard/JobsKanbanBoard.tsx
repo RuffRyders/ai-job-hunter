@@ -1,12 +1,14 @@
 'use client'
 
 import { KanbanBoard } from '@/common/ui/KanbanBoard'
-import { ApplicationStatus, JobModel } from '../../data/types'
+import {
+  ApplicationStatus,
+  JobModel,
+} from '@/common/services/supabase/database.helper.types'
 import { CSSProperties, useCallback, useMemo } from 'react'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { useRouter } from 'next/navigation'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
-import { updateJob } from '../../data/api/jobApplications'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 import { StatusLabel } from '@/common/ui/StatusLabel'
 import { applicationStatuses } from '../../data/contants/applicationStatuses'

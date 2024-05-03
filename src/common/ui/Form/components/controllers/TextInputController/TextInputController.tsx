@@ -2,24 +2,26 @@ import { Control, Controller } from 'react-hook-form'
 import { TextInput } from '../../inputs/TextInput'
 import { HTMLInputTypeAttribute } from 'react'
 
-interface TextInputController {
-  ariaLabel?: string
+interface TextInputController extends TextInputProps {
+  'aria-label'?: React.ComponentProps<'input'>['aria-label']
   control: Control<any>
   name: string
   label?: string
   type?: HTMLInputTypeAttribute
   placeholder?: string
+  isRequired?: boolean
   autoFocus?: boolean
 }
 
 export function TextInputController({
   autoFocus,
-  ariaLabel,
+  'aria-label': ariaLabel,
   control,
   name,
   label,
   type = 'text',
   placeholder,
+  isRequired,
 }: TextInputController) {
   return (
     <Controller
@@ -30,6 +32,7 @@ export function TextInputController({
           <TextInput
             autoFocus={autoFocus}
             ariaLabel={ariaLabel || name}
+            isRequired={isRequired}
             label={label}
             type={type}
             placeholder={placeholder}

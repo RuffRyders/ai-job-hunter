@@ -8,45 +8,73 @@ import {
   IconX,
 } from '@tabler/icons-react'
 import { Button } from '@/common/ui/Button'
-import { CustomFieldArray, TextInputController } from '@/common/ui/Form'
+import {
+  FieldArray,
+  NumberInput,
+  TextInputController,
+  SelectInputController,
+} from '@/common/ui/Form'
 import { Heading } from '@/common/ui/Heading'
 import { Label } from '@/common/ui/Label'
 import { Avatar } from '@/common/ui/Avatar'
 import { Input } from '@/common/ui/Input'
 import { IconButton } from '@/common/ui/IconButton'
 
-interface ProfileModel {
+interface Experience {
+  jobTitle: string
+  companyName: string
+  description?: string
+  stateDate?: string
+  endDate?: string
+  location?: string
+  isCurrent?: boolean
+}
+
+interface Education {
+  schoolName: string
+  degreeType: string // None, Other, GED, High School, Technical Diploma, Associates, Non-Degree Program, Bachelor, Higher Degree, Masters, Doctorate
+  discipline?: string
+  gpa?: number
+}
+
+interface Skill {
+  name: string
+}
+
+interface Website {
+  url: string
+}
+
+interface Social {
+  url: string
+  name: string
+}
+
+type ProfileModel = {
+  avatarUrl: string
   firstName: string
   lastName: string
   email: string
-  phone: string
+  phoneNumber?: string
+  location?: string
+  experience: Experience[]
+  education: Education[]
+  skills: Skill[]
+  websites?: Website[]
+  socials?: Social[]
 }
 
 export function ProfileForm() {
-  const { control, handleSubmit, formState, reset } = useForm({
+  const { control, handleSubmit, formState, reset } = useForm<ProfileModel>({
     defaultValues: {
       firstName: '',
       lastName: '',
       location: '',
       email: '',
-      phone: '',
-      experience: [
-        {
-          title: 'Hot Diggity Dog',
-          description:
-            'Made more hot dogs, served more hot dogs. Became one with the hot dog.',
-        },
-        {
-          title: 'Hot Dog on a Stick',
-          description: 'Made hot dogs, served hot dogs, end of story.',
-        },
-      ],
-      education: [
-        {
-          title: 'Academy of Hot Dogs',
-        },
-      ],
-      skills: [{ value: 'Hot Dogs' }],
+      phoneNumber: '',
+      experience: [],
+      education: [],
+      skills: [],
     },
   })
 
@@ -63,16 +91,8 @@ export function ProfileForm() {
     }
   }
 
-  const checkKeyDown = (evt: any) => {
-    if (evt.key === 'Enter') evt.preventDefault()
-  }
-
   return (
-    <form
-      className="flex flex-col gap-2"
-      onSubmit={handleSubmit(onSubmit)}
-      // onKeyDown={(evt) => checkKeyDown(evt)}
-    >
+    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col flex-1 gap-4 max-w-[500px] m-auto pb-[150px]">
         <div className="font-bold text-3xl">Edit Profile</div>
         <div className="flex flex-col gap-2 p-4 text-sm border border-solid border-primary-600 bg-primary-100 rounded-lg text-primary-900">
@@ -120,14 +140,14 @@ export function ProfileForm() {
           placeholder="Enter your email address..."
         />
         <TextInputController
-          name="phone"
+          name="phoneNumber"
           control={control}
           label="Phone Number"
           type="tel"
           placeholder="Enter your phone number..."
         />
         <Heading variant="h2">Work Experience</Heading>
-        <CustomFieldArray
+        <FieldArray
           name="experience"
           control={control}
           renderFooter={({ append }) => (
@@ -135,7 +155,7 @@ export function ProfileForm() {
               type="button"
               className="self-start"
               onPress={() => {
-                append({ title: '' })
+                append({ jobTitle: '', companyName: '' })
               }}
             >
               <IconPlus size={20} />
@@ -143,32 +163,45 @@ export function ProfileForm() {
             </Button>
           )}
           renderRow={(fieldConfig, index, { remove }) => (
-            <li key={fieldConfig.id} className="flex gap-2">
-              <div className="flex flex-col flex-1 gap-2">
-                <TextInputController
-                  name={`experience.${index}.title`}
-                  control={control}
-                  label="Job Title"
-                />
-                <TextInputController
-                  name={`experience.${index}.description`}
-                  control={control}
-                  label="Description"
-                />
-                <Button
-                  className="self-end"
-                  onPress={() => {
-                    remove(index)
-                  }}
-                >
-                  <IconTrash size={20} /> Remove
-                </Button>
-              </div>
+            <li key={fieldConfig.id} className="flex flex-col gap-2">
+              <Heading variant="h6">Work Experience {index + 1}</Heading>
+              <TextInputController
+                name={`experience.${index}.jobTitle`}
+                control={control}
+                isRequired
+                label="Job Title"
+              />
+              <TextInputController
+                name={`experience.${index}.companyName`}
+                control={control}
+                isRequired
+                label="Company"
+              />
+              <TextInputController
+                name={`experience.${index}.location`}
+                control={control}
+                label="Location"
+              />
+              <TextInputController
+                name={`experience.${index}.description`}
+                control={control}
+                label="Description"
+              />
+              <Button
+                className="self-end"
+                color="danger"
+                variant="outline"
+                onPress={() => {
+                  remove(index)
+                }}
+              >
+                <IconTrash size={20} /> Remove
+              </Button>
             </li>
           )}
         />
         <Heading variant="h2">Education</Heading>
-        <CustomFieldArray
+        <FieldArray
           name="education"
           control={control}
           renderFooter={({ append }) => (
@@ -176,7 +209,7 @@ export function ProfileForm() {
               type="button"
               className="self-start"
               onPress={() => {
-                append({ title: '' })
+                append({ schoolName: '', degreeType: '' })
               }}
             >
               <IconPlus size={20} />
@@ -184,33 +217,65 @@ export function ProfileForm() {
             </Button>
           )}
           renderRow={(fieldConfig, index, { remove }) => (
-            <li key={fieldConfig.id} className="flex gap-2">
-              <div className="flex flex-col flex-1 gap-2">
-                <TextInputController
-                  name={`education.${index}.title`}
-                  control={control}
-                  label="School or University"
-                />
-                <Button
-                  className="self-end"
-                  onPress={() => {
-                    remove(index)
-                  }}
-                >
-                  <IconTrash size={20} /> Remove
-                </Button>
-              </div>
+            <li key={fieldConfig.id} className="flex flex-col flex-1 gap-2">
+              <Heading variant="h6">Education {index + 1}</Heading>
+              <TextInputController
+                name={`education.${index}.schoolName`}
+                control={control}
+                label="School or University"
+                isRequired
+              />
+              <SelectInputController
+                name={`education.${index}.degreeType`}
+                control={control}
+                label="Degree"
+                isRequired
+                items={[
+                  { name: 'High School', value: 'hs' },
+                  { name: 'Ivy League', value: 'iv' },
+                ]}
+              />
+              <TextInputController
+                name={`education.${index}.discipline`}
+                control={control}
+                label="Field of Study"
+              />
+              <Controller
+                name={`education.${index}.gpa`}
+                control={control}
+                render={({ field }) => {
+                  return (
+                    <NumberInput
+                      step={0.1}
+                      minValue={0}
+                      maxValue={4}
+                      label="GPA"
+                      {...field}
+                    />
+                  )
+                }}
+              />
+              <Button
+                className="self-end"
+                color="danger"
+                variant="outline"
+                onPress={() => {
+                  remove(index)
+                }}
+              >
+                <IconTrash size={20} /> Remove
+              </Button>
             </li>
           )}
         />
         <Heading variant="h2">Skills</Heading>
-        <CustomFieldArray
+        <FieldArray
           name="skills"
           control={control}
           renderHeader={({ append }) => (
             <Input
-              onEnterPress={(value) => {
-                append({ value })
+              onEnterPress={(name) => {
+                append({ name })
               }}
               placeholder="Add another skill..."
             />
@@ -222,13 +287,13 @@ export function ProfileForm() {
             <div key={fieldConfig.id} className="flex gap-2">
               <div className="flex flex-col flex-1 gap-2">
                 <Controller
-                  name={`skills.${index}.value`}
+                  name={`skills.${index}.name`}
                   control={control}
                   render={({ field, fieldState }) => {
                     console.log({ field, fieldState })
                     return (
                       <div className="flex gap-2 rounded-full bg-gray-200 items-center p-2 pl-4">
-                        <span>{field.value}</span>
+                        <span>{field.name}</span>
                         <IconButton onPress={() => remove(index)}>
                           <IconX />
                         </IconButton>
@@ -246,7 +311,7 @@ export function ProfileForm() {
           Reset
         </Button>
         <Button
-          variant="primary"
+          color="primary"
           type="submit"
           isDisabled={formState.isSubmitting}
         >

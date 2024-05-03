@@ -20,12 +20,12 @@ import { TextArea } from '@/common/ui/TextArea'
 import { TextField } from '@/common/ui/TextField'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { addJobApplication } from '../../data/serverActions/addJobApplication'
-import { JobModel } from '../../data/types'
 import { updateJobApplication } from '../../data/serverActions/updateJobApplication'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 import { CompanyNameWatched, JobTitleWatched } from './components'
 import { archiveJobApplication } from '../../data/serverActions/archiveJobApplication'
 import { unarchiveJobApplication } from '../../data/serverActions/unarchiveJobApplication'
+import { JobModel } from '@/common/services/supabase/database.helper.types'
 
 interface JobFormProps {
   jobId?: string
@@ -190,10 +190,11 @@ export function JobForm({ jobId, values, onClose }: JobFormProps) {
                   render={({ field }) => {
                     return (
                       <TextInput
-                        ariaLabel="jobUrl"
+                        {...field}
+                        aria-label="jobUrl"
                         label="Job Post URL"
                         placeholder="https://example.com/job/123"
-                        {...field}
+                        value={field.value || undefined}
                       />
                     )
                   }}
