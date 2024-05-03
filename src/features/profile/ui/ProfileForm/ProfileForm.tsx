@@ -19,6 +19,8 @@ import { Label } from '@/common/ui/Label'
 import { Avatar } from '@/common/ui/Avatar'
 import { Input } from '@/common/ui/Input'
 import { IconButton } from '@/common/ui/IconButton'
+import { useEffect, useState } from 'react'
+import { FileTrigger } from 'react-aria-components'
 
 interface Experience {
   jobTitle: string
@@ -65,6 +67,8 @@ type ProfileModel = {
 }
 
 export function ProfileForm() {
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState('#')
   const { control, handleSubmit, formState, reset } = useForm<ProfileModel>({
     defaultValues: {
       firstName: '',
@@ -81,6 +85,9 @@ export function ProfileForm() {
   const onSubmit: SubmitHandler<ProfileModel> = async (data) => {
     console.log('submit data', data)
     try {
+      if (avatarFile) {
+        // TODO: Update image and get URL
+      }
       // if (!jobId) {
       //   await addJobApplication(data)
       // } else {
@@ -90,6 +97,23 @@ export function ProfileForm() {
       console.error(error)
     }
   }
+
+  const handleFileSelect = (files: FileList | null) => {
+    if (files) {
+      setAvatarFile(files[0])
+      setAvatarPreviewUrl(URL.createObjectURL(files[0]))
+    }
+  }
+
+  useEffect(() => {
+    if (!avatarFile) {
+      setAvatarPreviewUrl('')
+      return
+    }
+    if (avatarFile) {
+      setAvatarPreviewUrl(URL.createObjectURL(avatarFile))
+    }
+  }, [avatarFile])
 
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
@@ -110,8 +134,14 @@ export function ProfileForm() {
         <div>
           <Label>Avatar</Label>
           <div className="flex gap-2 items-center">
-            <Avatar size="xl" avatarUrl="" />
-            <Button>Change Photo</Button>
+            <Avatar size="xl" avatarUrl={avatarPreviewUrl} />
+            <FileTrigger
+              acceptedFileTypes={['image/png', 'image/jpeg']}
+              allowsMultiple={false}
+              onSelect={handleFileSelect}
+            >
+              <Button>Change Photo</Button>
+            </FileTrigger>
           </div>
         </div>
         <TextInputController
