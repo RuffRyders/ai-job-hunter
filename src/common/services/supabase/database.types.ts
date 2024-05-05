@@ -13,8 +13,9 @@ export type Database = {
         Row: {
           createdAt: string
           degreeType: string
-          discipline: string
+          discipline: string | null
           endDate: string | null
+          gpa: number | null
           id: string
           schoolName: string
           startDate: string | null
@@ -23,8 +24,9 @@ export type Database = {
         Insert: {
           createdAt?: string
           degreeType: string
-          discipline: string
+          discipline?: string | null
           endDate?: string | null
+          gpa?: number | null
           id?: string
           schoolName: string
           startDate?: string | null
@@ -33,8 +35,9 @@ export type Database = {
         Update: {
           createdAt?: string
           degreeType?: string
-          discipline?: string
+          discipline?: string | null
           endDate?: string | null
+          gpa?: number | null
           id?: string
           schoolName?: string
           startDate?: string | null
@@ -54,30 +57,36 @@ export type Database = {
         Row: {
           companyName: string | null
           createdAt: string
+          description: string | null
           endDate: string | null
           id: string
           isCurrent: boolean
           jobTitle: string
+          location: string | null
           startDate: string | null
           userId: string
         }
         Insert: {
           companyName?: string | null
           createdAt?: string
+          description?: string | null
           endDate?: string | null
           id?: string
           isCurrent?: boolean
           jobTitle: string
+          location?: string | null
           startDate?: string | null
           userId: string
         }
         Update: {
           companyName?: string | null
           createdAt?: string
+          description?: string | null
           endDate?: string | null
           id?: string
           isCurrent?: boolean
           jobTitle?: string
+          location?: string | null
           startDate?: string | null
           userId?: string
         }
@@ -98,6 +107,7 @@ export type Database = {
           archivedReason:
             | Database["public"]["Enums"]["jobApplicationArchivedReason"]
             | null
+          companyLogoUrl: string | null
           companyName: string
           coverLetter: string | null
           createdAt: string
@@ -118,6 +128,7 @@ export type Database = {
           archivedReason?:
             | Database["public"]["Enums"]["jobApplicationArchivedReason"]
             | null
+          companyLogoUrl?: string | null
           companyName: string
           coverLetter?: string | null
           createdAt?: string
@@ -138,6 +149,7 @@ export type Database = {
           archivedReason?:
             | Database["public"]["Enums"]["jobApplicationArchivedReason"]
             | null
+          companyLogoUrl?: string | null
           companyName?: string
           coverLetter?: string | null
           createdAt?: string
@@ -199,7 +211,8 @@ export type Database = {
           firstName: string | null
           id: string
           lastName: string | null
-          phoneNumber: number | null
+          location: string | null
+          phoneNumber: string | null
         }
         Insert: {
           avatarUrl?: string | null
@@ -208,7 +221,8 @@ export type Database = {
           firstName?: string | null
           id?: string
           lastName?: string | null
-          phoneNumber?: number | null
+          location?: string | null
+          phoneNumber?: string | null
         }
         Update: {
           avatarUrl?: string | null
@@ -217,7 +231,8 @@ export type Database = {
           firstName?: string | null
           id?: string
           lastName?: string | null
-          phoneNumber?: number | null
+          location?: string | null
+          phoneNumber?: string | null
         }
         Relationships: []
       }

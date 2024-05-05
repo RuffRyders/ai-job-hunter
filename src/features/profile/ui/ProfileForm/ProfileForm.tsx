@@ -21,54 +21,18 @@ import { Input } from '@/common/ui/Input'
 import { IconButton } from '@/common/ui/IconButton'
 import { useEffect, useState } from 'react'
 import { FileTrigger } from 'react-aria-components'
+import { updateUserProfile } from '../../data/serverActions/updateUserProfile'
+import { ProfileModel } from '../../data/types'
 
-interface Experience {
-  jobTitle: string
-  companyName: string
-  description?: string
-  stateDate?: string
-  endDate?: string
-  location?: string
-  isCurrent?: boolean
-}
-
-interface Education {
-  schoolName: string
-  degreeType: string // None, Other, GED, High School, Technical Diploma, Associates, Non-Degree Program, Bachelor, Higher Degree, Masters, Doctorate
-  discipline?: string
-  gpa?: number
-}
-
-interface Skill {
-  name: string
-}
-
-interface Website {
-  url: string
-}
-
-interface Social {
-  url: string
-  name: string
-}
-
-type ProfileModel = {
-  avatarUrl: string
-  firstName: string
-  lastName: string
-  email: string
-  phoneNumber?: string
-  location?: string
-  experience: Experience[]
-  education: Education[]
-  skills: Skill[]
-  websites?: Website[]
-  socials?: Social[]
-}
-
-export function ProfileForm() {
+export function ProfileForm({
+  userId,
+  values,
+}: {
+  userId: string
+  values: ProfileModel
+}) {
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
-  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState('#')
+  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState('')
   const { control, handleSubmit, formState, reset } = useForm<ProfileModel>({
     defaultValues: {
       firstName: '',
@@ -80,23 +44,24 @@ export function ProfileForm() {
       education: [],
       skills: [],
     },
+    values,
   })
 
   const onSubmit: SubmitHandler<ProfileModel> = async (data) => {
-    console.log('submit data', data)
+    console.log('submit data', userId, data)
     try {
       if (avatarFile) {
-        // TODO: Update image and get URL
+        // TODO: Check that the image is new and not the one already stored in the database
+        // TODO: Upload image and get URL
       }
-      // if (!jobId) {
-      //   await addJobApplication(data)
-      // } else {
-      //   await updateJobApplication(jobId, data)
-      // }
+      const result = await updateUserProfile(userId, data)
+      console.log('result', result)
     } catch (error) {
       console.error(error)
     }
   }
+
+  // TODO: reset image when form resets
 
   const handleFileSelect = (files: FileList | null) => {
     if (files) {
@@ -131,18 +96,16 @@ export function ProfileForm() {
           </div>
         </div>
         <Heading variant="h2">Basic Info</Heading>
-        <div>
-          <Label>Avatar</Label>
-          <div className="flex gap-2 items-center">
-            <Avatar size="xl" avatarUrl={avatarPreviewUrl} />
-            <FileTrigger
-              acceptedFileTypes={['image/png', 'image/jpeg']}
-              allowsMultiple={false}
-              onSelect={handleFileSelect}
-            >
-              <Button>Change Photo</Button>
-            </FileTrigger>
-          </div>
+        <Label>Avatar</Label>
+        <div className="flex gap-2 items-center">
+          <Avatar size="xl" avatarUrl={avatarPreviewUrl} />
+          <FileTrigger
+            acceptedFileTypes={['image/png', 'image/jpeg']}
+            allowsMultiple={false}
+            onSelect={handleFileSelect}
+          >
+            <Button>Change Photo</Button>
+          </FileTrigger>
         </div>
         <TextInputController
           name="firstName"
@@ -213,12 +176,22 @@ export function ProfileForm() {
                 label="Location"
               />
               <TextInputController
+                name={`experience.${index}.startDate`}
+                control={control}
+                label="Start Date"
+              />
+              <TextInputController
+                name={`experience.${index}.endDate`}
+                control={control}
+                label="End Date"
+              />
+              <TextInputController
                 name={`experience.${index}.description`}
                 control={control}
                 label="Description"
               />
               <Button
-                className="self-end"
+                className="self-start"
                 color="danger"
                 variant="outline"
                 onPress={() => {
@@ -261,8 +234,16 @@ export function ProfileForm() {
                 label="Degree"
                 isRequired
                 items={[
-                  { name: 'High School', value: 'hs' },
-                  { name: 'Ivy League', value: 'iv' },
+                  { name: 'Other', value: 'other' },
+                  { name: 'GED', value: 'ged' },
+                  { name: 'High School', value: 'high_school' },
+                  { name: 'Technical Diploma', value: 'technical_diploma' },
+                  { name: 'Associates', value: 'associates' },
+                  { name: 'Non-Degree Program', value: 'non_degree_program' },
+                  { name: 'Bachelor', value: 'bachelor' },
+                  { name: 'Higher Degree', value: 'higher_degree' },
+                  { name: 'Masters', value: 'masters' },
+                  { name: 'Doctorate', value: 'doctorate' },
                 ]}
               />
               <TextInputController
@@ -286,7 +267,7 @@ export function ProfileForm() {
                 }}
               />
               <Button
-                className="self-end"
+                className="self-start"
                 color="danger"
                 variant="outline"
                 onPress={() => {
@@ -310,7 +291,7 @@ export function ProfileForm() {
               placeholder="Add another skill..."
             />
           )}
-          renderWrapper={({ children, fields }) => (
+          renderWrapper={({ children }) => (
             <div className="flex flex-wrap gap-1">{children}</div>
           )}
           renderRow={(fieldConfig, index, { remove }) => (
@@ -319,13 +300,12 @@ export function ProfileForm() {
                 <Controller
                   name={`skills.${index}.name`}
                   control={control}
-                  render={({ field, fieldState }) => {
-                    console.log({ field, fieldState })
+                  render={({ field }) => {
                     return (
-                      <div className="flex gap-2 rounded-full bg-gray-200 items-center p-2 pl-4">
-                        <span>{field.name}</span>
+                      <div className="text-sm flex gap-2 rounded-full bg-gray-200 items-center p-1 pl-4">
+                        <span>{field.value}</span>
                         <IconButton onPress={() => remove(index)}>
-                          <IconX />
+                          <IconX size={20} />
                         </IconButton>
                       </div>
                     )
