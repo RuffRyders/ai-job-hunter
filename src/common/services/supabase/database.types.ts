@@ -177,19 +177,19 @@ export type Database = {
       skills: {
         Row: {
           createdAt: string
-          id: number
+          id: string
           name: string
           userId: string
         }
         Insert: {
           createdAt?: string
-          id?: number
+          id?: string
           name: string
           userId: string
         }
         Update: {
           createdAt?: string
-          id?: number
+          id?: string
           name?: string
           userId?: string
         }

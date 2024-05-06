@@ -40,6 +40,10 @@ export default async function Profile() {
               lastName: data.lastName || undefined,
               location: data.location || undefined,
               phoneNumber: data.phoneNumber || undefined,
+              skills: data.skills?.map((skill) => ({
+                id: skill.id,
+                name: skill.name,
+              })),
             }}
           />
         </div>

@@ -1,5 +1,5 @@
 import { Control, Controller } from 'react-hook-form'
-import { TextInput } from '../../inputs/TextInput'
+import { TextInput, TextInputProps } from '../../inputs/TextInput'
 import { HTMLInputTypeAttribute } from 'react'
 
 interface TextInputController extends TextInputProps {

@@ -23,6 +23,9 @@ import { useEffect, useState } from 'react'
 import { FileTrigger } from 'react-aria-components'
 import { updateUserProfile } from '../../data/serverActions/updateUserProfile'
 import { ProfileModel } from '../../data/types'
+import { LoadingIndicator } from '@/common/ui/LoadingIndicator'
+import { createClient } from '@/common/services/supabase/client'
+import { v4 as uuidv4 } from 'uuid'
 
 export function ProfileForm({
   userId,
@@ -48,14 +51,27 @@ export function ProfileForm({
   })
 
   const onSubmit: SubmitHandler<ProfileModel> = async (data) => {
-    console.log('submit data', userId, data)
+    const client = createClient()
     try {
       if (avatarFile) {
-        // TODO: Check that the image is new and not the one already stored in the database
-        // TODO: Upload image and get URL
+        const { type } = avatarFile
+        const ext = type === 'image/jpeg' ? 'jpg' : 'png'
+        const uuid = uuidv4()
+        const fileName = `${userId}/${uuid}.${ext}`
+        const { data: imageData, error } = await client.storage
+          .from('avatars')
+          .upload(fileName, avatarFile, {
+            cacheControl: '3600',
+            upsert: false,
+          })
+        if (imageData) {
+          data.avatarUrl = `https://hmkrejoaprtoeniopyap.supabase.co/storage/v1/object/public/avatars/${imageData.path}`
+        }
       }
-      const result = await updateUserProfile(userId, data)
-      console.log('result', result)
+
+      await updateUserProfile(userId, data)
+
+      setAvatarFile(null)
     } catch (error) {
       console.error(error)
     }
@@ -98,7 +114,7 @@ export function ProfileForm({
         <Heading variant="h2">Basic Info</Heading>
         <Label>Avatar</Label>
         <div className="flex gap-2 items-center">
-          <Avatar size="xl" avatarUrl={avatarPreviewUrl} />
+          <Avatar size="xl" avatarUrl={avatarPreviewUrl || values.avatarUrl} />
           <FileTrigger
             acceptedFileTypes={['image/png', 'image/jpeg']}
             allowsMultiple={false}
@@ -156,7 +172,7 @@ export function ProfileForm({
             </Button>
           )}
           renderRow={(fieldConfig, index, { remove }) => (
-            <li key={fieldConfig.id} className="flex flex-col gap-2">
+            <li key={fieldConfig.id} className="flex flex-col gap-4">
               <Heading variant="h6">Work Experience {index + 1}</Heading>
               <TextInputController
                 name={`experience.${index}.jobTitle`}
@@ -220,7 +236,7 @@ export function ProfileForm({
             </Button>
           )}
           renderRow={(fieldConfig, index, { remove }) => (
-            <li key={fieldConfig.id} className="flex flex-col flex-1 gap-2">
+            <li key={fieldConfig.id} className="flex flex-col flex-1 gap-4">
               <Heading variant="h6">Education {index + 1}</Heading>
               <TextInputController
                 name={`education.${index}.schoolName`}
@@ -325,7 +341,7 @@ export function ProfileForm({
           type="submit"
           isDisabled={formState.isSubmitting}
         >
-          Save
+          Save {formState.isSubmitting && <LoadingIndicator />}
         </Button>
       </div>
     </form>
