@@ -1,7 +1,6 @@
 import { createClient } from '@/common/services/supabase/server'
 import { Education, Experience, ProfileModel, Skill } from '../types'
 import { SupabaseClient } from '@supabase/supabase-js'
-import { v4 as uuidv4 } from 'uuid'
 
 const tableName = 'users'
 
@@ -13,10 +12,14 @@ async function delsert<T>(
 ) {
   if (items) {
     await db.from(collectionName).delete().eq('userId', userId)
-    const result = await db.from(collectionName).insert(
+    const { error, data } = await db.from(collectionName).insert(
       items.map((item) => ({ ...item, userId })),
       { defaultToNull: false },
     )
+    if (error) {
+      throw error
+    }
+    return data
   }
 }
 
@@ -26,6 +29,7 @@ export async function updateProfile(
 ) {
   console.log('user model', data)
   const supabase = await createClient()
+  // TODO: Move complicatetd logic to PostrgreSQL function for transaction-based approach
   const { education, experience, skills, ...user } = data
 
   // update education
@@ -38,11 +42,18 @@ export async function updateProfile(
   await delsert<Skill>(supabase, 'skills', userId, skills)
 
   // update user profile (users table)
-  return await supabase
+  const { error, data: profileData } = await supabase
     .from(tableName)
     .update({ ...user })
     .eq('id', userId)
     .select()
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return profileData
 }
 
 export async function getProfile(id: string) {

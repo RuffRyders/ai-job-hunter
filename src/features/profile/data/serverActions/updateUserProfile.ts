@@ -12,7 +12,12 @@ export async function updateUserProfile(
   revalidatePath(PROFILE_BASEURL)
   try {
     return await updateProfile(userId, data)
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    console.error(error)
+    return {
+      error: {
+        message: error.message,
+      },
+    }
   }
 }
