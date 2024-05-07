@@ -61,7 +61,7 @@ export function ProfileForm({
         const { data: imageData, error } = await client.storage
           .from('avatars')
           .upload(fileName, avatarFile, {
-            cacheControl: '3600',
+            cacheControl: '86400', // 1 day
             upsert: false,
           })
         if (imageData) {
