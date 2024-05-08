@@ -8,11 +8,16 @@ import {
   useCallback,
   useImperativeHandle,
   useRef,
+  useEffect,
+  useState,
+  EventHandler,
+  ChangeEvent,
 } from 'react'
 import {
   Input as AriaInput,
   InputProps as AriaInputProps,
 } from 'react-aria-components'
+import { AsYouType } from 'libphonenumber-js'
 
 interface InputProps extends AriaInputProps {
   onEnterPress?: (value: string) => void
@@ -26,12 +31,34 @@ export const Input = forwardRef(function Input(
     onKeyDown,
     clearOnEnterPress = true,
     onEnterPress,
+    value,
+    onChange,
+    type,
     ...rest
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const innerRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(ref, () => innerRef.current!, [])
+
+  const [innerValue, setInnerValue] = useState(value)
+
+  useEffect(() => {
+    setInnerValue(value)
+  }, [value])
+
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const val = event.target.value
+      if (type === 'tel') {
+        // TODO: Switch between US and international based on locale
+        const formatted = new AsYouType('US').input(val)
+        event.target.value = formatted || ''
+      }
+      onChange?.(event)
+    },
+    [onChange, type],
+  )
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = useCallback(
     (evt) => {
@@ -57,6 +84,8 @@ export const Input = forwardRef(function Input(
         'flex-1 p-2 border border-gray-300 border-solid rounded-lg',
         className,
       )}
+      value={innerValue}
+      onChange={handleOnChange}
       {...rest}
     >
       {children}
