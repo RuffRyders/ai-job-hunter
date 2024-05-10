@@ -8,17 +8,20 @@
 }
 
 html,
-body,
-main {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: auto;
-  overflow-y: auto;
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-color));
+}
+
+main {
+  height: 100%;
+  width: 100%;
 }
 
 @layer utilities {

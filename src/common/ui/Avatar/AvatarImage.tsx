@@ -15,6 +15,7 @@ export const AvatarImage = ({
   return (
     <Image
       fill
+      sizes="100px" // HACK: https://github.com/vercel/next.js/discussions/40643
       src={avatarUrl}
       alt={email}
       draggable={false}

@@ -2,7 +2,7 @@
 
 import { formatDistance } from 'date-fns'
 import { unarchiveJobApplication } from '../../data/serverActions/unarchiveJobApplication'
-import { JobModel } from '../../data/types'
+import { JobModel } from '@/common/services/supabase/database.helper.types'
 
 export function ArchivedJobsList({
   jobs,

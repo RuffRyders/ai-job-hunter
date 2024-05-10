@@ -1,4 +1,4 @@
-import { ApplicationStatus } from '../types'
+import { ApplicationStatus } from '@/common/services/supabase/database.helper.types'
 
 export interface ApplicationStatusData {
   name: string

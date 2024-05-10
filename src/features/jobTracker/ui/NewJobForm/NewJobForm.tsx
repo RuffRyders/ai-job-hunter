@@ -7,7 +7,7 @@ import { LoadingIndicator } from '@/common/ui/LoadingIndicator'
 import { useCallback, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { addJobApplication } from '../../data/serverActions/addJobApplication'
-import { JobModel } from '../../data/types'
+import { JobModel } from '@/common/services/supabase/database.helper.types'
 
 type FormValues = {
   jobUrl: string

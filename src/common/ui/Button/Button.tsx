@@ -22,6 +22,7 @@ export function Button({
   color,
   variant,
   linkProps,
+  type = 'button',
   ...rest
 }: ButtonProps) {
   const button = tv({
@@ -89,7 +90,7 @@ export function Button({
     )
   }
   return (
-    <AriaButton className={finalClassName} {...rest}>
+    <AriaButton className={finalClassName} type={type} {...rest}>
       {children}
     </AriaButton>
   )

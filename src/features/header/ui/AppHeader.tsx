@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-
-import Avatar from '@/features/header/ui/Avatar'
+import { Avatar } from '@/common/ui/Avatar'
 import { AppLogger } from '@/common/services/Logger/Logger'
 import { UserMenu } from './UserMenu'
 import { cn } from '@/common/utils/style/cn'

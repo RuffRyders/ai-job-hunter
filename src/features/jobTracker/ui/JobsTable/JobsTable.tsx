@@ -5,9 +5,11 @@ import { Table, TableBody, TableHeader } from '@/common/ui/Table'
 import { StatusLabel } from '@/common/ui/StatusLabel'
 import { applicationStatuses } from '@/features/jobTracker/data/contants/applicationStatuses'
 import { useRouter } from 'next/navigation'
-import { ApplicationStatus, JobModel } from '../../data/types'
+import {
+  ApplicationStatus,
+  JobModel,
+} from '@/common/services/supabase/database.helper.types'
 import { formatDistance } from 'date-fns'
-import { Database } from '@/common/services/supabase/database.types'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
 
 const columns = [
@@ -92,7 +94,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
         )}
       </TableHeader>
       <TableBody items={jobs}>
-        {(item: Database['public']['Tables']['jobApplications']['Row']) => (
+        {(item: JobModel) => (
           <Row
             columns={columns}
             className="bg-white border-b cursor-pointer hover:bg-gray-100"
@@ -109,10 +111,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
                 )
               }
 
-              const value =
-                item[
-                  column.id as keyof Database['public']['Tables']['jobApplications']['Row']
-                ]
+              const value = item[column.id as keyof JobModel]
               if (column.id === 'applicationStatus') {
                 return <StatusCell status={value as any} />
               }

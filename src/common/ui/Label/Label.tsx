@@ -1,12 +1,24 @@
 'use client'
 
 import { cn } from '@/common/utils/style/cn'
-import { Label as AriaLabel, LabelProps } from 'react-aria-components'
+import {
+  Label as AriaLabel,
+  LabelProps as AriaLabelProps,
+} from 'react-aria-components'
 
-export function Label({ children, className, ...rest }: LabelProps) {
+interface LabelProps extends AriaLabelProps {
+  isRequired?: boolean
+}
+
+export function Label({
+  children,
+  isRequired,
+  className,
+  ...rest
+}: LabelProps) {
   return (
     <AriaLabel className={cn('text-xs font-bold', className)} {...rest}>
-      {children}
+      {children} {isRequired && <span className="text-red-600">*</span>}
     </AriaLabel>
   )
 }

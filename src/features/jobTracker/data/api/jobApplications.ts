@@ -1,5 +1,8 @@
+import {
+  ArchivedReason,
+  JobModel,
+} from '@/common/services/supabase/database.helper.types'
 import { createClient } from '@/common/services/supabase/server'
-import { ArchivedReason, JobModel } from '../types'
 
 const tableName = 'jobApplications'
 

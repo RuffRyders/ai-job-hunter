@@ -8,8 +8,8 @@ import {
 } from 'react-aria-components'
 import { useRouter } from 'next/navigation'
 import { JobForm } from '../JobForm'
-import { JobModel } from '../../data/types'
 import { JOB_TRACKER_BASEURL } from '../../data/contants/routes'
+import { JobModel } from '@/common/services/supabase/database.helper.types'
 
 interface CardEditorProps extends ModalOverlayProps {
   jobId?: string

@@ -7,7 +7,7 @@ import {
   NumberFieldProps as AriaNumberFieldProps,
 } from 'react-aria-components'
 
-interface NumberFieldProps extends Omit<AriaNumberFieldProps, 'value'> {
+export interface NumberFieldProps extends Omit<AriaNumberFieldProps, 'value'> {
   value?: number | null
 }
 

@@ -1,12 +1,12 @@
 'use client'
 
 import { FieldError, Group } from 'react-aria-components'
-import { Label } from '../../Label'
-import { NumberField } from '../../NumberField'
-import { Input } from '../../Input'
+import { Label } from '@/common/ui/Label'
+import { NumberField, NumberFieldProps } from '@/common/ui/NumberField'
+import { Input } from '@/common/ui/Input'
 import { ForwardedRef, forwardRef } from 'react'
 
-interface NumberInputProps {
+interface NumberInputProps extends NumberFieldProps {
   label: string
   error?: { message: string }
 }
@@ -18,7 +18,6 @@ export const NumberInput = forwardRef(function NumberInput(
   return (
     <NumberField
       ref={ref}
-      defaultValue={0}
       minValue={0}
       className="flex flex-1 flex-col gap-2"
       {...rest}
